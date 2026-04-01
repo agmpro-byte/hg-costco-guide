@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Costco Contract Guide — Heavenly Greens</title>
+<style>
+  :root {
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --dark: #1a1a2e;
+    --gray: #f8f9fa;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background: #fff;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--dark);
+    color: #fff;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 24px;
+  }
+  .header .flow-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .flow-step {
+    background: var(--green);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    color: #475569;
+    font-size: 1.2rem;
+  }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--gray);
+    border-radius: 12px;
+  }
+  .toc h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+  .toc ol {
+    padding-left: 24px;
+  }
+  .toc li {
+    margin-bottom: 8px;
+  }
+  .toc a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .toc a:hover { text-decoration: underline; }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+  }
+  .section-header {
+    background: var(--green);
+    color: #fff;
+    padding: 20px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+  }
+  .section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .section-header p {
+    margin-top: 4px;
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+
+  /* STEP BLOCKS */
+  .step {
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .step-text {
+    padding: 20px 24px;
+  }
+  .step-text h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .step-text p, .step-text li {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .step-text ul {
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .step-image {
+    background: var(--gray);
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .step-image img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* CALLOUT BOXES */
+  .tip {
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .warning {
+    background: var(--amber-light);
+    border-left: 4px solid var(--amber);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .critical {
+    background: #fee2e2;
+    border-left: 4px solid var(--red);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+
+  /* CHEAT SHEET */
+  .cheat-sheet {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--dark);
+    color: #fff;
+    border-radius: 12px;
+  }
+  .cheat-sheet h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .cheat-sheet ol {
+    padding-left: 24px;
+    font-size: 1.05rem;
+  }
+  .cheat-sheet li {
+    margin-bottom: 12px;
+    color: #e2e8f0;
+  }
+  .cheat-sheet li strong {
+    color: #4ade80;
+  }
+  .cheat-sheet .memory-line {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #334155;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #4ade80;
+    letter-spacing: 0.5px;
+  }
+
+  /* PRINT */
+  @media print {
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 1.8rem; }
+    .section { page-break-inside: avoid; }
+    .step { page-break-inside: avoid; }
+    .step-image img { max-height: 400px; object-fit: contain; }
+    body { font-size: 11pt; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.6rem; }
+    .flow-bar { gap: 4px; }
+    .flow-step { font-size: 0.7rem; padding: 6px 10px; }
+    .section-header h2 { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>Costco Contract Guide</h1>
+  <p class="subtitle">Heavenly Greens — Sales Rep Quick Reference</p>
+  <div class="flow-bar">
+    <span class="flow-step">1. Open Form</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">2. Fill Details</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">3. Review Draft</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">4. Send</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">5. Member Signs</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">6. You Sign</span>
+  </div>
+</div>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<div class="toc">
+  <h2>Quick Navigation</h2>
+  <ol>
+    <li><a href="#open-form">Open the Contract Form</a> — find the form in Contacts or Conversations</li>
+    <li><a href="#fill-form">Fill Out the Form</a> — products, quantities, member info</li>
+    <li><a href="#review-draft">Review the Draft Contract</a> — rename, check fields, set signing order</li>
+    <li><a href="#send">Send for Signature</a> — email/SMS or in-person links</li>
+    <li><a href="#signing">Member Signs, Then You Sign</a> — electronic signatures</li>
+    <li><a href="#confirm">Confirm Completion</a> — verify everything landed</li>
+    <li><a href="#editing">Editing Contact Fields</a> — fix info before or after</li>
+    <li><a href="#post-contract">After the Contract</a> — Job Auth, Job Completed, Payments</li>
+  </ol>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 1: OPEN THE CONTRACT FORM -->
+<!-- ============================================================ -->
+<div class="section" id="open-form">
+  <div class="section-header">
+    <h2>Step 1: Open the Contract Form</h2>
+    <p>The appointment is confirmed. Time to start the contract.</p>
+  </div>
+
+  <!-- Trigger: Email notification -->
+  <div class="step">
+    <div class="step-text">
+      <h3>You'll get an email or SMS when it's time to start</h3>
+      <p>When an appointment is confirmed, you'll receive a notification. That's your cue to open the contract form.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_06.png" alt="Email notification to start contract process">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>SMS notification</h3>
+      <p>You may also receive an SMS message as a trigger.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_07.png" alt="SMS notification">
+    </div>
+  </div>
+
+  <!-- Option A: Contacts -->
+  <div class="step">
+    <div class="step-text">
+      <h3>Option A: Open from Contacts</h3>
+      <p>Go to <strong>Contacts</strong> &rarr; find the member &rarr; click their profile &rarr; click <strong>"Costco Contract Form"</strong> button.</p>
+      <div class="tip">Look for the green "Costco Contract Form" button at the top of the contact profile.</div>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_04.png" alt="Accessing contract form through Contacts area">
+    </div>
+  </div>
+
+  <!-- Option B: Conversations -->
+  <div class="step">
+    <div class="step-text">
+      <h3>Option B: Open from Conversations</h3>
+      <p>Go to <strong>Conversations</strong> &rarr; find the member's conversation &rarr; click the form button.</p>
+      <p>Both options get you to the same form. Use whichever is faster.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_05.png" alt="Accessing contract form through Conversations">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 2: FILL OUT THE FORM -->
+<!-- ============================================================ -->
+<div class="section" id="fill-form">
+  <div class="section-header">
+    <h2>Step 2: Fill Out the Form</h2>
+    <p>Enter all member and job details. Dropdowns will show quantity and notes fields automatically.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Complete every field</h3>
+      <p>Fill in all member info and select products from the dropdown lists. When you pick a product, the quantity and notes fields appear automatically.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_08.png" alt="Completing the contract form">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Product selection detail</h3>
+      <p>Each product dropdown shows associated fields. Fill in all quantities and notes for every product selected.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_09.png" alt="Product selection details">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_10.png" alt="Additional form fields">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_11.png" alt="Form fields continued">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Submit the form</h3>
+      <p>Once all fields are completed, hit <strong>Submit</strong>. All information is automatically saved to the member's Contact Profile.</p>
+      <div class="tip">You can always go back and edit contact fields later if needed.</div>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_12.png" alt="Submit the form">
+    </div>
+  </div>
+
+  <!-- Verify data / Ready to Draft -->
+  <div class="step">
+    <div class="step-text">
+      <h3>Verify the data before drafting</h3>
+      <p>After submitting, review all the data in each category:</p>
+      <ul>
+        <li>If everything is correct &rarr; click <strong>"Ready to Draft Contract"</strong></li>
+        <li>If something needs fixing &rarr; click <strong>"Needs Correction"</strong></li>
+      </ul>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_13.png" alt="Verify data - Ready to Draft or Needs Correction">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Confirm the right document</h3>
+      <p>The document will be called <strong>"Costco Job Contract - Template"</strong>. Verify the member is linked to the document you're opening.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_14.png" alt="Document name confirmation">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_15.png" alt="Contract template view">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 3: REVIEW THE DRAFT CONTRACT -->
+<!-- ============================================================ -->
+<div class="section" id="review-draft">
+  <div class="section-header">
+    <h2>Step 3: Review the Draft Contract</h2>
+    <p>This is the most important step. Check everything before the member sees it.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3a. Rename the document</h3>
+      <p>Open the contract and rename it from "Costco Job Contract - Template" to:</p>
+      <p><strong>"Costco Job Contract - [Member Name / Job Name]"</strong></p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_16.png" alt="Rename the contract document">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Need to leave and come back?</h3>
+      <p>If you need to step away from the contract to make updates, here's how to get back to it:</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_17.png" alt="How to get back to the contract">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3b. Check all fields populated correctly</h3>
+      <p>Scan the entire contract. If you see anything like <code>{{contact.first_name}}</code> or <code>{{contact.details}}</code>, that field didn't pull in.</p>
+      <div class="warning"><strong>Fix it:</strong> Update the field in the Contact Profile &rarr; Save &rarr; Come back to the contract &rarr; Refresh your browser. If it still won't populate, delete the placeholder and type the info manually.</div>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_18.png" alt="Review fields instruction">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_19.png" alt="Fields populated example">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3c. Set the signing order</h3>
+      <p>This is critical. In the recipient list:</p>
+      <ul>
+        <li>Confirm only <strong>2 names</strong> are listed: the member and you</li>
+        <li>Turn on <strong>"Set Signing Order"</strong> &mdash; member receives the document first, you receive it after they sign</li>
+      </ul>
+      <div class="critical"><strong>Don't skip this.</strong> If signing order isn't set, both parties get the document at the same time and the member could see your signature before they've reviewed it.</div>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_20.png" alt="Set signing order - recipient list">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3d. Review the Work Order (Page 12)</h3>
+      <p>Scroll to page 12 and confirm all products and descriptions match what you quoted to the member.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_21.png" alt="Review Work Order page 12">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3e. Save the contract</h3>
+      <p>Click <strong>Save</strong> at the top right corner. The system also auto-saves, but always click Save before sending.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_22.png" alt="Save the contract">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 4: SEND FOR SIGNATURE -->
+<!-- ============================================================ -->
+<div class="section" id="send">
+  <div class="section-header">
+    <h2>Step 4: Send for Signature</h2>
+    <p>Contract reviewed and saved. Time to get it signed.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Click the blue "Send" button</h3>
+      <p>It's at the top right of the page. You'll get two options for how to send.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_23.png" alt="Click Send button">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Option A: Send via Email / SMS (Remote)</h3>
+      <p>Choose this when the member has left the appointment or you're closing remotely. The member gets a link to review and sign on their own device.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_24.png" alt="Send via email or SMS">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Option B: In-Person Signing Links</h3>
+      <p>Choose this when you're sitting with the member. Generate two links:</p>
+      <ul>
+        <li><strong>Member link</strong> &mdash; copy and open in a new tab for them to sign</li>
+        <li><strong>Sales rep link</strong> &mdash; copy and open in a new tab for you to sign after</li>
+      </ul>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_25.png" alt="In-person signing links instructions">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_26.png" alt="Signing links detail">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 5: SIGNING -->
+<!-- ============================================================ -->
+<div class="section" id="signing">
+  <div class="section-header">
+    <h2>Step 5: Member Signs, Then You Sign</h2>
+    <p>Always member first. You sign after.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Member signs first</h3>
+      <p>The member opens the link or email and reviews the contract. Always have them sign first &mdash; if they catch something, you can fix it before you've already signed.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_27.png" alt="Member signing instruction">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_28.png" alt="Member signing view">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>You sign as the Heavenly Greens representative</h3>
+      <p>After the member signs, you'll be notified. Open your link and sign.</p>
+      <div class="warning"><strong>Don't forget the optional checkboxes:</strong><br>
+        &bull; <strong>Page 4:</strong> Plastic Costco Shop Card &mdash; check if applicable<br>
+        &bull; <strong>Page 6:</strong> Over 65 buyer &mdash; affects cancellation timing
+      </div>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_29.png" alt="Rep signing instruction">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_30.png" alt="Rep signing view">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 6: CONFIRM COMPLETION -->
+<!-- ============================================================ -->
+<div class="section" id="confirm">
+  <div class="section-header">
+    <h2>Step 6: Confirm Completion</h2>
+    <p>Don't walk away until you've verified everything landed.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Confirm the completed document</h3>
+      <p>Verify you received the completed document with all fields filled. No blanks, no placeholders.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_31.png" alt="Confirm completed document">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Check the Completed tab</h3>
+      <p>Go to the <strong>Completed</strong> tab in AGM and confirm the contract is there. Also check the member's profile to make sure it's visible.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_32.png" alt="Check Completed tab">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_33.png" alt="Completed tab detail">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_34.png" alt="Member profile contract view">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_35.png" alt="Contract in member profile">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 7: EDITING CONTACT FIELDS -->
+<!-- ============================================================ -->
+<div class="section" id="editing">
+  <div class="section-header">
+    <h2>Editing Contact Fields</h2>
+    <p>Need to fix member info before or after the contract? Here's how.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Two ways to edit</h3>
+      <p>You can edit contact fields from either the <strong>Contacts</strong> menu or the <strong>Conversations</strong> screen. All updates are saved automatically.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_36.png" alt="Editing contacts overview">
+    </div>
+  </div>
+
+  <!-- Via Contacts -->
+  <div class="step">
+    <div class="step-text">
+      <h3>Via Contacts: Find the member</h3>
+      <p>Navigate to <strong>Contacts</strong> and search for the contact that needs editing.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_37.png" alt="Search for contact in Contacts menu">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Via Contacts: Edit the fields</h3>
+      <p>Click the field you need to update. You can search for specific fields or hide empty/filled fields to find what you need faster.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_38.png" alt="Edit contact fields">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Updating the Phone field</h3>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_39.png" alt="Updating phone field">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Updating the Address fields</h3>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_40.png" alt="Updating address fields">
+    </div>
+  </div>
+
+  <!-- Via Conversations -->
+  <div class="step">
+    <div class="step-text">
+      <h3>Via Conversations: Find the contact</h3>
+      <p>Navigate to <strong>Conversations</strong> and find the member's conversation thread.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_41.png" alt="Find contact in Conversations">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_42.png" alt="Conversation view">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Via Conversations: Edit the fields</h3>
+      <p>Edit fields the same way as in the Contacts menu. Changes auto-save.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_43.png" alt="Edit fields in Conversations">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 8: AFTER THE CONTRACT -->
+<!-- ============================================================ -->
+<div class="section" id="post-contract">
+  <div class="section-header">
+    <h2>After the Contract</h2>
+    <p>The contract is signed. Here's what comes next.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Job Authorization</h3>
+      <p>The <strong>production department</strong> sends this. You'll be notified once the member has signed it. Your action: <strong>initial it</strong> as the Heavenly Greens representative.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_44.png" alt="Job Authorization document">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Job Completed Verification</h3>
+      <p>Sent by the <strong>production department after the installation is finished</strong>. The member signs it, then you <strong>initial it</strong> as the Heavenly Greens representative.</p>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_45.png" alt="Job Completed document">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Payments &mdash; Costco ACH Protocol</h3>
+      <p>Three rules that Costco will reject the contract over if not followed:</p>
+      <ul>
+        <li><strong>All checks must be made payable to Costco</strong></li>
+        <li><strong>The Member must be the account holder</strong></li>
+        <li><strong>Checks must not be defaced or voided for any reason</strong></li>
+      </ul>
+      <div class="critical"><strong>If a check is defaced:</strong> The member must rewrite the check AND fill out the ACH authorization form. Bring that form back with the corrected contract. You can print the form or pick one up at the office.</div>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_46.png" alt="Payment protocols">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>ACH Payment Steps</h3>
+    </div>
+    <div class="step-image">
+      <img src="slides/slide_47.png" alt="ACH payment form and steps">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="slides/slide_48.png" alt="Payment documentation example">
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== CHEAT SHEET ===== -->
+<div class="cheat-sheet">
+  <h2>Your Cheat Sheet &mdash; The Whole Process on One Page</h2>
+  <ol>
+    <li><strong>Open Form</strong> &mdash; Contacts or Conversations, click "Costco Contract Form"</li>
+    <li><strong>Fill It Out</strong> &mdash; Products, quantities, member info &rarr; Submit</li>
+    <li><strong>Verify &amp; Draft</strong> &mdash; Check data, click "Ready to Draft Contract"</li>
+    <li><strong>Review Draft</strong> &mdash; Rename it, check all fields, set signing order (member first), check Work Order (pg 12) &rarr; Save</li>
+    <li><strong>Send</strong> &mdash; Blue "Send" button &rarr; Email/SMS (remote) or signing links (in person)</li>
+    <li><strong>Member Signs First</strong> &mdash; Watch for Page 4 (Shop Card) and Page 6 (Over 65) checkboxes</li>
+    <li><strong>You Sign</strong> &mdash; Initial as Heavenly Greens rep</li>
+    <li><strong>Confirm</strong> &mdash; Completed tab + member profile &mdash; contract visible in both</li>
+  </ol>
+  <div class="memory-line">
+    Form &rarr; Fill &rarr; Verify &rarr; Review &rarr; Send &rarr; Member Signs &rarr; You Sign &rarr; Confirm
+  </div>
+</div>
+
+<div style="text-align:center; padding: 40px 20px; color: var(--text-light); font-size: 0.85rem;">
+  Heavenly Greens &mdash; Costco Contract Guide &mdash; Sales Rep Reference
+</div>
+
+</body>
+</html>
