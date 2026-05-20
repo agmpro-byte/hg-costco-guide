@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HG/Costco Contract Guide — Heavenly Greens</title>
+<style>
+  :root {
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --dark: #1a1a2e;
+    --gray: #f8f9fa;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background: #fff;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--dark);
+    color: #fff;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 24px;
+  }
+  .header .flow-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .flow-step {
+    background: var(--green);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    color: #475569;
+    font-size: 1.2rem;
+  }
+
+  /* STAGE STRIP */
+  .stage-strip {
+    max-width: 900px;
+    margin: 40px auto 0;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  .stage-chip {
+    background: var(--green-light);
+    border: 1px solid var(--green);
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #14532d;
+    text-decoration: none;
+    transition: transform 0.1s ease;
+  }
+  .stage-chip:hover { transform: translateY(-2px); background: var(--green); color: #fff; }
+  .stage-chip .num {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .stage-chip:hover .num { color: rgba(255,255,255,0.85); }
+  @media (max-width: 720px) {
+    .stage-strip { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--gray);
+    border-radius: 12px;
+  }
+  .toc h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+  .toc ol {
+    padding-left: 24px;
+  }
+  .toc li {
+    margin-bottom: 8px;
+  }
+  .toc a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .toc a:hover { text-decoration: underline; }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+  }
+  .section-header {
+    background: var(--green);
+    color: #fff;
+    padding: 20px 32px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .section-header p {
+    margin-top: 4px;
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+  .section-header .stage-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  /* STAGE INTRO — the rep-facing trail map for each stage */
+  .stage-intro {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .stage-intro h3 {
+    font-size: 1rem;
+    color: #14532d;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+  }
+  .stage-intro ol {
+    padding-left: 22px;
+    font-size: 0.95rem;
+  }
+  .stage-intro li {
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .stage-intro li strong { color: var(--dark); }
+
+  /* STEP BLOCKS */
+  .step {
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .step-text {
+    padding: 20px 24px;
+  }
+  .step-text h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .step-text p, .step-text li {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .step-text ul {
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .step-image {
+    background: var(--gray);
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .step-image img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* CALLOUT BOXES */
+  .tip {
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .warning {
+    background: var(--amber-light);
+    border-left: 4px solid var(--amber);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .critical {
+    background: #fee2e2;
+    border-left: 4px solid var(--red);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes {
+    background: #eef2ff;
+    border-left: 4px solid #6366f1;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes strong {
+    color: #4338ca;
+  }
+
+  /* PRE-FLIGHT CHECKLIST */
+  .preflight {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fffbeb;
+    border: 2px solid var(--amber);
+    border-radius: 12px;
+  }
+  .preflight h2 {
+    color: #92400e;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .preflight .subtitle {
+    color: #78350f;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  .preflight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .preflight-card {
+    background: #fff;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .preflight-card h3 {
+    color: var(--dark);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .preflight-card p {
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .preflight-card .where {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+  @media (max-width: 640px) {
+    .preflight-grid { grid-template-columns: 1fr; }
+  }
+
+  /* CHEAT SHEET */
+  .cheat-sheet {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--dark);
+    color: #fff;
+    border-radius: 12px;
+  }
+  .cheat-sheet h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .cheat-sheet .lanes {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .cheat-sheet .lane {
+    background: #0f172a;
+    border-radius: 10px;
+    padding: 14px 12px;
+  }
+  .cheat-sheet .lane h3 {
+    color: #4ade80;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .cheat-sheet .lane ol {
+    padding-left: 18px;
+    font-size: 0.85rem;
+  }
+  .cheat-sheet .lane li {
+    margin-bottom: 6px;
+    color: #e2e8f0;
+  }
+  .cheat-sheet .memory-line {
+    text-align: center;
+    margin-top: 8px;
+    padding-top: 20px;
+    border-top: 1px solid #334155;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #4ade80;
+    letter-spacing: 0.5px;
+  }
+  @media (max-width: 720px) {
+    .cheat-sheet .lanes { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* PRINT */
+  @media print {
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 1.8rem; }
+    .section { page-break-inside: avoid; }
+    .step { page-break-inside: avoid; }
+    .step-image img { max-height: 400px; object-fit: contain; }
+    body { font-size: 11pt; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.6rem; }
+    .flow-bar { gap: 4px; }
+    .flow-step { font-size: 0.7rem; padding: 6px 10px; }
+    .section-header h2 { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>HG / Costco Contract Guide</h1>
+  <p class="subtitle">Heavenly Greens — Sales Rep Trail Map</p>
+  <div class="flow-bar">
+    <span class="flow-step">1. Create Contract</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">2. Get It Signed</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">3. Countersign</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">4. Installer Packet</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">5. Change Orders</span>
+  </div>
+</div>
+
+<!-- ===== STAGE STRIP ===== -->
+<div class="stage-strip">
+  <a class="stage-chip" href="#stage-1"><span class="num">Stage 1</span>Creating the Contract</a>
+  <a class="stage-chip" href="#stage-2"><span class="num">Stage 2</span>Getting It Signed</a>
+  <a class="stage-chip" href="#stage-3"><span class="num">Stage 3</span>Countersigning</a>
+  <a class="stage-chip" href="#stage-4"><span class="num">Stage 4</span>Installer Packet</a>
+  <a class="stage-chip" href="#stage-5"><span class="num">Stage 5</span>Change Orders</a>
+</div>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<div class="toc">
+  <h2>Quick Navigation</h2>
+  <ol>
+    <li><a href="#preflight">Pre-Contract Build Checklist</a> — the four fields that must be on the contact first</li>
+    <li><a href="#stage-1">Stage 1 — Creating the Contract</a> — open contact, fill form, submit</li>
+    <li><a href="#stage-2">Stage 2 — Getting It Signed</a> — review draft, approve, member signs</li>
+    <li><a href="#stage-3">Stage 3 — Countersigning</a> — your turn to sign</li>
+    <li><a href="#stage-4">Stage 4 — Building the Installer Packet</a> — Project Documents Uploader</li>
+    <li><a href="#stage-5">Stage 5 — Completing a Change Order</a> — scope changes after signing</li>
+    <li><a href="#after-install">After the Install</a> — Job Auth, Job Completed, ACH Payments</li>
+    <li><a href="#editing">Editing Contact Fields</a> — fixing info before or after</li>
+    <li><a href="#troubleshooting">If Something Goes Wrong</a> — common issues + fixes</li>
+  </ol>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- PRE-CONTRACT BUILD CHECKLIST -->
+<!-- ============================================================ -->
+<div class="preflight" id="preflight">
+  <h2>Pre-Contract Build Checklist</h2>
+  <p class="subtitle">These four fields must be on the member's Contact record <strong>before</strong> you open the form. If they're missing, the contract will still build, but the system will fire warnings and Costco-side reporting will not match up.</p>
+
+  <div class="preflight-grid">
+    <div class="preflight-card">
+      <h3>1. Costco Lead #</h3>
+      <p>The lead number from the CENTAH email. This is what ties the contract to the Costco opportunity.</p>
+      <span class="where">Contact Profile → custom field "Costco Lead #"</span>
+    </div>
+    <div class="preflight-card">
+      <h3>2. Costco Membership #</h3>
+      <p>The member's Costco membership number. Required for the Shop Card reward calculation to print correctly on the contract.</p>
+      <span class="where">Contact Profile → custom field "Membership #"</span>
+    </div>
+    <div class="preflight-card">
+      <h3>3. Your HIS # (Registration #)</h3>
+      <p>Your Costco-registered sales rep number. Lives on your user record — should auto-populate, but verify it's on the contact.</p>
+      <span class="where">Auto-filled from your AGM user account</span>
+    </div>
+    <div class="preflight-card">
+      <h3>4. Member 65+ Status</h3>
+      <p><strong>Critical for cancellation window.</strong> Under 65: 3-business-day cancellation. 65 or older: 5-business-day cancellation. California law — get it right.</p>
+      <span class="where">Contact Profile → custom field "Over 65"</span>
+    </div>
+  </div>
+
+  <div class="warning" style="margin-top:20px;"><strong>Quick tip:</strong> Pull the CENTAH email up before you start. Lead # and Membership # both live there. Copy them into the contact, then open the form.</div>
+
+  <div class="critical"><strong>One blocker that will stop the contract cold:</strong> If your rep email on the contact record is blank or pointing to a decommissioned mailbox, the system will refuse to send the contract and alert the office. Make sure the contact is assigned to <em>you</em> with your active <code>@heavenlygreens.com</code> address.</div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- STAGE 1: CREATING THE CONTRACT -->
+<!-- ============================================================ -->
+<div class="section" id="stage-1">
+  <div class="section-header">
+    <span class="stage-tag">Stage 1</span>
+    <h2>Creating the Contract</h2>
+    <p>Open the contact, fill the form, submit. The draft builds itself.</p>
+  </div>
+
+  <div class="stage-intro">
+    <h3>The three things you do</h3>
+    <ol>
+      <li><strong>Open the contact in AGM</strong> (Contacts or Conversations)</li>
+      <li><strong>Fill out the Costco Contract Form</strong></li>
+      <li><strong>Submit</strong> — the draft is built automatically</li>
+    </ol>
+  </div>
+
+  <!-- Trigger -->
+  <div class="step">
+    <div class="step-text">
+      <h3>You'll get an email or SMS when it's time to start</h3>
+      <p>When an appointment is confirmed, you'll receive a notification. That's your cue.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_06.png" alt="Email notification to start contract process">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>SMS notification</h3>
+      <p>You may also receive an SMS message as a trigger.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_07.png" alt="SMS notification">
+    </div>
+  </div>
+
+  <!-- 1. Open contact -->
+  <div class="step">
+    <div class="step-text">
+      <h3>1. Open the contact in AGM</h3>
+      <p>Two ways in — use whichever is faster:</p>
+      <ul>
+        <li><strong>From Contacts</strong> — find the member &rarr; open their profile &rarr; click <strong>"Costco Contract Form"</strong></li>
+        <li><strong>From Conversations</strong> — find the member's thread &rarr; click the form button</li>
+      </ul>
+      <div class="tip">Look for the green "Costco Contract Form" button at the top of the contact profile.</div>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_04.png" alt="Accessing contract form through Contacts area">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_05.png" alt="Accessing contract form through Conversations">
+    </div>
+  </div>
+
+  <!-- 2. Fill form -->
+  <div class="step">
+    <div class="step-text">
+      <h3>2. Fill out the form</h3>
+      <p>Enter all member info and select products from the dropdowns. When you pick a product, the quantity and notes fields appear automatically. Fill in every field.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_08.png" alt="Completing the contract form">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_09.png" alt="Product selection details">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_10.png" alt="Additional form fields">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_11.png" alt="Form fields continued">
+    </div>
+  </div>
+
+  <!-- 3. Submit -->
+  <div class="step">
+    <div class="step-text">
+      <h3>3. Submit the form</h3>
+      <p>Once all fields are completed, hit <strong>Submit</strong>. All information is automatically saved to the member's Contact Profile.</p>
+      <div class="tip">You can always go back and edit contact fields later if needed.</div>
+      <div class="behind-scenes"><strong>What happens behind the scenes:</strong> The moment you hit submit, the system mints a unique job number (<code>HGC-XXXXX</code>) and stamps it on the contact record. That's your reference for the rest of the deal. If you resubmit the form for any reason, the same job number is reused — no duplicates.</div>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_12.png" alt="Submit the form">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Verify the data before drafting</h3>
+      <p>After submitting, review all the data in each category:</p>
+      <ul>
+        <li>If everything is correct &rarr; click <strong>"Ready to Draft Contract"</strong></li>
+        <li>If something needs fixing &rarr; click <strong>"Needs Correction"</strong></li>
+      </ul>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_13.png" alt="Verify data - Ready to Draft or Needs Correction">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- STAGE 2: GETTING IT SIGNED -->
+<!-- ============================================================ -->
+<div class="section" id="stage-2">
+  <div class="section-header">
+    <span class="stage-tag">Stage 2</span>
+    <h2>Getting It Signed</h2>
+    <p>You review the draft. You approve. The member signs.</p>
+  </div>
+
+  <div class="stage-intro">
+    <h3>The three things you do</h3>
+    <ol>
+      <li><strong>Open the "Review Draft" link</strong> in your AGM conversation</li>
+      <li><strong>Approve the draft</strong> (or reject, fix the data in AGM, and resubmit)</li>
+      <li><strong>The member gets the signing link</strong> in their AGM conversation thread and signs</li>
+    </ol>
+  </div>
+
+  <!-- 1. Review draft -->
+  <div class="step">
+    <div class="step-text">
+      <h3>1. Open the draft and confirm the document</h3>
+      <p>The document will be called <strong>"Costco Job Contract - Template"</strong>. Verify the member is linked to the document you're opening, then rename it to:</p>
+      <p><strong>"Costco Job Contract - [Member Name / Job Name]"</strong></p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_14.png" alt="Document name confirmation">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_15.png" alt="Contract template view">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_16.png" alt="Rename the contract document">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Need to leave and come back?</h3>
+      <p>If you need to step away from the contract to make updates, here's how to get back to it:</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_17.png" alt="How to get back to the contract">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Check all fields populated correctly</h3>
+      <p>Scan the entire contract. If you see anything like <code>{{contact.first_name}}</code> or <code>{{contact.details}}</code>, that field didn't pull in.</p>
+      <div class="warning"><strong>Fix it:</strong> Update the field in the Contact Profile &rarr; Save &rarr; Come back to the contract &rarr; Refresh your browser. If it still won't populate, delete the placeholder and type the info manually.</div>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_18.png" alt="Review fields instruction">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_19.png" alt="Fields populated example">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Set the signing order</h3>
+      <p>This is critical. In the recipient list:</p>
+      <ul>
+        <li>Confirm only <strong>2 names</strong> are listed: the member and you</li>
+        <li>Turn on <strong>"Set Signing Order"</strong> &mdash; member receives the document first, you receive it after they sign</li>
+      </ul>
+      <div class="critical"><strong>Don't skip this.</strong> If signing order isn't set, both parties get the document at the same time and the member could see your signature before they've reviewed it.</div>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_20.png" alt="Set signing order - recipient list">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Review the Work Order (Page 12)</h3>
+      <p>Scroll to page 12 and confirm all products and descriptions match what you quoted to the member.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_21.png" alt="Review Work Order page 12">
+    </div>
+  </div>
+
+  <!-- 2. Approve -->
+  <div class="step">
+    <div class="step-text">
+      <h3>2. Save the draft</h3>
+      <p>Click <strong>Save</strong> at the top right corner. The system also auto-saves, but always click Save before sending.</p>
+      <div class="behind-scenes"><strong>Reject path:</strong> If something's wrong, click <strong>"Reject"</strong> instead of approving. The session resets to draft. Fix the contact fields in AGM, resubmit the form, review the new draft. Same job number throughout.</div>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_22.png" alt="Save the contract">
+    </div>
+  </div>
+
+  <!-- 3. Send to member -->
+  <div class="step">
+    <div class="step-text">
+      <h3>3. Send for signature</h3>
+      <p>Click the blue <strong>"Send"</strong> button at the top right. Two options:</p>
+      <ul>
+        <li><strong>Email / SMS (Remote)</strong> — when the member has left the appointment or you're closing remotely. They get a link to sign on their own device.</li>
+        <li><strong>In-Person Signing Links</strong> — when you're sitting with the member. Generate two links: <strong>Member link</strong> (copy and open in a new tab for them) and <strong>Sales rep link</strong> (for you, after).</li>
+      </ul>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_23.png" alt="Click Send button">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_24.png" alt="Send via email or SMS">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_25.png" alt="In-person signing links instructions">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_26.png" alt="Signing links detail">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Member signs first</h3>
+      <p>The member opens the link or email and reviews the contract. Always have them sign first &mdash; if they catch something, you can fix it before you've already signed.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_27.png" alt="Member signing instruction">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_28.png" alt="Member signing view">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- STAGE 3: COUNTERSIGNING -->
+<!-- ============================================================ -->
+<div class="section" id="stage-3">
+  <div class="section-header">
+    <span class="stage-tag">Stage 3</span>
+    <h2>Countersigning (Your Turn)</h2>
+    <p>Member signed. You sign. The rest happens on its own.</p>
+  </div>
+
+  <div class="stage-intro">
+    <h3>The three things you do</h3>
+    <ol>
+      <li><strong>You get a "Your turn to sign" notification</strong> (email + SMS)</li>
+      <li><strong>Open the link and sign all dealer fields</strong></li>
+      <li><strong>Done</strong> — signed PDF, AGM opportunity advance, customer delivery, and office delivery all happen automatically</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>1. You're notified the moment the member signs</h3>
+      <p>You'll get an email and SMS within seconds of the member completing their signatures. Open your link.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>2. Sign as the Heavenly Greens representative</h3>
+      <div class="warning"><strong>Don't forget the optional checkboxes:</strong><br>
+        &bull; <strong>Page 4 — Plastic Costco Shop Card:</strong> Check if the member is receiving the physical Shop Card (the 10% Shaw turf reward). If they've opted for the digital reward, leave it unchecked.<br>
+        &bull; <strong>Page 6 — Over 65 buyer:</strong> California law mandates a 5-business-day cancellation window for buyers 65 or older (vs. 3 days for under 65). If the member is 65+, this box <strong>must</strong> be checked.
+      </div>
+      <div class="behind-scenes"><strong>If you don't sign within a day:</strong> The system will nudge you. Email + SMS reminder at the 1-hour mark, again at 24 hours, again at 32 hours. At 48 hours unsigned, the office gets a Slack alert. Don't let it get there.</div>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_29.png" alt="Rep signing instruction">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_30.png" alt="Rep signing view">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3. Done — the system handles the rest</h3>
+      <p>Once you've countersigned, the engine takes over:</p>
+      <ul>
+        <li>Re-renders the signed PDF with both signatures + signature certificate</li>
+        <li>Uploads to S3, emails the signed PDF to the member (in their AGM conversation) and to the office</li>
+        <li>Advances the AGM opportunity to <strong>Proposal/Contract Approved</strong></li>
+        <li>Adds the <strong>contract-signed</strong> tag (kicks off the Specs &amp; Warranty workflow)</li>
+        <li>Syncs to Salesforce</li>
+        <li>Posts a Slack alert: <em>"Contract Fully Executed"</em></li>
+      </ul>
+      <div class="behind-scenes"><strong>Verify it landed:</strong> Check the <strong>Completed</strong> tab in AGM and the member's profile. The signed contract should be visible in both within seconds.</div>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_31.png" alt="Confirm completed document">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_32.png" alt="Check Completed tab">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_33.png" alt="Completed tab detail">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_34.png" alt="Member profile contract view">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_35.png" alt="Contract in member profile">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- STAGE 4: BUILDING THE INSTALLER PACKET -->
+<!-- ============================================================ -->
+<div class="section" id="stage-4">
+  <div class="section-header">
+    <span class="stage-tag">Stage 4</span>
+    <h2>Building the Installer Packet</h2>
+    <p>The signed contract goes to the office. The installer packet goes to the crew.</p>
+  </div>
+
+  <div class="stage-intro">
+    <h3>The three things you do</h3>
+    <ol>
+      <li><strong>Open the Project Documents Uploader</strong> for the job</li>
+      <li><strong>Upload Access Photos, Site Photos, Drawing PDF, Existing Damage, Walkthrough Video</strong> — and add notes for each section</li>
+      <li><strong>Packet rebuilds automatically</strong> — a short link goes to the crew</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>1. Open the Project Documents Uploader</h3>
+      <p>From the contact record, open the <strong>Project Documents Uploader</strong> link. It's the rep portal that feeds the installer packet directly — what you upload here is what the crew sees on-site.</p>
+      <div class="tip">The uploader is per-job. Each section has its own tiles for drag-and-drop uploads, plus a free-text notes field beneath the tiles.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>2. Upload media for each section</h3>
+      <p>Five sections, each with their own tiles and notes field:</p>
+      <ul>
+        <li><strong>Access Photos</strong> — gate widths, path obstructions, parking situation</li>
+        <li><strong>Site Photos</strong> — the existing yard, all angles</li>
+        <li><strong>Drawing PDF</strong> — your hand-drawn layout (turf zones, sprinkler heads, drainage notes)</li>
+        <li><strong>Existing Damage</strong> — anything pre-installation (cracked patio, broken sprinkler, gopher holes). If there's no visible damage, use the <strong>"No Visible Damage"</strong> attestation toggle instead of leaving the section blank.</li>
+        <li><strong>Walkthrough Video</strong> — a single video walking the property</li>
+      </ul>
+      <div class="tip">Add notes per section as you upload. The crew sees them printed in the packet under each section header. "Watch the dog at the side gate." "Sprinkler valve is behind the AC unit." This is where job knowledge transfers.</div>
+      <div class="warning"><strong>Notes auto-save</strong> as you type (blur or after a short pause). You can come back later and edit — they hydrate when you reopen the portal.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3. The packet rebuilds itself</h3>
+      <p>You don't trigger a build. The engine watches for new media or notes and rebuilds the installer packet automatically. The crew gets a short URL they can text to themselves, and tapping any video link opens a fresh, presigned stream — no expired links.</p>
+      <div class="behind-scenes"><strong>What's in the packet:</strong> a PII-stripped work order page, attachments index, revised material spec page if any change orders exist, every uploaded photo classified and laid out (portrait, landscape, panorama), per-section rep notes, embedded PDFs, and a clickable video index. Any change order updates the packet too — so the crew always has the latest.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- STAGE 5: COMPLETING A CHANGE ORDER -->
+<!-- ============================================================ -->
+<div class="section" id="stage-5">
+  <div class="section-header">
+    <span class="stage-tag">Stage 5</span>
+    <h2>Completing a Change Order</h2>
+    <p>Scope changed after signing? Don't void the contract. File a Change Order.</p>
+  </div>
+
+  <div class="stage-intro">
+    <h3>The five things you do</h3>
+    <ol>
+      <li><strong>Open the contact</strong> &rarr; click <strong>"Create Change Order"</strong></li>
+      <li><strong>Enter the reason + line items</strong> (Add / Remove / Modify)</li>
+      <li><strong>Submit</strong> — the CO draft is built automatically</li>
+      <li><strong>Review the CO draft</strong> &rarr; approve</li>
+      <li><strong>Member signs &rarr; you countersign</strong>. The installer packet auto-updates.</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>When to create a Change Order</h3>
+      <p>The member has signed, but something changed: they want more turf, different edging, an extra removal area, a sprinkler tweak. <strong>Don't void the original contract.</strong> Create a Change Order instead.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>1. Open the form</h3>
+      <p>From the member's Contact record, click <strong>"Create Change Order"</strong> — it sits next to the original Contract Form button.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>2. Enter the line items</h3>
+      <p>Each row is one change. Required fields:</p>
+      <ul>
+        <li><strong>Action</strong> — Add, Remove, or Modify</li>
+        <li><strong>Category</strong> — Turf, Removal, Edging, Base Rock, Infill, Sprinklers, Gopher Wire, Other</li>
+        <li><strong>Description</strong> — what specifically changed (e.g. "K9 Park Olive — backyard extension")</li>
+        <li><strong>Quantity + Unit Price</strong> — for Add and Modify actions (totals auto-calc)</li>
+      </ul>
+      <p>Add a brief <strong>Reason for Change</strong> in the notes field — the member sees this.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3. Submit</h3>
+      <p>The engine loads the original signed contract, applies your line item deltas, calculates revised totals and shop card, and assembles a one-page Change Order PDF.</p>
+      <div class="behind-scenes"><strong>What the member sees on the PDF:</strong>
+        <ul>
+          <li>Original contract amount (read-only header)</li>
+          <li>Any prior change orders on this job (cumulative)</li>
+          <li>The new change order items and the new total</li>
+        </ul>
+        Same job number (<code>HGC-XXXXX</code>) carries through. Each CO gets its own version (v2, v3, etc.).
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>4. Review the CO draft &rarr; approve</h3>
+      <p>Same draft-review gate as the original contract. The CO is one page, four signing fields (member sig + date, dealer sig + date). Check the math, check the description, then approve.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>5. Member signs &rarr; you countersign</h3>
+      <p>Same signing flow as the original. Member first, then you. Once you countersign:</p>
+      <ul>
+        <li>Signed CO PDF goes to S3 and the member's AGM conversation</li>
+        <li>CO field writeback updates the original contract record</li>
+        <li><strong>The installer packet rebuilds automatically</strong> — the crew sees the revised material spec page</li>
+        <li>No pipeline-stage change (already approved); no new job number (reuses original)</li>
+      </ul>
+      <div class="tip">If the change order swaps the turf product itself (different Shaw SKU), a fresh Specs &amp; Warranty sheet auto-regenerates. If it's edging, base, or removal only, the original specs stand.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- AFTER THE INSTALL -->
+<!-- ============================================================ -->
+<div class="section" id="after-install">
+  <div class="section-header">
+    <h2>After the Install</h2>
+    <p>What you'll see after the crew finishes.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Job Authorization</h3>
+      <p>The <strong>production department</strong> sends this. You'll be notified once the member has signed it. Your action: <strong>initial it</strong> as the Heavenly Greens representative.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_44.png" alt="Job Authorization document">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Job Completed Verification</h3>
+      <p>Sent by the <strong>production department after the installation is finished</strong>. The member signs it, then you <strong>initial it</strong> as the Heavenly Greens representative.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_45.png" alt="Job Completed document">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Payments &mdash; Costco ACH Protocol</h3>
+      <p>Three rules that Costco will reject the contract over if not followed:</p>
+      <ul>
+        <li><strong>All checks must be made payable to Costco</strong></li>
+        <li><strong>The Member must be the account holder</strong></li>
+        <li><strong>Checks must not be defaced or voided for any reason</strong></li>
+      </ul>
+      <div class="critical"><strong>If a check is defaced:</strong> The member must rewrite the check AND fill out the ACH authorization form. Bring that form back with the corrected contract. You can print the form or pick one up at the office.</div>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_46.png" alt="Payment protocols">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_47.png" alt="ACH payment form and steps">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_48.png" alt="Payment documentation example">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- EDITING CONTACT FIELDS -->
+<!-- ============================================================ -->
+<div class="section" id="editing">
+  <div class="section-header">
+    <h2>Editing Contact Fields</h2>
+    <p>Need to fix member info before or after the contract? Here's how.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Two ways to edit</h3>
+      <p>You can edit contact fields from either the <strong>Contacts</strong> menu or the <strong>Conversations</strong> screen. All updates are saved automatically.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_36.png" alt="Editing contacts overview">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Via Contacts: Find the member</h3>
+      <p>Navigate to <strong>Contacts</strong> and search for the contact that needs editing.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_37.png" alt="Search for contact in Contacts menu">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Via Contacts: Edit the fields</h3>
+      <p>Click the field you need to update. You can search for specific fields or hide empty/filled fields to find what you need faster.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_38.png" alt="Edit contact fields">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_39.png" alt="Updating phone field">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_40.png" alt="Updating address fields">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Via Conversations</h3>
+      <p>Navigate to <strong>Conversations</strong>, find the member's thread, edit fields the same way. Changes auto-save.</p>
+    </div>
+    <div class="step-image">
+      <img src="../slides/slide_41.png" alt="Find contact in Conversations">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_42.png" alt="Conversation view">
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-image">
+      <img src="../slides/slide_43.png" alt="Edit fields in Conversations">
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- TROUBLESHOOTING -->
+<!-- ============================================================ -->
+<div class="section" id="troubleshooting">
+  <div class="section-header">
+    <h2>If Something Goes Wrong</h2>
+    <p>Common issues and how to fix them.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>You submitted the form but nothing happened</h3>
+      <p>If a required field was missing or invalid, the system will text and email you within seconds explaining what's wrong (e.g., "Missing membership number. Please update the contact and resubmit."). Fix the contact field, then resubmit the form — the same job number is reused.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>The member's contract didn't send</h3>
+      <p>Two common causes:</p>
+      <ul>
+        <li><strong>Contact isn't assigned to you</strong> &mdash; the system needs an active rep email to send from. Reassign the contact to yourself.</li>
+        <li><strong>Your email on the contact is wrong or decommissioned</strong> &mdash; the office will see a Slack alert. Check with the office to confirm your AGM user record is right.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Member says they didn't get the link</h3>
+      <p>Check the contact's <strong>Conversations</strong> tab. The email and SMS will show in their timeline. If the member's email address is wrong, fix it in the contact, then click "Resend" on the contract. If the SMS bounced (bad number), update the phone and resend.</p>
+      <div class="tip">You can always copy the in-person signing link and text it to them directly as a backup.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Member signed but I haven't been notified</h3>
+      <p>You should get an email + SMS within seconds of the member signing. If you haven't seen it after 5 minutes, check the contact timeline — the system narrates every step there. If the timeline shows "Member signed" but you weren't notified, your contact info on the rep record may be stale.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>The member spotted a typo after signing</h3>
+      <p>Small typos (address spelling, name punctuation): fix the contact record, contact the office to log the correction. The signed PDF stands.</p>
+      <p>Material errors (wrong price, wrong product, missing line item): you'll need to <strong>withdraw and reissue</strong>. Tell the office immediately — they can void the current signing session and you start over from the form. <strong>Do not</strong> just create a Change Order to "fix" a contract error; that's only for genuine scope changes the member is agreeing to.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>I made a mistake on the contract before sending it</h3>
+      <p>Easy fix. On the draft review step, click <strong>"Reject"</strong> instead of approving. The session resets to draft. Fix the contact fields in AGM, resubmit the form, review the new draft. Same job number throughout.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>Still stuck?</h3>
+      <p>Call the office. The system logs every step of every contract — if something is genuinely broken, they can see it in real time and tell you exactly what's happening.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== CHEAT SHEET ===== -->
+<div class="cheat-sheet">
+  <h2>Your Cheat Sheet &mdash; The Whole Process on One Page</h2>
+  <div class="lanes">
+    <div class="lane">
+      <h3>Stage 1 — Create</h3>
+      <ol>
+        <li>Open the contact</li>
+        <li>Fill the Costco Contract Form</li>
+        <li>Submit (job # minted)</li>
+      </ol>
+    </div>
+    <div class="lane">
+      <h3>Stage 2 — Signed</h3>
+      <ol>
+        <li>Review draft link</li>
+        <li>Approve</li>
+        <li>Member signs</li>
+      </ol>
+    </div>
+    <div class="lane">
+      <h3>Stage 3 — Countersign</h3>
+      <ol>
+        <li>Get notified</li>
+        <li>Sign dealer fields</li>
+        <li>Engine handles delivery</li>
+      </ol>
+    </div>
+    <div class="lane">
+      <h3>Stage 4 — Packet</h3>
+      <ol>
+        <li>Open Documents Uploader</li>
+        <li>Upload photos + notes</li>
+        <li>Packet auto-builds</li>
+      </ol>
+    </div>
+    <div class="lane">
+      <h3>Stage 5 — Change Order</h3>
+      <ol>
+        <li>Create Change Order</li>
+        <li>Enter line items</li>
+        <li>Submit, review, sign</li>
+      </ol>
+    </div>
+  </div>
+  <div class="memory-line">
+    Create &rarr; Sign &rarr; Countersign &rarr; Packet &rarr; Change Orders
+  </div>
+</div>
+
+<div style="text-align:center; padding: 40px 20px; color: var(--text-light); font-size: 0.85rem;">
+  Heavenly Greens &mdash; HG / Costco Contract Guide &mdash; Sales Rep Trail Map
+</div>
+
+</body>
+</html>
