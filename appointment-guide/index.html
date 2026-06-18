@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HG Appointment Guide — Heavenly Greens</title>
+<style>
+  :root {
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --dark: #1a1a2e;
+    --gray: #f8f9fa;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text); line-height: 1.6; background: #fff;
+  }
+
+  /* HEADER */
+  .header { background: var(--dark); color: #fff; padding: 48px 32px; text-align: center; }
+  .header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 8px; }
+  .header .subtitle { font-size: 1.1rem; color: #94a3b8; margin-bottom: 24px; }
+  .header .flow-bar { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
+  .flow-step { background: var(--green); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
+  .flow-step.amber { background: var(--amber); }
+  .flow-step.blue { background: var(--blue); }
+  .flow-arrow { color: #475569; font-size: 1.2rem; }
+
+  /* STAGE STRIP */
+  .stage-strip { max-width: 900px; margin: 40px auto 0; padding: 0 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stage-chip { background: var(--green-light); border: 1px solid var(--green); border-radius: 10px; padding: 12px 10px; text-align: center; font-size: 0.82rem; font-weight: 600; color: #14532d; text-decoration: none; transition: transform 0.1s ease; }
+  .stage-chip:hover { transform: translateY(-2px); background: var(--green); color: #fff; }
+  .stage-chip .num { display: block; font-size: 0.7rem; color: var(--text-light); font-weight: 500; margin-bottom: 2px; }
+  .stage-chip:hover .num { color: rgba(255,255,255,0.85); }
+  .stage-chip.amber { background: var(--amber-light); border-color: var(--amber); color: #92400e; }
+  .stage-chip.amber:hover { background: var(--amber); color: #fff; }
+  .stage-chip.blue { background: var(--blue-light); border-color: var(--blue); color: #1e40af; }
+  .stage-chip.blue:hover { background: var(--blue); color: #fff; }
+  .stage-chip.dark { background: #0f172a; border-color: #334155; color: #e2e8f0; }
+  .stage-chip.dark .num { color: #94a3b8; }
+  .stage-chip.dark:hover { background: #000; color: #fff; }
+  @media (max-width: 720px) { .stage-strip { grid-template-columns: 1fr 1fr; } }
+
+  /* TABLE OF CONTENTS */
+  .toc { max-width: 900px; margin: 40px auto; padding: 32px; background: var(--gray); border-radius: 12px; }
+  .toc h2 { font-size: 1.3rem; margin-bottom: 16px; color: var(--dark); }
+  .toc ol { padding-left: 24px; }
+  .toc li { margin-bottom: 8px; }
+  .toc a { color: var(--green); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* FORK — start-here decision box */
+  .fork { max-width: 900px; margin: 40px auto; padding: 28px 32px; background: var(--dark); color: #fff; border-radius: 12px; }
+  .fork h2 { color: #fff; font-size: 1.4rem; margin-bottom: 4px; text-align: center; }
+  .fork .q { text-align: center; font-size: 1.15rem; color: #fbbf24; font-weight: 700; margin: 10px 0 20px; }
+  .fork .branches { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .fork .branch { background: #0f172a; border-radius: 10px; padding: 16px 18px; }
+  .fork .branch h3 { font-size: 0.95rem; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .fork .branch.no h3 { color: #fbbf24; }
+  .fork .branch.yes h3 { color: #60a5fa; }
+  .fork .branch p { font-size: 0.88rem; color: #e2e8f0; }
+  .fork .branch p strong { color: #fff; }
+  .fork .third { text-align: center; margin-top: 16px; padding-top: 16px; border-top: 1px solid #334155; font-size: 0.9rem; color: #cbd5e1; }
+  .fork .third strong { color: #4ade80; }
+  @media (max-width: 640px) { .fork .branches { grid-template-columns: 1fr; } }
+
+  /* SECTIONS */
+  .section { max-width: 900px; margin: 0 auto 60px; padding: 0 24px; }
+  .section-header { background: var(--green); color: #fff; padding: 20px 32px; border-radius: 12px; margin-bottom: 24px; }
+  .section-header.amber { background: var(--amber); }
+  .section-header.blue { background: var(--blue); }
+  .section-header h2 { font-size: 1.6rem; font-weight: 700; }
+  .section-header p { margin-top: 4px; opacity: 0.9; font-size: 0.95rem; }
+  .section-header .stage-tag { display: inline-block; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
+
+  /* STAGE INTRO */
+  .stage-intro { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .stage-intro.amber { background: #fffbeb; border-color: #fde68a; }
+  .stage-intro.blue { background: #eff6ff; border-color: #bfdbfe; }
+  .stage-intro h3 { font-size: 1rem; color: #14532d; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+  .stage-intro.amber h3 { color: #92400e; }
+  .stage-intro.blue h3 { color: #1e40af; }
+  .stage-intro ol { padding-left: 22px; font-size: 0.95rem; }
+  .stage-intro li { margin-bottom: 6px; color: var(--text); }
+  .stage-intro li strong { color: var(--dark); }
+
+  /* STEP BLOCKS */
+  .step { margin-bottom: 24px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .step-text { padding: 20px 24px; }
+  .step-text h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .step-text p, .step-text li { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+  .step-text ul { padding-left: 20px; margin-bottom: 8px; }
+  .step-image { background: var(--gray); padding: 16px; text-align: center; border-top: 1px solid var(--border); }
+
+  /* CALLOUTS */
+  .tip { background: var(--green-light); border-left: 4px solid var(--green); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.9rem; }
+  .warning { background: var(--amber-light); border-left: 4px solid var(--amber); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.9rem; }
+  .critical { background: #fee2e2; border-left: 4px solid var(--red); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.9rem; }
+  .critical strong { color: #991b1b; }
+  .behind-scenes { background: #eef2ff; border-left: 4px solid #6366f1; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.9rem; }
+  .behind-scenes strong { color: #4338ca; }
+
+  /* TRAP BANNER — the lead-owner overwrite, shown once up top */
+  .trap-banner { max-width: 900px; margin: 0 auto 40px; padding: 20px 28px; background: #fef2f2; border: 2px solid #fca5a5; border-radius: 12px; }
+  .trap-banner h2 { color: #991b1b; font-size: 1.15rem; margin-bottom: 6px; }
+  .trap-banner p { font-size: 0.92rem; color: var(--text); }
+  .trap-banner p strong { color: #991b1b; }
+
+  /* RENDERED PANELS (v1 — swap for real AGM screenshots later) */
+  .panel { background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; max-width: 460px; margin: 0 auto; text-align: left; }
+  .panel-bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #f3f4f6; border-bottom: 1px solid var(--border); font-size: 0.76rem; color: var(--text-light); font-weight: 600; }
+  .panel-bar .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .panel-body { padding: 16px; }
+  .cap { font-size: 0.76rem; color: var(--text-light); font-style: italic; margin-top: 10px; }
+  .cap-tag { display: inline-block; background: #eef2ff; color: #4338ca; border-radius: 10px; padding: 1px 8px; font-size: 0.66rem; font-weight: 700; font-style: normal; margin-right: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+  /* mock: contact header */
+  .chead { display: flex; align-items: center; gap: 10px; }
+  .chead .av { width: 38px; height: 38px; border-radius: 50%; background: var(--green-light); color: #14532d; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; }
+  .chead .nm { font-weight: 700; font-size: 0.9rem; color: var(--dark); }
+  .chead .sub { font-size: 0.74rem; color: var(--text-light); }
+  .chead .btn { margin-left: auto; background: var(--green); color: #fff; border-radius: 6px; padding: 7px 12px; font-size: 0.76rem; font-weight: 700; }
+
+  /* mock: calendar */
+  .cal { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+  .cal .col { }
+  .cal .dh { font-size: 0.66rem; color: var(--text-light); text-align: center; margin-bottom: 4px; font-weight: 600; }
+  .cal .slot { background: #fff; border: 1px solid var(--border); border-radius: 5px; font-size: 0.62rem; padding: 5px 3px; margin-bottom: 4px; color: var(--text-light); text-align: center; }
+  .cal .slot.sel { background: var(--green); color: #fff; border-color: var(--green); font-weight: 700; }
+  .cal .slot.old { background: #fee2e2; color: #991b1b; border-color: #fca5a5; text-decoration: line-through; }
+  .cal .slot.new { background: var(--blue); color: #fff; border-color: var(--blue); font-weight: 700; }
+
+  /* mock: field */
+  .field { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; margin-bottom: 10px; }
+  .field .lbl { color: var(--text-light); font-size: 0.66rem; display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
+  .field .val { font-size: 0.86rem; color: var(--dark); display: flex; align-items: center; justify-content: space-between; }
+  .field .val .chev { color: var(--text-light); }
+  .field.flag { border-color: #fca5a5; background: #fef2f2; }
+  .field .ownernote { font-size: 0.7rem; color: #991b1b; margin-top: 5px; font-weight: 600; }
+
+  /* mock: pill */
+  .pill { display: inline-block; padding: 4px 12px; border-radius: 14px; font-size: 0.76rem; font-weight: 700; }
+  .pill.confirmed { background: var(--green-light); color: #14532d; }
+  .pill.booked { background: var(--amber-light); color: #92400e; }
+  .pill.arrow { background: none; color: var(--text-light); font-weight: 400; }
+
+  /* mock: timeline */
+  .tl .ev { display: flex; gap: 10px; align-items: flex-start; padding: 5px 0; font-size: 0.8rem; border-bottom: 1px dashed var(--border); }
+  .tl .ev:last-child { border-bottom: none; }
+  .tl .ev .t { color: var(--green); font-weight: 700; min-width: 78px; }
+  .tl .ev.blue .t { color: var(--blue); }
+  .tl .ev .d { color: var(--text); }
+  .tl .ev.muted .t, .tl .ev.muted .d { color: var(--text-light); text-decoration: line-through; }
+
+  /* mock: conversation */
+  .conv { display: flex; flex-direction: column; gap: 8px; }
+  .bubble { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 0.8rem; }
+  .bubble .meta { font-size: 0.66rem; color: var(--text-light); margin-bottom: 4px; display: flex; gap: 8px; }
+  .bubble .chan { color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
+  .bubble .chan.sms { color: var(--blue); }
+
+  /* mock: note card */
+  .notecard { background: #fffef5; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 12px; font-size: 0.82rem; color: var(--text); }
+  .notecard .nh { font-size: 0.66rem; color: #92400e; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700; margin-bottom: 4px; }
+
+  /* CHEAT SHEET */
+  .cheat-sheet { max-width: 900px; margin: 40px auto; padding: 32px; background: var(--dark); color: #fff; border-radius: 12px; }
+  .cheat-sheet h2 { color: #fff; font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
+  .cheat-sheet .lanes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+  .cheat-sheet .lane { background: #0f172a; border-radius: 10px; padding: 14px 12px; }
+  .cheat-sheet .lane h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .cheat-sheet .lane.book h3 { color: #4ade80; }
+  .cheat-sheet .lane.change h3 { color: #fbbf24; }
+  .cheat-sheet .lane.resched h3 { color: #60a5fa; }
+  .cheat-sheet .lane ol { padding-left: 18px; font-size: 0.84rem; }
+  .cheat-sheet .lane li { margin-bottom: 6px; color: #e2e8f0; }
+  .cheat-sheet .memory-line { text-align: center; margin-top: 8px; padding-top: 20px; border-top: 1px solid #334155; font-size: 1.05rem; font-weight: 700; color: #4ade80; letter-spacing: 0.3px; }
+  @media (max-width: 720px) { .cheat-sheet .lanes { grid-template-columns: 1fr; } }
+
+  /* FOOTER */
+  .foot { max-width: 900px; margin: 0 auto; padding: 24px; text-align: center; color: var(--text-light); font-size: 0.8rem; border-top: 1px solid var(--border); }
+
+  /* PRINT */
+  @media print {
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 1.8rem; }
+    .section, .step { page-break-inside: avoid; }
+    body { font-size: 11pt; }
+  }
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.6rem; }
+    .flow-bar { gap: 4px; }
+    .flow-step { font-size: 0.7rem; padding: 6px 10px; }
+    .section-header h2 { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>HG Appointment Guide</h1>
+  <p class="subtitle">Heavenly Greens — booking, changing &amp; rescheduling on the HG Estimate calendar</p>
+  <div class="flow-bar">
+    <span class="flow-step">Booking</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step amber">Changing</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step blue">Rescheduling</span>
+  </div>
+</div>
+
+<!-- ===== STAGE STRIP ===== -->
+<div class="stage-strip">
+  <a class="stage-chip dark" href="#fork"><span class="num">Start here</span>The one-question fork</a>
+  <a class="stage-chip" href="#booking"><span class="num">Path 1</span>Booking</a>
+  <a class="stage-chip amber" href="#changing"><span class="num">Path 2</span>Changing</a>
+  <a class="stage-chip blue" href="#rescheduling"><span class="num">Path 3</span>Rescheduling</a>
+</div>
+
+<!-- ===== TOC ===== -->
+<div class="toc">
+  <h2>Quick navigation</h2>
+  <ol>
+    <li><a href="#fork">The one-question fork</a> — the single thing that decides change vs. reschedule</li>
+    <li><a href="#booking">Booking a new appointment</a> — create it, confirm it, verify the send</li>
+    <li><a href="#changing">Changing an appointment</a> — edits that do NOT move the date or time</li>
+    <li><a href="#rescheduling">Rescheduling an appointment</a> — moving it to a new date or time</li>
+    <li><a href="#cheat">Cheat sheet</a> — the three paths at a glance</li>
+  </ol>
+</div>
+
+<!-- ===== FORK ===== -->
+<div class="fork" id="fork">
+  <h2>Start here — the one-question fork</h2>
+  <p class="q">Did the date or time move?</p>
+  <div class="branches">
+    <div class="branch no">
+      <h3>No → it's a Change</h3>
+      <p>Nothing goes to the customer automatically. The reminders keep running on the same schedule. <strong>If the change matters to the member, you tell them yourself.</strong></p>
+    </div>
+    <div class="branch yes">
+      <h3>Yes → it's a Reschedule</h3>
+      <p>AGM automatically sends a <strong>fresh confirmation</strong> and re-times every reminder to the new date. You just verify it went out.</p>
+    </div>
+  </div>
+  <div class="third">The third path is <strong>Booking</strong> — a brand-new appointment, where the confirmation and reminder ladder build themselves the moment you save.</div>
+</div>
+
+<!-- ===== TRAP BANNER ===== -->
+<div class="trap-banner">
+  <h2>One trap that applies to both Change and Reschedule</h2>
+  <p><strong>The rep you put on the appointment becomes the contact's lead owner.</strong> The appointment's assigned user always overwrites the contact-level owner — so changing or rescheduling into a slot held by a different rep will silently reassign the lead. After any edit that touches the rep (or any reschedule on the round-robin calendar), re-check that the lead owner is still who you want.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- PATH 1: BOOKING -->
+<!-- ============================================================ -->
+<div class="section" id="booking">
+  <div class="section-header">
+    <span class="stage-tag">Path 1</span>
+    <h2>Booking a new appointment</h2>
+    <p>Create it on the HG Estimate calendar — the confirmation and reminders build themselves.</p>
+  </div>
+
+  <div class="stage-intro">
+    <h3>What you do</h3>
+    <ol>
+      <li><strong>Open (or create) the contact</strong> and book from their record</li>
+      <li><strong>Pick the slot</strong> on the HG Estimate calendar and assign the rep</li>
+      <li><strong>Set status to Confirmed</strong> and save</li>
+      <li><strong>Verify</strong> the confirmation actually went out</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>1. Start from the contact record</h3>
+      <p>Always start on the member's contact — never a naked calendar slot. The appointment has to bind to the right person. Find or create the contact, then add the appointment from their record.</p>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;AGM — Contact</div>
+        <div class="panel-body">
+          <div class="chead">
+            <div class="av">JM</div>
+            <div><div class="nm">J. Member</div><div class="sub">Costco lead · San Jose, CA</div></div>
+            <div class="btn">Book appointment</div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>The "Book appointment" action on the contact record.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>2. Pick the slot on the HG Estimate calendar</h3>
+      <p>Choose an open slot on the <strong>HG Estimate</strong> calendar. Book it far enough out to clear the reminder window — the ladder needs at least about a day so the 24-hour reminder has room to fire.</p>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;HG Estimate calendar</div>
+        <div class="panel-body">
+          <div class="cal">
+            <div class="col"><div class="dh">Mon</div><div class="slot">9:00</div><div class="slot">1:00</div></div>
+            <div class="col"><div class="dh">Tue</div><div class="slot">10:00</div><div class="slot sel">2:00 ✓</div></div>
+            <div class="col"><div class="dh">Wed</div><div class="slot">9:00</div><div class="slot">3:00</div></div>
+            <div class="col"><div class="dh">Thu</div><div class="slot">11:00</div><div class="slot">2:00</div></div>
+            <div class="col"><div class="dh">Fri</div><div class="slot">9:00</div><div class="slot">1:00</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Selecting an open estimate slot.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3. Assign the rep — this also sets the lead owner</h3>
+      <p>Assign a rep who is on the HG Estimate calendar team. On a brand-new booking this is usually straightforward — just make sure it's the right rep, because that rep also becomes the contact's lead owner.</p>
+      <div class="critical"><strong>Remember:</strong> the appointment's assigned user always overwrites the contact's lead owner. On a new booking that's fine — just pick correctly the first time.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Appointment details</div>
+        <div class="panel-body">
+          <div class="field"><span class="lbl">Assigned to</span><div class="val">Assigned rep <span class="chev">&#9662;</span></div><div class="ownernote">= becomes the contact's lead owner</div></div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>The assigned-user field on the appointment.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>4. Set status to Confirmed, then save</h3>
+      <p>Make sure the appointment status reads <strong>Confirmed</strong>. If it saves as Booked, flip it — the confirmation and reminder workflow keys off Confirmed.</p>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Appointment status</div>
+        <div class="panel-body" style="text-align:center">
+          <span class="pill booked">Booked</span> <span class="pill arrow">&rarr;</span> <span class="pill confirmed">Confirmed ✓</span>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Flip Booked to Confirmed if needed.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>5. The system takes over</h3>
+      <p>The moment you save, the appointment confirmation &amp; reminder workflow fires on its own.</p>
+      <div class="behind-scenes"><strong>What happens behind the scenes:</strong> confirmation email goes immediately, confirmation SMS five minutes later, reminders at 24 hours and 1 hour before the appointment, and an "appointment ran" check 30 minutes after the start time.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Automated sends</div>
+        <div class="panel-body">
+          <div class="tl">
+            <div class="ev"><span class="t">On save</span><span class="d">Confirmation email</span></div>
+            <div class="ev"><span class="t">+5 min</span><span class="d">Confirmation SMS</span></div>
+            <div class="ev"><span class="t">T&minus;24h</span><span class="d">Reminder</span></div>
+            <div class="ev"><span class="t">T&minus;1h</span><span class="d">Reminder</span></div>
+            <div class="ev"><span class="t">T+30m</span><span class="d">"Appointment ran" check</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>The automatic confirmation + reminder ladder.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>6. Verify the confirmation went out</h3>
+      <p>Open <strong>Conversations</strong> on the contact and confirm the confirmation email and SMS are there with the correct date and time. A background monitor double-checks this, but eyeball it yourself.</p>
+      <div class="tip">Then drop a quick timeline note: booked, the date/time, and the lead source. Done.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Conversations</div>
+        <div class="panel-body">
+          <div class="conv">
+            <div class="bubble"><div class="meta"><span class="chan">Email</span><span>just now</span></div>Your estimate is confirmed for Tue 2:00 PM.</div>
+            <div class="bubble"><div class="meta"><span class="chan sms">SMS</span><span>+5 min</span></div>Heavenly Greens: you're booked for Tue 2:00 PM. Reply C to confirm.</div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>The confirmation email + SMS in the contact's log.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PATH 2: CHANGING -->
+<!-- ============================================================ -->
+<div class="section" id="changing">
+  <div class="section-header amber">
+    <span class="stage-tag">Path 2</span>
+    <h2>Changing an appointment</h2>
+    <p>Edits that do NOT move the date or time — the rep, the notes, the service details.</p>
+  </div>
+
+  <div class="stage-intro amber">
+    <h3>What you do</h3>
+    <ol>
+      <li><strong>Open the appointment</strong> on the contact</li>
+      <li><strong>Make your edit</strong> — and leave the date and time alone</li>
+      <li><strong>Save</strong></li>
+      <li><strong>Tell the member yourself</strong> if the change affects them</li>
+    </ol>
+  </div>
+
+  <div class="warning"><strong>The key difference:</strong> because the date and time don't move, the system sends the customer <strong>nothing</strong> — no fresh confirmation. If the change matters to the member (a different rep is coming, a detail changed), you notify them manually.</div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>1. Open the existing appointment, edit, keep the slot</h3>
+      <p>Open the appointment on the contact and make your change — rep, notes, service details, whatever's needed. <strong>Do not touch the date or time.</strong> If you do, it becomes a reschedule (see Path 3) and the system will re-confirm with the customer.</p>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Appointment details</div>
+        <div class="panel-body">
+          <div class="field" style="opacity:.7"><span class="lbl">Date &amp; time — leave as-is</span><div class="val">Tue 2:00 PM 🔒</div></div>
+          <div class="field"><span class="lbl">Notes (editing)</span><div class="val">Gate code 4471; dog in yard</div></div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Editing details while the date/time stays locked.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>2. Watch the lead-owner trap</h3>
+      <p>If you change the assigned rep, you are <strong>also</strong> changing the contact's lead owner — the appointment's assigned user always wins. Only change the rep if you genuinely mean to hand the lead over.</p>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Appointment details</div>
+        <div class="panel-body">
+          <div class="field flag"><span class="lbl">Assigned to (changing)</span><div class="val">A different rep <span class="chev">&#9662;</span></div><div class="ownernote">⚠ this also reassigns the lead owner</div></div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Changing the rep reassigns the lead.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3. Save — nothing auto-sends</h3>
+      <div class="behind-scenes"><strong>What happens behind the scenes:</strong> because the start time didn't change, the reminder ladder keeps running on its original schedule and no new customer message is generated. This is by design — not a miss.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;After save</div>
+        <div class="panel-body">
+          <div class="tl">
+            <div class="ev"><span class="t">T&minus;24h</span><span class="d">Reminder — unchanged</span></div>
+            <div class="ev"><span class="t">T&minus;1h</span><span class="d">Reminder — unchanged</span></div>
+            <div class="ev muted"><span class="t">—</span><span class="d">No new confirmation sent</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Reminders continue; no customer re-confirmation.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>4. Tell the member if it matters, then note it</h3>
+      <p>If the change affects the member, send them a quick message yourself — a call, text, or email. Then drop a timeline note: what changed and why.</p>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Contact timeline</div>
+        <div class="panel-body">
+          <div class="notecard"><div class="nh">Note</div>Reassigned to the covering rep (original rep out). Texted member to introduce them. Date unchanged.</div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Manual notice + timeline note.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PATH 3: RESCHEDULING -->
+<!-- ============================================================ -->
+<div class="section" id="rescheduling">
+  <div class="section-header blue">
+    <span class="stage-tag">Path 3</span>
+    <h2>Rescheduling an appointment</h2>
+    <p>Moving it to a new date or time — the system re-confirms and re-times everything for you.</p>
+  </div>
+
+  <div class="stage-intro blue">
+    <h3>What you do</h3>
+    <ol>
+      <li><strong>Open the appointment</strong> on the contact</li>
+      <li><strong>Move it</strong> to the new slot — never cancel and rebook</li>
+      <li><strong>Re-check the rep</strong> / lead owner</li>
+      <li><strong>Verify</strong> the fresh confirmation went out</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>1. Move the appointment — never cancel and rebook</h3>
+      <p>Open the appointment and move it to the new date or time. <strong>Do not cancel it and create a new one.</strong> A reschedule re-anchors all the reminders automatically; cancel-and-rebook loses the history and can double-fire messages.</p>
+      <div class="tip"><strong>The whole rule:</strong> reschedule = move the existing appointment.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;HG Estimate calendar</div>
+        <div class="panel-body">
+          <div class="cal">
+            <div class="col"><div class="dh">Mon</div><div class="slot">9:00</div></div>
+            <div class="col"><div class="dh">Tue</div><div class="slot old">2:00</div></div>
+            <div class="col"><div class="dh">Wed</div><div class="slot">3:00</div></div>
+            <div class="col"><div class="dh">Thu</div><div class="slot new">11:00 ✓</div></div>
+            <div class="col"><div class="dh">Fri</div><div class="slot">1:00</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Moving the existing appointment to a new slot.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>2. Re-check the rep — the trap bites hardest here</h3>
+      <p>Whoever holds the <strong>new</strong> slot becomes the contact's lead owner. On a round-robin calendar, rescheduling can land the slot on a different rep and silently reassign the lead. After you move it, confirm the assigned user is still who you want owning the member.</p>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Appointment details</div>
+        <div class="panel-body">
+          <div class="field flag"><span class="lbl">Assigned to (after move)</span><div class="val">Round-robin rep <span class="chev">&#9662;</span></div><div class="ownernote">⚠ confirm this is still the right owner</div></div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Re-checking the owner after the move.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3. Save — the system re-confirms and re-times everything</h3>
+      <div class="behind-scenes"><strong>What happens behind the scenes:</strong> on save, AGM re-anchors the whole reminder ladder to the new date and sends a <strong>fresh</strong> confirmation email + SMS for the new time — automatically. The customer gets exactly one re-confirmation (the old duplicate native email was switched off on this calendar).</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Re-anchored sends</div>
+        <div class="panel-body">
+          <div class="tl">
+            <div class="ev blue"><span class="t">On save</span><span class="d">Fresh confirmation email (new date)</span></div>
+            <div class="ev blue"><span class="t">+5 min</span><span class="d">Fresh confirmation SMS</span></div>
+            <div class="ev blue"><span class="t">T&minus;24h</span><span class="d">Reminder — re-timed to new date</span></div>
+            <div class="ev blue"><span class="t">T&minus;1h</span><span class="d">Reminder — re-timed to new date</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Everything re-anchors to the new date.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>4. Verify the fresh confirmation, then note the move</h3>
+      <p>Open <strong>Conversations</strong> and confirm the new confirmation email/SMS landed, showing the <strong>new</strong> date and time. On this calendar the workflow is the only re-confirmation, so a silent miss matters — check it yourself.</p>
+      <div class="tip">Then note it: old date &rarr; new date and why, and re-check the owner one last time. <strong>No-show?</strong> Send the reschedule link — that's just another reschedule, loop back to step 1.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Conversations</div>
+        <div class="panel-body">
+          <div class="conv">
+            <div class="bubble"><div class="meta"><span class="chan">Email</span><span>just now</span></div>Your estimate has moved to Thu 11:00 AM. See you then!</div>
+            <div class="bubble"><div class="meta"><span class="chan sms">SMS</span><span>+5 min</span></div>Heavenly Greens: your estimate is now Thu 11:00 AM. Reply C to confirm.</div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>The fresh confirmation on the new date.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHEAT SHEET ===== -->
+<div class="cheat-sheet" id="cheat">
+  <h2>Cheat sheet — the three paths</h2>
+  <div class="lanes">
+    <div class="lane book">
+      <h3>Booking</h3>
+      <ol>
+        <li>Open the contact</li>
+        <li>Add appt on HG Estimate</li>
+        <li>Assign rep = sets owner</li>
+        <li>Status &rarr; Confirmed</li>
+        <li>Save &rarr; auto confirm + reminders</li>
+        <li>Verify the send</li>
+      </ol>
+    </div>
+    <div class="lane change">
+      <h3>Changing — date stays</h3>
+      <ol>
+        <li>Open the appt</li>
+        <li>Edit — don't move the date</li>
+        <li>Rep change = owner change</li>
+        <li>Save &rarr; nothing auto-sends</li>
+        <li>Tell the member yourself</li>
+        <li>Note it</li>
+      </ol>
+    </div>
+    <div class="lane resched">
+      <h3>Rescheduling — date moves</h3>
+      <ol>
+        <li>Open the appt</li>
+        <li>MOVE it (never cancel+rebook)</li>
+        <li>Re-check rep = owner</li>
+        <li>Save &rarr; auto re-confirm + re-time</li>
+        <li>Verify the fresh send</li>
+        <li>Note old &rarr; new</li>
+      </ol>
+    </div>
+  </div>
+  <div class="memory-line">Did the date move? No = Change (you tell them). Yes = Reschedule (the system tells them).</div>
+</div>
+
+<div class="foot">
+  Heavenly Greens — HG Estimate calendar · Part of the HG Command Center · Powered by AGM Pro Tools
+</div>
+
+</body>
+</html>
