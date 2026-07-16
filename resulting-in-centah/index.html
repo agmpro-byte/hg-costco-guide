@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resulting in CENTAH — Heavenly Greens</title>
+<style>
+  :root {
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --dark: #1a1a2e;
+    --gray: #f8f9fa;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text); line-height: 1.6; background: #fff;
+  }
+
+  /* HEADER */
+  .header { background: var(--dark); color: #fff; padding: 48px 32px; text-align: center; }
+  .header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 8px; }
+  .header .subtitle { font-size: 1.1rem; color: #94a3b8; margin-bottom: 24px; }
+  .header .flow-bar { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
+  .flow-step { background: var(--green); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
+  .flow-step.amber { background: var(--amber); }
+  .flow-step.blue { background: var(--blue); }
+  .flow-arrow { color: #475569; font-size: 1.2rem; }
+
+  /* STAGE STRIP */
+  .stage-strip { max-width: 900px; margin: 40px auto 0; padding: 0 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .stage-chip { background: var(--green-light); border: 1px solid var(--green); border-radius: 10px; padding: 12px 10px; text-align: center; font-size: 0.82rem; font-weight: 600; color: #14532d; text-decoration: none; transition: transform 0.1s ease; }
+  .stage-chip:hover { transform: translateY(-2px); background: var(--green); color: #fff; }
+  .stage-chip .num { display: block; font-size: 0.7rem; color: var(--text-light); font-weight: 500; margin-bottom: 2px; }
+  .stage-chip:hover .num { color: rgba(255,255,255,0.85); }
+  .stage-chip.amber { background: var(--amber-light); border-color: var(--amber); color: #92400e; }
+  .stage-chip.amber:hover { background: var(--amber); color: #fff; }
+  .stage-chip.dark { background: #0f172a; border-color: #334155; color: #e2e8f0; }
+  .stage-chip.dark .num { color: #94a3b8; }
+  .stage-chip.dark:hover { background: #000; color: #fff; }
+  @media (max-width: 720px) { .stage-strip { grid-template-columns: 1fr; } }
+
+  /* TABLE OF CONTENTS */
+  .toc { max-width: 900px; margin: 40px auto; padding: 32px; background: var(--gray); border-radius: 12px; }
+  .toc h2 { font-size: 1.3rem; margin-bottom: 16px; color: var(--dark); }
+  .toc ol { padding-left: 24px; }
+  .toc li { margin-bottom: 8px; }
+  .toc a { color: var(--green); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* FORK — start-here decision box */
+  .fork { max-width: 900px; margin: 40px auto; padding: 28px 32px; background: var(--dark); color: #fff; border-radius: 12px; }
+  .fork h2 { color: #fff; font-size: 1.4rem; margin-bottom: 4px; text-align: center; }
+  .fork .q { text-align: center; font-size: 1.15rem; color: #fbbf24; font-weight: 700; margin: 10px 0 20px; }
+  .fork .branches { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .fork .branch { background: #0f172a; border-radius: 10px; padding: 16px 18px; }
+  .fork .branch h3 { font-size: 0.95rem; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .fork .branch.yes h3 { color: #4ade80; }
+  .fork .branch.no h3 { color: #fbbf24; }
+  .fork .branch p { font-size: 0.88rem; color: #e2e8f0; }
+  .fork .branch p strong { color: #fff; }
+  .fork .third { text-align: center; margin-top: 16px; padding-top: 16px; border-top: 1px solid #334155; font-size: 0.9rem; color: #cbd5e1; }
+  .fork .third strong { color: #4ade80; }
+  @media (max-width: 640px) { .fork .branches { grid-template-columns: 1fr; } }
+
+  /* SECTIONS */
+  .section { max-width: 900px; margin: 0 auto 60px; padding: 0 24px; }
+  .section-header { background: var(--green); color: #fff; padding: 20px 32px; border-radius: 12px; margin-bottom: 24px; }
+  .section-header.amber { background: var(--amber); }
+  .section-header h2 { font-size: 1.6rem; font-weight: 700; }
+  .section-header p { margin-top: 4px; opacity: 0.9; font-size: 0.95rem; }
+  .section-header .stage-tag { display: inline-block; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
+
+  /* STAGE INTRO */
+  .stage-intro { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .stage-intro.amber { background: #fffbeb; border-color: #fde68a; }
+  .stage-intro h3 { font-size: 1rem; color: #14532d; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+  .stage-intro.amber h3 { color: #92400e; }
+  .stage-intro ol { padding-left: 22px; font-size: 0.95rem; }
+  .stage-intro li { margin-bottom: 6px; color: var(--text); }
+  .stage-intro li strong { color: var(--dark); }
+
+  /* STEP BLOCKS */
+  .step { margin-bottom: 24px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .step-text { padding: 20px 24px; }
+  .step-text h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .step-text p, .step-text li { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+  .step-text ul { padding-left: 20px; margin-bottom: 8px; }
+  .step-image { background: var(--gray); padding: 16px; text-align: center; border-top: 1px solid var(--border); }
+
+  /* CALLOUTS */
+  .tip { background: var(--green-light); border-left: 4px solid var(--green); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.9rem; }
+  .warning { background: var(--amber-light); border-left: 4px solid var(--amber); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.9rem; }
+  .critical { background: #fee2e2; border-left: 4px solid var(--red); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.9rem; }
+  .critical strong { color: #991b1b; }
+  .behind-scenes { background: #eef2ff; border-left: 4px solid #6366f1; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.9rem; }
+  .behind-scenes strong { color: #4338ca; }
+
+  /* TRAP BANNER — the notes rule, shown once up top */
+  .trap-banner { max-width: 900px; margin: 0 auto 40px; padding: 20px 28px; background: #fef2f2; border: 2px solid #fca5a5; border-radius: 12px; }
+  .trap-banner h2 { color: #991b1b; font-size: 1.15rem; margin-bottom: 6px; }
+  .trap-banner p { font-size: 0.92rem; color: var(--text); }
+  .trap-banner p strong { color: #991b1b; }
+
+  /* RENDERED PANELS (v1 — swap for real CENTAH screenshots later) */
+  .panel { background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; max-width: 460px; margin: 0 auto; text-align: left; }
+  .panel-bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #f3f4f6; border-bottom: 1px solid var(--border); font-size: 0.76rem; color: var(--text-light); font-weight: 600; }
+  .panel-bar .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .panel-body { padding: 16px; }
+  .cap { font-size: 0.76rem; color: var(--text-light); font-style: italic; margin-top: 10px; }
+  .cap-tag { display: inline-block; background: #eef2ff; color: #4338ca; border-radius: 10px; padding: 1px 8px; font-size: 0.66rem; font-weight: 700; font-style: normal; margin-right: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+  /* mock: field */
+  .field { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; margin-bottom: 10px; }
+  .field .lbl { color: var(--text-light); font-size: 0.66rem; display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
+  .field .val { font-size: 0.86rem; color: var(--dark); display: flex; align-items: center; justify-content: space-between; }
+  .field.flag { border-color: #fca5a5; background: #fef2f2; }
+  .field .fieldnote { font-size: 0.7rem; color: #991b1b; margin-top: 5px; font-weight: 600; }
+
+  /* mock: portal button */
+  .pbtn { display: inline-block; background: var(--blue); color: #fff; border-radius: 6px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; }
+  .pbtn.gray { background: #6b7280; }
+
+  /* mock: lead table */
+  .ltable { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .ltable th { text-align: left; color: var(--text-light); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.4px; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  .ltable td { padding: 7px 8px; border-bottom: 1px dashed var(--border); }
+  .ltable td.lead { color: var(--blue); font-weight: 700; text-decoration: underline; }
+
+  /* mock: note card */
+  .notecard { background: #fffef5; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 12px; font-size: 0.82rem; color: var(--text); }
+  .notecard .nh { font-size: 0.66rem; color: #92400e; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700; margin-bottom: 4px; }
+
+  /* mock: pay grid */
+  .paygrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* CHEAT SHEET */
+  .cheat-sheet { max-width: 900px; margin: 40px auto; padding: 32px; background: var(--dark); color: #fff; border-radius: 12px; }
+  .cheat-sheet h2 { color: #fff; font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
+  .cheat-sheet .lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .cheat-sheet .lane { background: #0f172a; border-radius: 10px; padding: 14px 12px; }
+  .cheat-sheet .lane h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .cheat-sheet .lane.sale h3 { color: #4ade80; }
+  .cheat-sheet .lane.nosale h3 { color: #fbbf24; }
+  .cheat-sheet .lane ol { padding-left: 18px; font-size: 0.84rem; }
+  .cheat-sheet .lane li { margin-bottom: 6px; color: #e2e8f0; }
+  .cheat-sheet .memory-line { text-align: center; margin-top: 8px; padding-top: 20px; border-top: 1px solid #334155; font-size: 1.05rem; font-weight: 700; color: #4ade80; letter-spacing: 0.3px; }
+  @media (max-width: 720px) { .cheat-sheet .lanes { grid-template-columns: 1fr; } }
+
+  /* FOOTER */
+  .foot { max-width: 900px; margin: 0 auto; padding: 24px; text-align: center; color: var(--text-light); font-size: 0.8rem; border-top: 1px solid var(--border); }
+
+  /* PRINT */
+  @media print {
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 1.8rem; }
+    .section, .step { page-break-inside: avoid; }
+    body { font-size: 11pt; }
+  }
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.6rem; }
+    .flow-bar { gap: 4px; }
+    .flow-step { font-size: 0.7rem; padding: 6px 10px; }
+    .section-header h2 { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>Resulting in CENTAH</h1>
+  <p class="subtitle">Heavenly Greens — recording the outcome of every Costco appointment (Sale or No Sale)</p>
+  <div class="flow-bar">
+    <span class="flow-step blue">Open the lead</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">Quote it — same day</span>
+    <span class="flow-arrow">&rarr;</span>
+    <span class="flow-step amber">Sell it or note it</span>
+  </div>
+</div>
+
+<!-- ===== STAGE STRIP ===== -->
+<div class="stage-strip">
+  <a class="stage-chip dark" href="#fork"><span class="num">Start here</span>Sale or No Sale?</a>
+  <a class="stage-chip" href="#sale"><span class="num">Path 1</span>Sale</a>
+  <a class="stage-chip amber" href="#nosale"><span class="num">Path 2</span>No Sale</a>
+</div>
+
+<!-- ===== TOC ===== -->
+<div class="toc">
+  <h2>Quick navigation</h2>
+  <ol>
+    <li><a href="#fork">Sale or No Sale?</a> — the two paths, and the spine they share</li>
+    <li><a href="#sale">Resulting a Sale</a> — quote it, sell it, and trigger the member's payment email</li>
+    <li><a href="#nosale">Resulting a No Sale</a> — quote it and record what happened in Lead Notes</li>
+    <li><a href="#cheat">Cheat sheet</a> — both paths at a glance</li>
+  </ol>
+</div>
+
+<!-- ===== FORK ===== -->
+<div class="fork" id="fork">
+  <h2>Start here — did the member buy?</h2>
+  <p class="q">Every appointment gets resulted in CENTAH the same day — the only question is which path.</p>
+  <div class="branches">
+    <div class="branch yes">
+      <h3>Yes → Sale</h3>
+      <p>Quote the lead, then <strong>Sell</strong> the lead. Selling triggers the email from Costco that sends the member to the Member Payment Portal.</p>
+    </div>
+    <div class="branch no">
+      <h3>No → No Sale</h3>
+      <p>Quote the lead anyway — <strong>same day, no exceptions</strong> — then record what happened in <strong>Lead Notes</strong>.</p>
+    </div>
+  </div>
+  <div class="third">Both paths start the same way: <strong>log in &rarr; Dashboard &rarr; open the lead &rarr; fix any member info &rarr; Quote Lead.</strong> They only split at the last step.</div>
+</div>
+
+<!-- ===== TRAP BANNER ===== -->
+<div class="trap-banner">
+  <h2>The standing rule — notes on every single contact</h2>
+  <p><strong>Every single time you contact, or attempt to contact, any Costco member, you must enter the notes. No exceptions.</strong> And remember: Costco has access to these notes — keep every note professional.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- PATH 1: SALE -->
+<!-- ============================================================ -->
+<div class="section" id="sale">
+  <div class="section-header">
+    <span class="stage-tag">Path 1</span>
+    <h2>Resulting a Sale</h2>
+    <p>Quote the lead, sell the lead — and CENTAH tells Costco to collect the member's payment.</p>
+  </div>
+
+  <div class="stage-intro">
+    <h3>What you do</h3>
+    <ol>
+      <li><strong>Log in</strong> and open the lead from the Dashboard</li>
+      <li><strong>Correct member info</strong> if anything is wrong</li>
+      <li><strong>Quote the lead</strong> — same day, tax 0, Shop Card 10%</li>
+      <li><strong>Sell the lead</strong> — work dates 90+ days out, all four payment boxes filled</li>
+      <li><strong>Costco emails the member</strong> to pay in the Member Payment Portal</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>1. Log in and open the lead</h3>
+      <p>Log in at <a href="https://costcous.centah.com/">costcous.centah.com</a>. Click the <strong>Dashboard</strong> button along the top, then click the member's <strong>Lead #</strong> on the left of the screen — it's the blue link that opens the lead.</p>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;CENTAH — Dashboard</div>
+        <div class="panel-body">
+          <table class="ltable">
+            <tr><th>Lead #</th><th>Member</th><th>Status</th></tr>
+            <tr><td class="lead">10482913</td><td>J. Member</td><td>Appointment ran</td></tr>
+            <tr><td class="lead">10482877</td><td>A. Member</td><td>Scheduled</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>The blue Lead # link opens the lead.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>2. Fix any member info while you're in the lead</h3>
+      <p>If anything in the lead needs correcting — email address, member number, phone number, spelling — fix it here. Type the correction into the box and click <strong>Update Member Information</strong> on the left, about midway down the page.</p>
+      <div class="tip">A wrong email here means the member never gets the payment email — check it before you move on.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Lead — member information</div>
+        <div class="panel-body">
+          <div class="field"><span class="lbl">Email</span><div class="val">member@example.com</div></div>
+          <div class="field"><span class="lbl">Member #</span><div class="val">111888222</div></div>
+          <span class="pbtn gray">Update Member Information</span>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Correct anything wrong, then click Update Member Information.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3. Quote the lead — the day you quote it</h3>
+      <p>A lead must be <strong>quoted</strong> in CENTAH before it can be sold. Click <strong>Quote Lead</strong> on the right side, about three-quarters down the page — this opens the Quote Lead page.</p>
+      <ul>
+        <li><strong>Quote day = today.</strong> The quote goes into CENTAH the day you do it.</li>
+        <li><strong>Sales tax = 0</strong> — and you need to actually enter the 0.</li>
+        <li><strong>Shop Card = 10%</strong> of the quote amount.</li>
+      </ul>
+      <p>Then click the <strong>Quote Lead</strong> button.</p>
+      <div class="critical"><strong>NO EXCEPTIONS:</strong> the quote is entered in CENTAH the same day you quote the member.</div>
+      <div class="warning">There are exceptions to the 10% Shop Card amount — they require additional training. If you think you have one, ask before you enter it.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Quote Lead</div>
+        <div class="panel-body">
+          <div class="field"><span class="lbl">Quote date</span><div class="val">Today ✓</div></div>
+          <div class="field"><span class="lbl">Sales tax</span><div class="val">0</div></div>
+          <div class="field"><span class="lbl">Shop Card amount</span><div class="val">10% of quote</div></div>
+          <span class="pbtn">Quote Lead</span>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Same-day quote, tax 0, Shop Card 10%.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>4. Sell the lead</h3>
+      <p>Click <strong>Sell Lead</strong> on the right side, about three-quarters down the page — this opens the Sell Lead page.</p>
+      <ul>
+        <li><strong>Sub Total and Total Amount</strong> auto-populate with the quote amount. If the actual sale amount is different, adjust it.</li>
+        <li><strong>Sales tax = 0.</strong></li>
+        <li><strong>Work Start and Work End dates: pick a date 90 or more days out.</strong></li>
+        <li><strong>Shop Card = 10%</strong> of the total (same additional-training exceptions apply).</li>
+        <li><strong>All four payment boxes must have a value, even if it's 0:</strong> Third-Party Financing, Check, Costco Shop Card, and Credit/Debit Card. Fill them out accordingly.</li>
+      </ul>
+      <p>When done, click <strong>Submit Sold Details</strong>.</p>
+      <div class="critical"><strong>ESSENTIAL — NO EXCEPTIONS:</strong> Work Start and Work End dates must be 90 or more days out.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Sell Lead</div>
+        <div class="panel-body">
+          <div class="field"><span class="lbl">Total amount</span><div class="val">Auto-filled from quote — adjust if different</div></div>
+          <div class="field flag"><span class="lbl">Work start / work end</span><div class="val">90+ days out</div><div class="fieldnote">ESSENTIAL — no exceptions</div></div>
+          <div class="paygrid">
+            <div class="field"><span class="lbl">3rd-party financing</span><div class="val">$ …</div></div>
+            <div class="field"><span class="lbl">Check</span><div class="val">$ …</div></div>
+            <div class="field"><span class="lbl">Costco Shop Card</span><div class="val">$ …</div></div>
+            <div class="field"><span class="lbl">Credit / debit card</span><div class="val">$ …</div></div>
+          </div>
+          <span class="pbtn">Submit Sold Details</span>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>All four payment boxes get a value — even if it's 0.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>5. Costco takes it from here — the member pays in the portal</h3>
+      <div class="behind-scenes"><strong>What happens behind the scenes:</strong> the moment you submit sold details, Costco emails the member prompting them to enter their payment information in the <strong>Member Payment Portal</strong>.</div>
+      <div class="warning"><strong>The member must have a Costco.com account</strong> to use the payment portal. If they don't have one, they'll need to set one up — tell them that at the table so the email doesn't stall them.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Member's inbox</div>
+        <div class="panel-body">
+          <div class="notecard"><div class="nh">Email from Costco</div>Your Heavenly Greens project is confirmed — please enter your payment information in the Member Payment Portal.</div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Selling the lead triggers Costco's payment email automatically.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PATH 2: NO SALE -->
+<!-- ============================================================ -->
+<div class="section" id="nosale">
+  <div class="section-header amber">
+    <span class="stage-tag">Path 2</span>
+    <h2>Resulting a No Sale</h2>
+    <p>No sale doesn't mean no result — the quote still goes in the same day, and the story goes in the notes.</p>
+  </div>
+
+  <div class="stage-intro amber">
+    <h3>What you do</h3>
+    <ol>
+      <li><strong>Log in</strong> and open the lead from the Dashboard</li>
+      <li><strong>Correct member info</strong> if anything is wrong</li>
+      <li><strong>Quote the lead</strong> — same day, tax 0, Shop Card 10%</li>
+      <li><strong>Enter your appointment notes</strong> in Lead Notes and save</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>1. Open the lead and quote it — exactly like a sale</h3>
+      <p>The first steps are identical to the Sale path: log in at <a href="https://costcous.centah.com/">costcous.centah.com</a>, click <strong>Dashboard</strong>, click the blue <strong>Lead #</strong> link, and correct any member info with <strong>Update Member Information</strong>.</p>
+      <p>Then quote the lead: <strong>Quote Lead</strong> button on the right, quote day = today, sales tax = 0 (enter the 0), Shop Card = 10% of the quote amount, click <strong>Quote Lead</strong>.</p>
+      <div class="critical"><strong>NO EXCEPTIONS:</strong> the quote goes into CENTAH the day you do it — even when the member doesn't buy.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Quote Lead</div>
+        <div class="panel-body">
+          <div class="field"><span class="lbl">Quote date</span><div class="val">Today ✓</div></div>
+          <div class="field"><span class="lbl">Sales tax</span><div class="val">0</div></div>
+          <div class="field"><span class="lbl">Shop Card amount</span><div class="val">10% of quote</div></div>
+          <span class="pbtn">Quote Lead</span>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Same-day quote — sale or no sale.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>2. Enter your appointment notes</h3>
+      <p>Now record what happened: how it went, how likely they are — or aren't — to buy, and anything pertinent. Scroll to the bottom of the lead to the <strong>Lead Notes</strong> section. Click into the text box at the bottom of the section and type your note. When you're done, click <strong>Save Lead Notes</strong>.</p>
+      <div class="behind-scenes"><strong>What happens behind the scenes:</strong> CENTAH time- and date-stamps the note and assigns it to you.</div>
+      <div class="warning"><strong>Costco has access to these notes.</strong> Keep it professional — every note reads like Costco is reading it, because they can.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Lead Notes</div>
+        <div class="panel-body">
+          <div class="notecard" style="margin-bottom:10px"><div class="nh">New note</div>Met with member, presented quote. Considering options — wants to compare with one other bid. Follow-up call set for Friday.</div>
+          <span class="pbtn">Save Lead Notes</span>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>The note gets time-stamped and assigned to you on save.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-text">
+      <h3>3. And every contact after this one</h3>
+      <div class="critical"><strong>EVERY SINGLE TIME you contact, or attempt to contact, any Costco member — enter the notes. NO EXCEPTIONS.</strong> Calls, voicemails, texts, follow-ups, no-answers: if you reached out, it goes in Lead Notes.</div>
+    </div>
+    <div class="step-image">
+      <div class="panel">
+        <div class="panel-bar"><span class="dot" style="background:#f87171"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#4ade80"></span>&nbsp;Lead Notes — history</div>
+        <div class="panel-body">
+          <div class="notecard" style="margin-bottom:8px"><div class="nh">Mon 10:15 AM</div>Left voicemail re: follow-up on quote.</div>
+          <div class="notecard" style="margin-bottom:8px"><div class="nh">Wed 2:40 PM</div>Spoke with member — still comparing bids, call back next week.</div>
+          <div class="notecard"><div class="nh">Fri 9:05 AM</div>Attempted call, no answer. Will try again Monday.</div>
+        </div>
+      </div>
+      <div class="cap"><span class="cap-tag">rendered preview</span>Every contact and every attempt, noted.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHEAT SHEET ===== -->
+<div class="cheat-sheet" id="cheat">
+  <h2>Cheat sheet — both paths</h2>
+  <div class="lanes">
+    <div class="lane sale">
+      <h3>Sale</h3>
+      <ol>
+        <li>Log in &rarr; Dashboard &rarr; Lead #</li>
+        <li>Fix member info if needed</li>
+        <li>Quote Lead — TODAY, tax 0, Shop Card 10%</li>
+        <li>Sell Lead — dates 90+ days out</li>
+        <li>All 4 payment boxes get a value (even 0)</li>
+        <li>Submit Sold Details &rarr; Costco emails the member to pay</li>
+      </ol>
+    </div>
+    <div class="lane nosale">
+      <h3>No Sale</h3>
+      <ol>
+        <li>Log in &rarr; Dashboard &rarr; Lead #</li>
+        <li>Fix member info if needed</li>
+        <li>Quote Lead — TODAY, tax 0, Shop Card 10%</li>
+        <li>Lead Notes: how it went, buying likelihood, anything pertinent</li>
+        <li>Save Lead Notes</li>
+        <li>Note EVERY contact &amp; attempt after</li>
+      </ol>
+    </div>
+  </div>
+  <div class="memory-line">Quote it the day you quote it. Sell it 90+ days out. Note every contact. No exceptions.</div>
+</div>
+
+<div class="foot">
+  Heavenly Greens — Costco CENTAH resulting · Part of the HG Command Center · Powered by AGM Pro Tools
+</div>
+
+</body>
+</html>
