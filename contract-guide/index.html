@@ -296,6 +296,31 @@
     color: #4338ca;
   }
 
+  /* INTERNAL-USE-ONLY CHANGE-ORDER SUB-BLOCK */
+  .internal-callout {
+    border: 2px solid var(--red);
+    border-radius: 12px;
+    margin: 24px 0;
+    overflow: hidden;
+  }
+  .internal-callout .int-banner {
+    background: var(--red);
+    color: #fff;
+    padding: 12px 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .internal-callout .int-body {
+    background: #fef2f2;
+    padding: 8px 16px;
+  }
+  .internal-callout .step {
+    background: #fff;
+    margin: 16px 0;
+  }
+
   /* CHANGE-BEFORE-SIGN INTERSTITIAL (between Stage 2 and Stage 3) */
   .change-callout {
     max-width: 900px;
@@ -1294,6 +1319,24 @@
     </div>
   </div>
 
+  <div class="step">
+    <div class="step-text">
+      <h3>Pick a lane: customer signing or internal-only</h3>
+      <p>Clicking <strong>"Create Change Order"</strong> now opens a chooser with two options:</p>
+      <ul>
+        <li><strong>Change Order for Customer Signing</strong> &mdash; the standard flow, where the <strong>customer reviews and signs</strong>. This is the path walked through below.</li>
+        <li><strong>Change Order — Internal Use Only</strong> &mdash; <strong>in-house reconciliation only — no customer or rep signature, amount tracked at $0 for manual costing</strong>. See the <a href="#co-internal">Internal Use Only</a> block at the end of this stage.</li>
+      </ul>
+    </div>
+    <div class="step-image">
+      <img src="../slides/co_internal_1_fork.png" alt="Create Change Order chooser: Change Order for Customer Signing vs Change Order — Internal Use Only">
+    </div>
+  </div>
+
+  <div class="loom-embed">
+    <iframe src="https://www.loom.com/embed/2597e70ed85d443bb8f88790d928c7d6" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+
   <div class="loom-embed">
     <iframe src="https://www.loom.com/embed/d31a4e51b4ed46cba9b3fd984d01a331" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
   </div>
@@ -1496,6 +1539,39 @@
 
   <div class="loom-embed">
     <iframe src="https://www.loom.com/embed/551999e60c544de58ca43cb66b936df4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+
+  <div class="internal-callout" id="co-internal">
+    <div class="int-banner">Internal Use Only</div>
+    <div class="int-body">
+      <div class="step">
+        <div class="step-text">
+          <h3>The Internal Use Only lane</h3>
+          <p>Pick <strong>Change Order — Internal Use Only</strong> from the chooser when the change is for <strong>in-house cost reconciliation</strong> — not something the member signs. It behaves differently from the customer lane in four ways:</p>
+          <ul>
+            <li><strong>$0 adjustment</strong> — the dollar delta is forced to <strong>$0</strong>. The amount is tracked for manual costing, never billed to the member.</li>
+            <li><strong>No signature</strong> — the change order completes with <strong>no customer and no rep signature</strong>. No signing link is sent.</li>
+            <li><strong>Fires the internal tag</strong> — it fires <code>internal change order approved</code>, never the customer <code>change order approved</code>, so internal notifications stay separate from customer-facing ones.</li>
+            <li><strong>Stamped PDF</strong> — the CO PDF is stamped <strong>"NO SIGNATURE REQUIRED"</strong> so anyone reading it knows it was an internal reconciliation.</li>
+          </ul>
+        </div>
+        <div class="step-image">
+          <img src="../slides/co_internal_2_form.png" alt="Internal Use Only change order form — $0 adjustment, no signature required">
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <h3>The stamped internal CO PDF</h3>
+          <p>The generated PDF carries the <strong>"NO SIGNATURE REQUIRED"</strong> stamp and a $0 adjustment. It's for <strong>in-house cost reconciliation</strong> — there's nothing to send to the member.</p>
+        </div>
+        <div class="step-image">
+          <img src="../slides/co_internal_3_pdf.png" alt="Internal change order PDF stamped NO SIGNATURE REQUIRED with a $0 adjustment">
+        </div>
+      </div>
+
+      <div class="behind-scenes"><strong>Why the $0 and no signature:</strong> the internal lane exists so Tim can run the manual cost calculation in-house without touching the member's signed contract or triggering any customer comms. The distinct <code>internal change order approved</code> tag routes the internal notification to the production team, not the member.</div>
+    </div>
   </div>
 </div>
 
