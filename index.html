@@ -308,9 +308,22 @@
     .flow-step { font-size: 0.7rem; padding: 6px 10px; }
     .section-header h2 { font-size: 1.2rem; }
   }
+
+  /* GUIDE TABS (site-wide, added 2026-09-07) */
+  .guide-tabs { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; background:#0f0f1f; padding:12px 16px; }
+  .guide-tab { color:#cbd5e1; text-decoration:none; font-weight:600; font-size:0.9rem; padding:8px 16px; border-radius:20px; border:1px solid #334155; }
+  .guide-tab:hover { background:#1e293b; color:#fff; }
+  .guide-tab.active { background:var(--green); color:#fff; border-color:var(--green); }
 </style>
 </head>
 <body>
+<nav class="guide-tabs" aria-label="Guides">
+  <a href="https://hgdocs.com/" class="guide-tab active">Costco Contract Guide</a>
+  <a href="https://hgdocs.com/hg-direct-contract/" class="guide-tab">HG Direct Contract Guide</a>
+  <a href="https://hgdocs.com/appointment-guide/" class="guide-tab">Appointment Guide</a>
+  <a href="https://hgdocs.com/resulting-in-centah/" class="guide-tab">Resulting in CENTAH</a>
+</nav>
+
 
 <!-- ===== HEADER ===== -->
 <div class="header">

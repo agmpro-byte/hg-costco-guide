@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HG Direct Contract Guide — Heavenly Greens</title>
+<style>
+  :root {
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --dark: #1a1a2e;
+    --gray: #f8f9fa;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background: #fff;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--dark);
+    color: #fff;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 24px;
+  }
+  .header .flow-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .flow-step {
+    background: var(--green);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    color: #475569;
+    font-size: 1.2rem;
+  }
+  .centah-nav {
+    display: inline-block;
+    margin-top: 24px;
+    background: var(--amber);
+    color: #1a1a2e;
+    padding: 10px 22px;
+    border-radius: 22px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.1s ease, transform 0.1s ease;
+  }
+  .centah-nav:hover { background: #fbbf24; transform: translateY(-2px); }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--gray);
+    border-radius: 12px;
+  }
+  .toc h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+  .toc ol {
+    padding-left: 24px;
+  }
+  .toc li {
+    margin-bottom: 8px;
+  }
+  .toc a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .toc a:hover { text-decoration: underline; }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+  }
+  .section-header {
+    background: var(--green);
+    color: #fff;
+    padding: 20px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+  }
+  .section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .section-header p {
+    margin-top: 4px;
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+
+  /* STEP BLOCKS */
+  .step {
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .step-text {
+    padding: 20px 24px;
+  }
+  .step-text h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .step-text p, .step-text li {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .step-text ul {
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .step-image {
+    background: var(--gray);
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .step-image img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* CALLOUT BOXES */
+  .tip {
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .warning {
+    background: var(--amber-light);
+    border-left: 4px solid var(--amber);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .critical {
+    background: #fee2e2;
+    border-left: 4px solid var(--red);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes {
+    background: #eef2ff;
+    border-left: 4px solid #6366f1;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes strong {
+    color: #4338ca;
+  }
+
+  /* PRE-FLIGHT CHECKLIST */
+  .preflight {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fffbeb;
+    border: 2px solid var(--amber);
+    border-radius: 12px;
+  }
+  .preflight h2 {
+    color: #92400e;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .preflight .subtitle {
+    color: #78350f;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  .preflight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .preflight-card {
+    background: #fff;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .preflight-card h3 {
+    color: var(--dark);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .preflight-card p {
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .preflight-card .where {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+  @media (max-width: 640px) {
+    .preflight-grid { grid-template-columns: 1fr; }
+  }
+
+  /* CHEAT SHEET */
+  .cheat-sheet {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--dark);
+    color: #fff;
+    border-radius: 12px;
+  }
+  .cheat-sheet h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .cheat-sheet ol {
+    padding-left: 24px;
+    font-size: 1.05rem;
+  }
+  .cheat-sheet li {
+    margin-bottom: 12px;
+    color: #e2e8f0;
+  }
+  .cheat-sheet li strong {
+    color: #4ade80;
+  }
+  .cheat-sheet .memory-line {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #334155;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #4ade80;
+    letter-spacing: 0.5px;
+  }
+
+  /* PRINT */
+  @media print {
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 1.8rem; }
+    .section { page-break-inside: avoid; }
+    .step { page-break-inside: avoid; }
+    .step-image img { max-height: 400px; object-fit: contain; }
+    body { font-size: 11pt; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.6rem; }
+    .flow-bar { gap: 4px; }
+    .flow-step { font-size: 0.7rem; padding: 6px 10px; }
+    .section-header h2 { font-size: 1.2rem; }
+  }
+
+  /* GUIDE TABS (site-wide, added 2026-09-07) */
+  .guide-tabs { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; background:#0f0f1f; padding:12px 16px; }
+  .guide-tab { color:#cbd5e1; text-decoration:none; font-weight:600; font-size:0.9rem; padding:8px 16px; border-radius:20px; border:1px solid #334155; }
+  .guide-tab:hover { background:#1e293b; color:#fff; }
+  .guide-tab.active { background:var(--green); color:#fff; border-color:var(--green); }
+
+  .deck-embed { max-width: 900px; margin: 32px auto 8px; padding: 0 24px; }
+  .deck-embed iframe { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--border); border-radius: 12px; background: #111; }
+  .deck-actions { max-width: 900px; margin: 0 auto 40px; padding: 0 24px; display:flex; gap:12px; flex-wrap:wrap; }
+  .btn-green { display:inline-block; background: var(--green); color:#fff; padding: 12px 22px; border-radius: 22px; font-weight:700; text-decoration:none; }
+  .btn-green:hover { background:#15803d; }
+  .btn-ghost { display:inline-block; border:1px solid var(--border); color: var(--dark); padding: 12px 22px; border-radius: 22px; font-weight:600; text-decoration:none; }
+  .actor { display:inline-block; font-size:0.75rem; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:10px; margin-right:6px; vertical-align:middle; }
+  .actor.rep { background:#dbeafe; color:#1d4ed8; }
+  .actor.cust { background:#fef3c7; color:#b45309; }
+  .actor.agm { background:#dcfce7; color:#15803d; }
+  .footer { max-width:900px; margin:40px auto; padding:24px; color:var(--text-light); font-size:0.85rem; border-top:1px solid var(--border); }
+</style>
+</head>
+<body>
+<nav class="guide-tabs" aria-label="Guides">
+  <a href="https://hgdocs.com/" class="guide-tab">Costco Contract Guide</a>
+  <a href="https://hgdocs.com/hg-direct-contract/" class="guide-tab active">HG Direct Contract Guide</a>
+  <a href="https://hgdocs.com/appointment-guide/" class="guide-tab">Appointment Guide</a>
+  <a href="https://hgdocs.com/resulting-in-centah/" class="guide-tab">Resulting in CENTAH</a>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>HG Direct Contract Guide</h1>
+  <p class="subtitle">Heavenly Greens — Sales Rep Quick Reference · every new HG Direct contract is built in AGM</p>
+  <div class="flow-bar">
+    <span class="flow-step">1. Build Contract</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">2. Fill the Form</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">3. Create &amp; Review</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">4. Approve &amp; Send</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">5. Customer Signs</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">6. You Countersign</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">7. Deposit Paid</span>
+  </div>
+  <a class="centah-nav" href="https://gamma.app/docs/3fikag6bfvau3ys" target="_blank" rel="noopener">Open the full step-by-step deck (17 cards) &rarr;</a>
+</div>
+
+<!-- ===== THE DECK ===== -->
+<div class="deck-embed">
+  <iframe src="https://gamma.app/embed/3fikag6bfvau3ys" allow="fullscreen" title="How to build an HG Direct contract in AGM — training deck"></iframe>
+</div>
+<div class="deck-actions">
+  <a class="btn-green" href="https://gamma.app/docs/3fikag6bfvau3ys" target="_blank" rel="noopener">Open the deck in Gamma</a>
+  <a class="btn-ghost" href="#build">Read it as a page below &darr;</a>
+</div>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<div class="toc">
+  <h2>Quick Navigation</h2>
+  <ol>
+    <li><a href="#build">Build the contract in AGM</a> — from the contact record to a draft</li>
+    <li><a href="#send">Send it for signature</a> — two presses of Approve &amp; Send; the second is the send</li>
+    <li><a href="#customer">What the customer does</a> — Take me there, Confirm, Sign</li>
+    <li><a href="#countersign">You countersign</a> — your signing copy arrives when they sign</li>
+    <li><a href="#deposit">The customer pays the deposit</a> — automatic invoice with a Pay link</li>
+    <li><a href="#agm">What lands back in AGM</a> — timeline, notes, Deposit Received</li>
+  </ol>
+  <div class="tip">Costco contracts have their own track and their own guide — use the <strong>Costco Contract Guide</strong> tab above.</div>
+</div>
+
+<div class="section" id="build">
+  <div class="section-header">
+    <h2>Chapter 1: Build the contract in AGM</h2>
+    <p>From the customer's contact record to a draft you can send. Captured live on a test contract, 7 September 2026.</p>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor rep">SALES REP</span>Open the customer's contact and press <strong>Build Contract</strong></h3>
+      <p>Contacts &rarr; the customer you just ran the appointment for. The top bar carries <strong>Change Order Form &middot; Build Contract &middot; View Installer Packet &middot; Add Project Details &middot; Service Request</strong>. Press <strong>Build Contract</strong>.</p>
+    </div>
+    <div class="step-image"><img src="img/00_rep_contact_record_build_contract_button.png" alt="The contact record with the Build Contract button" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor rep">SALES REP</span>Pick <strong>Heavenly Greens Direct</strong></h3>
+      <p>A new tab asks <em>Which contract is this?</em> Press <strong>Heavenly Greens Direct</strong>. Costco is the other track and has its own guide.</p>
+    </div>
+    <div class="step-image"><img src="img/00b_rep_chooser_which_contract.png" alt="Which contract is this? chooser" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor rep">SALES REP</span>The Build Contract form opens with the customer already filled in</h3>
+      <p>Name and email come from the contact. You add <strong>Phone, Billing Address, City, Zip</strong>, and whether the job address is the same as billing. The <strong>Sales Rep</strong> block pre-fills from the contact's assigned rep &mdash; confirm it is you: that name prints on the contract and receives the signing copy.</p>
+    </div>
+    <div class="step-image"><img src="img/02_rep_intake_customer_and_rep_filled.png" alt="The form with customer and sales rep filled in" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor rep">SALES REP</span>The job, the waivers, the products and the payment schedule</h3>
+      <ul><li><strong>Job:</strong> approximate start (e.g. 4&ndash;6 weeks out), duration, gopher wire, site check, project area, turf area (auto-sums from turf lines), location ticks, and the job description that prints on the contract.</li><li><strong>Waivers:</strong> tick every one that applies &mdash; they go to the customer automatically after full signature, never before.</li><li><strong>Products &amp; Services:</strong> Category &rarr; Product (frequently-used first; <em>Write in a product&hellip;</em> for anything else), Qty, Unit, Price, Warranty years. <strong>+ Add line item</strong> for more. At least one line, total above $0.</li><li><strong>Payment Schedule:</strong> the deposit is computed for you (California law: 10%, capped at $1,000). Pick Deposit Paid By, add any Materials / Start of Work / progress payments; Final Payment is the remainder. Read the totals box.</li></ul>
+      <div class="warning"><strong>Price is the price for that line, not per unit.</strong> The form does not multiply Qty &times; Price. Type the amount you quoted the customer for that line.</div>
+    </div>
+    <div class="step-image"><img src="img/05_rep_intake_filled_before_create.png" alt="The form filled in, before Create Contract" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor rep">SALES REP</span>Press <strong>Create Contract</strong> and review the draft</h3>
+      <p>The page keeps your form and shows the <strong>Installation Agreement Draft</strong> card: customer, phone, email, rep, document ref, version &mdash; with <strong>Approve &amp; Send to Customer</strong>, <strong>Reject &mdash; Needs Fixes</strong>, <strong>Open PDF in new tab</strong> and <strong>Delete</strong>.</p>
+    </div>
+    <div class="step-image"><img src="img/07_rep_draft_review_card.png" alt="The Installation Agreement Draft card" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor rep">SALES REP</span>Optional: open the PDF and read the draft</h3>
+      <p>Four pages: agreement, terms, waivers, signature page. Read it the way the customer will.</p>
+    </div>
+    <div class="step-image"><img src="img/08_rep_draft_pdf_page-1.png" alt="Page 1 of the draft agreement PDF" loading="lazy"></div>
+  </div>
+</div>
+
+<div class="section" id="send">
+  <div class="section-header">
+    <h2>Chapter 2: Send it for signature</h2>
+    <p>Two presses of Approve &amp; Send. The second one is the send.</p>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor rep">SALES REP</span>Press <strong>Approve &amp; Send to Customer</strong> on the draft card</h3>
+      <p>You land on the <strong>Rep Review</strong> page, headed with the job number (HG-000xx): <em>Review required. Please verify every field is correct&hellip; Once you approve, the customer receives the signing link immediately.</em></p>
+    </div>
+    <div class="step-image"><img src="img/08_rep_after_approve_and_send.png" alt="The Rep Review page" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor rep">SALES REP</span>Press <strong>Approve &amp; Send to Customer</strong> again, then <strong>OK</strong></h3>
+      <p>The browser asks <em>Approve this draft and send the signing link to the customer?</em> &mdash; OK is the send. The customer gets the signing link by email (and by text if a mobile is on file); you get the signing copy.</p>
+      <div class="tip">The page flips to <strong>Contract Sent &mdash; awaiting their signature</strong>. If something must change before they sign, press <strong>Withdraw &amp; Correct</strong>: it invalidates their link, sends a withdrawal notice, and lets you fix and resend.</div>
+    </div>
+    <div class="step-image"><img src="img/12_rep_review_page_after_send.png" alt="Contract Sent — awaiting the customer&#x27;s signature" loading="lazy"></div>
+  </div>
+</div>
+
+<div class="section" id="customer">
+  <div class="section-header">
+    <h2>Chapter 3: What the customer does</h2>
+    <p>What lands in their inbox and what they press. Tell them this before you leave.</p>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor cust">CUSTOMER</span>Open the signing link &rarr; the Sign page</h3>
+      <p>Steps <strong>1 Review &middot; 2 Sign &middot; 3 Done</strong>. A <strong>NEXT SIGNATURE</strong> box counts the required spots (0 / 6) with <strong>Take me there &darr;</strong>.</p>
+    </div>
+    <div class="step-image"><img src="img/13_cust_signing_page_top.png" alt="The customer&#x27;s Sign page" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor cust">CUSTOMER</span>Press <strong>Take me there</strong> and <strong>Confirm</strong> each spot</h3>
+      <p>A small box opens at each signature spot with their name pre-filled &mdash; <strong>Confirm</strong>, then on to the next (product acknowledgment, waivers, terms&hellip;).</p>
+    </div>
+    <div class="step-image"><img src="img/15_cust_first_signature_spot.png" alt="The first signature spot" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor cust">CUSTOMER</span>When every spot is confirmed: <strong>Sign Installation Agreement</strong></h3>
+      <p>The box reads <strong>READY TO SUBMIT</strong>. They tick <em>I agree these typed entries are my legal electronic signature</em> (the button stays grey until they do), then press <strong>Sign Installation Agreement</strong>.</p>
+    </div>
+    <div class="step-image"><img src="img/20_cust_agreement_box_ticked_submit_enabled.png" alt="Agreement box ticked, Sign button enabled" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor cust">CUSTOMER</span>Done: <em>Signature recorded</em></h3>
+      <p><em>After salesperson has countersigned, a fully executed copy will be emailed to you.</em></p>
+    </div>
+    <div class="step-image"><img src="img/21_cust_done_page_top.png" alt="The customer&#x27;s done page" loading="lazy"></div>
+  </div>
+</div>
+
+<div class="section" id="countersign">
+  <div class="section-header">
+    <h2>Chapter 4: You countersign</h2>
+    <p>Your signing copy arrives the moment the customer signs.</p>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor rep">SALES REP</span>Open your signing copy: <em>Final signature required</em></h3>
+      <p><em>&lt;customer&gt; has signed. Review and add your signature to complete it.</em> NEXT SIGNATURE: Salesperson signature, 0 / 2 &rarr; <strong>Take me there</strong> &rarr; <strong>Confirm</strong> &times;2 &rarr; tick the e-signature agreement &rarr; <strong>Sign Installation Agreement</strong>.</p>
+    </div>
+    <div class="step-image"><img src="img/25_rep_countersign_ready_to_submit.png" alt="Countersign page, ready to submit" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor rep">SALES REP</span><em>This contract is now fully executed. All parties have been emailed a copy.</em></h3>
+      <p>The engine then creates the <strong>deposit invoice</strong> in AGM and sends the customer the pay link &mdash; nothing for you to do.</p>
+    </div>
+    <div class="step-image"><img src="img/28_rep_countersign_completed_top.png" alt="Countersign completed" loading="lazy"></div>
+  </div>
+</div>
+
+<div class="section" id="deposit">
+  <div class="section-header">
+    <h2>Chapter 5: The customer pays the deposit</h2>
+    <p>Automatic. You will see it land on the contact.</p>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor cust">CUSTOMER</span>The deposit invoice arrives by email with a <strong>Pay</strong> link</h3>
+      <p>From accounting@heavenlygreens.com: <em>Heavenly Greens &mdash; Deposit (HG-000xx)</em>, due in 7 days. The hosted invoice page shows the deposit line and a <strong>Pay</strong> button.</p>
+    </div>
+    <div class="step-image"><img src="img/30_cust_deposit_invoice_page_top.png" alt="The deposit invoice page" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor cust">CUSTOMER</span>Pay by card</h3>
+      <p>Press Pay &rarr; card form &rarr; pay.</p>
+    </div>
+    <div class="step-image"><img src="img/32_cust_card_form_after_pay_click.png" alt="The card form" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor cust">CUSTOMER</span>The invoice shows <strong>PAID</strong></h3>
+      <p>Completed date and time, amount paid, PDF download. The customer is also emailed the executed contract, the invoice and the payment receipt.</p>
+    </div>
+    <div class="step-image"><img src="img/34_cust_invoice_paid_state.png" alt="Invoice paid state" loading="lazy"></div>
+  </div>
+</div>
+
+<div class="section" id="agm">
+  <div class="section-header">
+    <h2>Chapter 6: What lands back in AGM for you</h2>
+    <p>The whole story on the contact, without opening anything else.</p>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor agm">BACK IN AGM</span>The <strong>Conversations</strong> timeline</h3>
+      <p>Opportunity created &rarr; Customer Signed &rarr; Installation Agreement fully executed &rarr; thank-you email &rarr; New Invoice Sent &rarr; the ticked waiver went out automatically &rarr; Deposit Invoice Sent &rarr; Payment received &rarr; <strong>Deposit Received</strong>.</p>
+    </div>
+    <div class="step-image"><img src="img/35_rep_contact_conversation_timeline.png" alt="The Conversations timeline on the contact" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor agm">BACK IN AGM</span>The <strong>Notes</strong> panel</h3>
+      <p>Draft ready (review link), Sent to Member, Customer Signed, <strong>Installation Agreement Finalized</strong> with the signed PDF link.</p>
+    </div>
+    <div class="step-image"><img src="img/36_rep_contact_notes_panel.png" alt="The Notes panel" loading="lazy"></div>
+  </div>
+  <div class="step">
+    <div class="step-text">
+      <h3><span class="actor agm">BACK IN AGM</span>The opportunity card sits in <strong>Deposit Received</strong></h3>
+      <p>Opportunities &rarr; 1. Lead Flow: the HG-000xx card now shows the contract value in <strong>Deposit Received</strong>, and installer-packet prep has fired.</p>
+    </div>
+    <div class="step-image"><img src="img/37_rep_pipeline_deposit_received.png" alt="The pipeline card in Deposit Received" loading="lazy"></div>
+  </div>
+</div>
+
+
+<div class="footer">
+  Captured live on 7 September 2026 on a test contract (test-mode deposit). Every screenshot is test data. Source: the HG Direct contract how-to deck &mdash; <a href="https://gamma.app/docs/3fikag6bfvau3ys" target="_blank" rel="noopener">https://gamma.app/docs/3fikag6bfvau3ys</a>.
+</div>
+</body>
+</html>
