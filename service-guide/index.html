@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Guide — Heavenly Greens</title>
+<style>
+  :root {
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --dark: #1a1a2e;
+    --gray: #f8f9fa;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background: #fff;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--dark);
+    color: #fff;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 24px;
+  }
+  .header .flow-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .flow-step {
+    background: var(--green);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    color: #475569;
+    font-size: 1.2rem;
+  }
+  .centah-nav {
+    display: inline-block;
+    margin-top: 24px;
+    background: var(--amber);
+    color: #1a1a2e;
+    padding: 10px 22px;
+    border-radius: 22px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.1s ease, transform 0.1s ease;
+  }
+  .centah-nav:hover { background: #fbbf24; transform: translateY(-2px); }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--gray);
+    border-radius: 12px;
+  }
+  .toc h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+  .toc ol {
+    padding-left: 24px;
+  }
+  .toc li {
+    margin-bottom: 8px;
+  }
+  .toc a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .toc a:hover { text-decoration: underline; }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+  }
+  .section-header {
+    background: var(--green);
+    color: #fff;
+    padding: 20px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+  }
+  .section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .section-header p {
+    margin-top: 4px;
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+
+  /* STEP BLOCKS */
+  .step {
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .step-text {
+    padding: 20px 24px;
+  }
+  .step-text h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .step-text p, .step-text li {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .step-text ul {
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .step-image {
+    background: var(--gray);
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .step-image img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* CALLOUT BOXES */
+  .tip {
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .warning {
+    background: var(--amber-light);
+    border-left: 4px solid var(--amber);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .critical {
+    background: #fee2e2;
+    border-left: 4px solid var(--red);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes {
+    background: #eef2ff;
+    border-left: 4px solid #6366f1;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes strong {
+    color: #4338ca;
+  }
+
+  /* PRE-FLIGHT CHECKLIST */
+  .preflight {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fffbeb;
+    border: 2px solid var(--amber);
+    border-radius: 12px;
+  }
+  .preflight h2 {
+    color: #92400e;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .preflight .subtitle {
+    color: #78350f;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  .preflight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .preflight-card {
+    background: #fff;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .preflight-card h3 {
+    color: var(--dark);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .preflight-card p {
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .preflight-card .where {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+  @media (max-width: 640px) {
+    .preflight-grid { grid-template-columns: 1fr; }
+  }
+
+  /* CHEAT SHEET */
+  .cheat-sheet {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--dark);
+    color: #fff;
+    border-radius: 12px;
+  }
+  .cheat-sheet h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .cheat-sheet ol {
+    padding-left: 24px;
+    font-size: 1.05rem;
+  }
+  .cheat-sheet li {
+    margin-bottom: 12px;
+    color: #e2e8f0;
+  }
+  .cheat-sheet li strong {
+    color: #4ade80;
+  }
+  .cheat-sheet .memory-line {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #334155;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #4ade80;
+    letter-spacing: 0.5px;
+  }
+
+  /* PRINT */
+  @media print {
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 1.8rem; }
+    .section { page-break-inside: avoid; }
+    .step { page-break-inside: avoid; }
+    .step-image img { max-height: 400px; object-fit: contain; }
+    body { font-size: 11pt; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.6rem; }
+    .flow-bar { gap: 4px; }
+    .flow-step { font-size: 0.7rem; padding: 6px 10px; }
+    .section-header h2 { font-size: 1.2rem; }
+  }
+
+  /* GUIDE TABS (site-wide, added 2026-09-07) */
+  .guide-tabs { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; background:#0f0f1f; padding:12px 16px; }
+  .guide-tab { color:#cbd5e1; text-decoration:none; font-weight:600; font-size:0.9rem; padding:8px 16px; border-radius:20px; border:1px solid #334155; }
+  .guide-tab:hover { background:#1e293b; color:#fff; }
+  .guide-tab.active { background:var(--green); color:#fff; border-color:var(--green); }
+
+  .deck-embed { max-width: 900px; margin: 32px auto 8px; padding: 0 24px; }
+  .deck-embed iframe { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--border); border-radius: 12px; background: #111; }
+  .deck-actions { max-width: 900px; margin: 0 auto 40px; padding: 0 24px; display:flex; gap:12px; flex-wrap:wrap; }
+  .btn-green { display:inline-block; background: var(--green); color:#fff; padding: 12px 22px; border-radius: 22px; font-weight:700; text-decoration:none; }
+  .btn-green:hover { background:#15803d; }
+  .btn-ghost { display:inline-block; border:1px solid var(--border); color: var(--dark); padding: 12px 22px; border-radius: 22px; font-weight:600; text-decoration:none; }
+  .actor { display:inline-block; font-size:0.75rem; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:10px; margin-right:6px; vertical-align:middle; }
+  .actor.rep { background:#dbeafe; color:#1d4ed8; }
+  .actor.cust { background:#fef3c7; color:#b45309; }
+  .actor.agm { background:#dcfce7; color:#15803d; }
+  .footer { max-width:900px; margin:40px auto; padding:24px; color:var(--text-light); font-size:0.85rem; border-top:1px solid var(--border); }
+
+  /* PRODUCTION GUIDE (added 2026-10-27) */
+  .card-body { padding: 20px 24px; border: 1px solid var(--border); border-radius: 12px; }
+  .card-body p, .card-body li { font-size: 0.95rem; margin-bottom: 8px; }
+  .card-body ul, .card-body ol { padding-left: 22px; margin: 8px 0 12px; }
+  .card-body h3 { font-size: 1.05rem; color: var(--dark); margin: 4px 0 10px; }
+  .card-body table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 0.9rem; }
+  .card-body th, .card-body td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  .card-body th { background: var(--gray); color: var(--dark); }
+  .card-body .table-wrap { overflow-x: auto; }
+  .shot { margin: 16px 0; background: var(--gray); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; }
+  .shot img { max-width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .shot figcaption { font-size: 0.85rem; color: var(--text-light); margin-top: 8px; }
+  .toc ol { columns: 2; column-gap: 32px; }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+</style>
+</head>
+<body>
+<nav class="guide-tabs" aria-label="Guides">
+  <a href="https://hgdocs.com/" class="guide-tab">Costco Contract Guide</a>
+  <a href="https://hgdocs.com/hg-direct-contract/" class="guide-tab">HG Direct Contract Guide</a>
+  <a href="https://hgdocs.com/appointment-guide/" class="guide-tab">Appointment Guide</a>
+  <a href="https://hgdocs.com/resulting-in-centah/" class="guide-tab">Resulting in CENTAH</a>
+  <a href="https://hgdocs.com/production-guide/" class="guide-tab">Production Guide</a>
+  <a href="https://hgdocs.com/service-guide/" class="guide-tab active">Service Guide</a>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>Service Guide</h1>
+  <p class="subtitle">Heavenly Greens — the service department in HG Command, from the first call to the money in · updated October 26, 2026</p>
+  <div class="flow-bar">
+    <span class="flow-step">1. New request</span><span class="flow-arrow">&rarr;</span><span class="flow-step">2. Photos / assessment</span><span class="flow-arrow">&rarr;</span><span class="flow-step">3. Needs a price</span><span class="flow-arrow">&rarr;</span><span class="flow-step">4. Scheduled</span><span class="flow-arrow">&rarr;</span><span class="flow-step">5. Done, not paid</span><span class="flow-arrow">&rarr;</span><span class="flow-step">6. Closed</span>
+  </div>
+  <a class="centah-nav" href="https://gamma.app/docs/fuc5602o28bazox" target="_blank" rel="noopener">Open the full deck (47 cards) &rarr;</a>
+</div>
+
+<!-- ===== THE DECK ===== -->
+<div class="deck-embed">
+  <iframe src="https://gamma.app/embed/fuc5602o28bazox" allow="fullscreen" title="The Service Department in HG Command — how-to deck"></iframe>
+</div>
+<div class="deck-actions">
+  <a class="btn-green" href="https://gamma.app/docs/fuc5602o28bazox" target="_blank" rel="noopener">Open the deck in Gamma</a>
+  <a class="btn-ghost" href="#the-100-000-foot-view">Read it as a page below &darr;</a>
+</div>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<div class="toc">
+  <h2>Quick Navigation</h2>
+  <ol>
+    <li><a href="#the-100-000-foot-view">The 100,000-foot view</a></li>
+    <li><a href="#the-three-rules">The three rules</a></li>
+    <li><a href="#where-a-request-comes-in">Where a request comes in</a></li>
+    <li><a href="#the-stages-a-ticket-moves-through">The stages a ticket moves through</a></li>
+    <li><a href="#part-1-signing-in">Part 1 · Signing in</a></li>
+    <li><a href="#part-2-the-service-board">Part 2 · The Service board</a></li>
+    <li><a href="#what-s-waiting-on-you">What&#x27;s waiting on you</a></li>
+    <li><a href="#the-instrument-panel">The instrument panel</a></li>
+    <li><a href="#your-next-moves">Your next moves</a></li>
+    <li><a href="#close-the-loop-done-press-what-happened">Close the loop: Done? Press what happened</a></li>
+    <li><a href="#press-a-button-to-see-just-those">Press a button to see just those</a></li>
+    <li><a href="#new-waiting-on-photos-and-the-72-hour-chase">New · Waiting on photos, and the 72-hour chase</a></li>
+    <li><a href="#convert-a-salesforce-ticket-and-fix-a-booking">Convert a Salesforce ticket, and fix a booking</a></li>
+    <li><a href="#emails-with-no-ticket-loose-mail">Emails with no ticket: Loose mail</a></li>
+    <li><a href="#today-s-visits-with-the-calendar-under-them">Today&#x27;s visits, with the calendar under them</a></li>
+    <li><a href="#part-3-one-service-calendar-for-everyone">Part 3 · One service calendar for everyone</a></li>
+    <li><a href="#a-visit-s-panel-and-book-here">A visit&#x27;s panel, and + Book here</a></li>
+    <li><a href="#the-call-center-books-service-in-agm">The call center books service in AGM</a></li>
+    <li><a href="#what-happens-after-a-call-center-booking">What happens after a call-center booking</a></li>
+    <li><a href="#part-4-the-three-tracks-in-detail">Part 4 · The three tracks, in detail</a></li>
+    <li><a href="#track-1-inbound-everyone-waiting-on-us">Track 1 · Inbound: everyone waiting on us</a></li>
+    <li><a href="#track-2-in-flight-every-open-ticket-by-stage">Track 2 · In flight: every open ticket by stage</a></li>
+    <li><a href="#reading-a-ticket-card">Reading a ticket card</a></li>
+    <li><a href="#clear-take-a-dead-ticket-off-the-board">Clear: take a dead ticket off the board</a></li>
+    <li><a href="#track-3-landed-and-the-numbers">Track 3 · Landed, and the numbers</a></li>
+    <li><a href="#part-5-opening-a-ticket">Part 5 · Opening a ticket</a></li>
+    <li><a href="#the-rest-of-the-form">The rest of the form</a></li>
+    <li><a href="#part-6-working-a-ticket">Part 6 · Working a ticket</a></li>
+    <li><a href="#send-the-link-or-book-a-visit-to-look">Send the link, or book a visit to look</a></li>
+    <li><a href="#what-the-customer-sees">What the customer sees</a></li>
+    <li><a href="#set-the-price-or-no-charge-then-the-crew">Set the price, or no charge, then the crew</a></li>
+    <li><a href="#book-the-visit">Book the visit</a></li>
+    <li><a href="#the-service-agreement-not-switched-on-yet">The service agreement (not switched on yet)</a></li>
+    <li><a href="#part-7-the-crews-day-sheets">Part 7 · The crews&#x27; day sheets</a></li>
+    <li><a href="#what-the-crew-sees">What the crew sees</a></li>
+    <li><a href="#one-outcome-per-stop">One outcome per stop</a></li>
+    <li><a href="#taking-payment-at-the-door">Taking payment at the door</a></li>
+    <li><a href="#part-8-the-day-before-confirmation-calls">Part 8 · The day-before confirmation calls</a></li>
+    <li><a href="#part-9-getting-paid">Part 9 · Getting paid</a></li>
+    <li><a href="#accounting-service">Accounting → Service</a></li>
+    <li><a href="#quickbooks-and-no-charge-work">QuickBooks, and no-charge work</a></li>
+    <li><a href="#a-day-in-service">A day in service</a></li>
+    <li><a href="#what-runs-by-itself-and-what-is-off-on-purpose">What runs by itself, and what is off on purpose</a></li>
+    <li><a href="#where-salesforce-stands">Where Salesforce stands</a></li>
+    <li><a href="#which-button-when">Which button, when</a></li>
+    <li><a href="#known-gaps-and-what-to-do-if-something-looks-wrong">Known gaps, and what to do if something looks wrong</a></li>
+  </ol>
+  <div class="tip">Looking for one button? Jump to <a href="#which-button-when"><strong>Which button, when</strong></a>.</div>
+</div>
+
+<div class="section" id="the-service-department-in-hg-command">
+  <div class="section-header"><h2>The Service department in HG Command</h2><p>How service works now, from the first call to the money in</p></div>
+  <div class="card-body">
+<p>Heavenly Greens · updated October 26, 2026 · for anyone who runs or takes over service</p>
+<figure class="shot"><img src="img/b01_board_top.png" alt="The Service board in HG Command" loading="lazy"><figcaption>The Service board in HG Command</figcaption></figure>
+
+<p><strong>What this guide is:</strong> the whole service department on one set of screens: where a request comes in, which page to open, which button to press and when, what the crews and customers see, and what the system does by itself afterwards. It replaces the October 20 service training deck. <strong>Every customer in these pictures is made up.</strong></p>
+  </div>
+</div>
+<div class="section" id="the-100-000-foot-view">
+  <div class="section-header"><h2>The 100,000-foot view</h2></div>
+  <div class="card-body">
+<p>Every service job is <strong>one ticket</strong> (an SVC number), on <strong>one calendar</strong> (AGM's Service calendar, a row per crew), worked from <strong>one board</strong> (HG Command → Service) that says what to do next.</p>
+<p><strong>Request → See it (photos or a visit) → Price it (or no charge) → Book a crew → Crew does it → Paid → Closed</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Who</th>
+<th>What they do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Customer</strong></td>
+<td>Reports the problem, sends photos on their own ticket link, pays on their phone or at the door</td>
+</tr>
+<tr>
+<td><strong>Call center</strong> (John Throne's team)</td>
+<td>Answers, opens the ticket (<strong>Service Request</strong> in AGM), books Service 3 or 4, makes the day-before confirmation calls</td>
+</tr>
+<tr>
+<td><strong>Sales rep</strong></td>
+<td>Opens a ticket for their own customer; gets an email when it is priced, scheduled, done and paid</td>
+</tr>
+<tr>
+<td><strong>Service manager</strong> (DeAnna, signs in as service@)</td>
+<td>Owns every ticket: looks, prices, books the crew, sends crews their day sheets, follows the money</td>
+</tr>
+<tr>
+<td><strong>Crews</strong> (Service 3, 4, 5)</td>
+<td>Open their day sheet, press one outcome per stop, take payment at the door</td>
+</tr>
+<tr>
+<td><strong>Accounting</strong> (Zima and Blas)</td>
+<td>Gets a "Service paid" email per payment, records checks, works Accounting → Service</td>
+</tr>
+<tr>
+<td><strong>Tim Fullerton</strong></td>
+<td>Go-back oversight</td>
+</tr>
+</tbody>
+</table></div>
+  </div>
+</div>
+<div class="section" id="the-three-rules">
+  <div class="section-header"><h2>The three rules</h2></div>
+  <div class="card-body">
+<ol>
+<li><strong>Crews never get email.</strong> The service manager pastes each crew's day-sheet link into that crew's group chat.</li>
+<li><strong>A person starts every customer message.</strong> Nothing goes to a customer until someone on our side acts on that one job: sends the link, books the visit, or the crew presses an outcome. What follows from that action is automatic (the confirmation, the reminders, the invoice), and listed later in this guide.</li>
+<li><strong>New service work goes into the new system.</strong> Salesforce is only for finishing old tickets. A ticket keyed into Salesforce shows up on the board to convert.</li>
+</ol>
+  </div>
+</div>
+<div class="section" id="where-a-request-comes-in">
+  <div class="section-header"><h2>Where a request comes in</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Door</th>
+<th>Where it lands</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Call center</strong></td>
+<td>AGM contact → <strong>Service Request</strong> button → the call-center form → a new SVC ticket</td>
+</tr>
+<tr>
+<td><strong>Sales rep</strong></td>
+<td><strong>Open a service ticket</strong> from their Playbook, Find, the AGM contact, or the job's uploader (pinned to that job)</td>
+</tr>
+<tr>
+<td><strong>Service manager</strong></td>
+<td><strong>➕ New ticket</strong> on the Service board</td>
+</tr>
+<tr>
+<td><strong>Website service form</strong></td>
+<td>Becomes a ticket by itself, checked every 15 minutes</td>
+</tr>
+<tr>
+<td><strong>service@ email or office voicemail</strong></td>
+<td><strong>Loose mail</strong> on the board: add it to a ticket, or open one from it</td>
+</tr>
+<tr>
+<td><strong>Polly</strong>, the after-hours AI</td>
+<td>A "call them back" line on the board; a person opens the ticket</td>
+</tr>
+<tr>
+<td><strong>Crew on site</strong></td>
+<td><strong>Repair found</strong> on the day sheet sends the scope to the office to price</td>
+</tr>
+<tr>
+<td><strong>Keyed into Salesforce</strong></td>
+<td>A <strong>Convert to AGM</strong> line on the board</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Every new ticket</strong> is put on AGM's <strong>4. Service</strong> pipeline, <strong>assigned to the service manager</strong>, and <strong>emailed to service@</strong>. The website form, phone look-up and address check tell whether HG installed at that address and whether it is in warranty.</p>
+  </div>
+</div>
+<div class="section" id="the-stages-a-ticket-moves-through">
+  <div class="section-header"><h2>The stages a ticket moves through</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Means</th>
+<th>What moves it on</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>New request</strong></td>
+<td>Just came in</td>
+<td>Someone sends the photo link, or books a visit to look</td>
+</tr>
+<tr>
+<td><strong>Needs assessment / photos</strong></td>
+<td>Waiting on photos, or an assessment visit is booked</td>
+<td>The customer's photos arrive, or the crew reports on the visit</td>
+</tr>
+<tr>
+<td><strong>Needs a price</strong></td>
+<td>We have what we need</td>
+<td>The service manager sets a price, or <strong>no charge</strong> with a reason</td>
+</tr>
+<tr>
+<td><strong>Holding — waiting on the customer</strong></td>
+<td>The ball is in their court</td>
+<td>They reply, sign or pick a time</td>
+</tr>
+<tr>
+<td><strong>Scheduled</strong></td>
+<td>A crew and a time</td>
+<td>The crew presses an outcome on the day</td>
+</tr>
+<tr>
+<td><strong>Done, not paid</strong></td>
+<td>Work done, invoice out</td>
+<td>The money comes in</td>
+</tr>
+<tr>
+<td><strong>Closed</strong></td>
+<td>Paid, no charge, or cleared</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <strong>photos arriving</strong>, a <strong>booking</strong>, the <strong>crew's outcome</strong> and the <strong>payment</strong> each move the ticket (and its AGM card) <strong>by themselves</strong>. Warranty, go-back and free tune-up work is <strong>no charge</strong>: it gets a crew and a date but never an invoice.</p>
+  </div>
+</div>
+<div class="section" id="part-1-signing-in">
+  <div class="section-header"><h2>Part 1 · Signing in</h2></div>
+  <div class="card-body">
+<ol>
+<li>Go to <strong>hgcommand.com</strong>.</li>
+<li>Sign in as <strong>service@heavenlygreens.com</strong> (the service manager's login). A code is sent to <strong>your</strong> phone; type it in.</li>
+<li>Click <strong>Service</strong> in the top bar. Bookmark <strong>hgcommand.com/service-board-v2</strong> to open it directly.</li>
+</ol>
+<p>The board takes a few seconds to read both systems the first time. It refreshes itself every 5 minutes and whenever you come back to the tab.</p>
+  </div>
+</div>
+<div class="section" id="part-2-the-service-board">
+  <div class="section-header"><h2>Part 2 · The Service board</h2></div>
+  <div class="card-body">
+<p>Open <strong>hgcommand.com → Service</strong>. It opens on <strong>what to do</strong>, not on numbers.</p>
+<figure class="shot"><img src="img/b01_board_top.png" alt="The Service board as the service manager sees it in the morning" loading="lazy"><figcaption>The Service board as the service manager sees it in the morning</figcaption></figure>
+
+<p>Top to bottom: what's waiting on you, by kind · the instrument panel · <strong>your next moves</strong>, one button each · today's visits with the Service calendar under them · then the three tracks, folded, for when you have a minute. Across the top: <strong>➕ New ticket</strong>, <strong>📅 Service calendar</strong> and <strong>Finished jobs</strong>. The search box (top right, or press <strong>/</strong>) finds any customer, job, <strong>SVC number</strong> or <strong>old Salesforce service number</strong>.</p>
+  </div>
+</div>
+<div class="section" id="what-s-waiting-on-you">
+  <div class="section-header"><h2>What&#x27;s waiting on you</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b02_waiting_on_you.png" alt="Good morning, how many things need you, where to start, and one button per kind of work" loading="lazy"><figcaption>Good morning, how many things need you, where to start, and one button per kind of work</figcaption></figure>
+
+<p>The top line says how many things need you, how many are <strong>customers waiting to hear back</strong>, and <strong>where to start</strong>. Click it and the page goes straight to that line.</p>
+<p>One button per kind of work, each with <strong>how many</strong> and <strong>how long the oldest has waited</strong>: Call back · Answer messages · Send photo links · <strong>Waiting on photos</strong> · Convert Salesforce tickets · Fix calendar bookings · Price jobs · Book, assign, call. Two are for <strong>when you have a minute</strong>: Emails with no ticket, and Idle tickets. <strong>Visits today</strong> names the next visit.</p>
+  </div>
+</div>
+<div class="section" id="the-instrument-panel">
+  <div class="section-header"><h2>The instrument panel</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b03_instrument_panel.png" alt="One tile per section further down, listing what&#x27;s inside it" loading="lazy"><figcaption>One tile per section further down, listing what&#x27;s inside it</figcaption></figure>
+
+<p>Four tiles, one per section further down: <strong>Track 1 · Inbound</strong> (who is trying to reach us), <strong>Track 2 · In flight</strong> (what's moving and what's stuck), <strong>Track 3 · Landed</strong> (what we finished) and <strong>The numbers</strong>. The counts come from the same list as the buttons above, so they always agree. <strong>Click a tile</strong> to open that section. <strong>Hide panel</strong> folds it away and the page remembers.</p>
+  </div>
+</div>
+<div class="section" id="your-next-moves">
+  <div class="section-header"><h2>Your next moves</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b04_next_moves.png" alt="Three lines show at a time; scroll inside the list for the rest" loading="lazy"><figcaption>Three lines show at a time; scroll inside the list for the rest</figcaption></figure>
+
+<p><strong>One list, in order:</strong> people waiting first (missed calls, Polly's messages, texts and emails), then Salesforce tickets to convert, calendar bookings to fix, visits to move over, photos to price, links to send and chase, visits to book. Every line says <strong>what to do</strong>, <strong>what happened</strong>, and <strong>how long they've waited</strong> (red when it's long), with <strong>one green button</strong> that opens exactly what you need. Finish a line and the next one moves up.</p>
+  </div>
+</div>
+<div class="section" id="close-the-loop-done-press-what-happened">
+  <div class="section-header"><h2>Close the loop: Done? Press what happened</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b05_done_press_what_happened.png" alt="A call-back line opened: the five results" loading="lazy"><figcaption>A call-back line opened: the five results</figcaption></figure>
+
+<p>After a call or message, press <strong>Done? Press what happened</strong>: <strong>Called back, spoke to them · Left a voicemail · Replied · No reply needed · Not service</strong>.</p>
+<p>It writes a note in AGM <strong>in your name</strong>, and the line leaves the list until that customer reaches out again. <strong>The goal every day:</strong> the list reads "Nothing is waiting on you" before you leave.</p>
+  </div>
+</div>
+<div class="section" id="press-a-button-to-see-just-those">
+  <div class="section-header"><h2>Press a button to see just those</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b06_pill_filter_price.png" alt="Price jobs pressed: only the jobs to price, oldest first" loading="lazy"><figcaption>Price jobs pressed: only the jobs to price, oldest first</figcaption></figure>
+
+<p>Any button at the top filters <strong>Your next moves</strong> to that kind of work, oldest first. A price line tells the story: who opened the ticket, how the link went out, and <strong>what the customer sent and said</strong>. Press <strong>✕ Back to your next moves</strong> (or the same button again) to see everything.</p>
+  </div>
+</div>
+<div class="section" id="new-waiting-on-photos-and-the-72-hour-chase">
+  <div class="section-header"><h2>New · Waiting on photos, and the 72-hour chase</h2></div>
+  <div class="card-body">
+<p>Once a photo link is out (sent by the call center <strong>or</strong> by you) it is yours to see through. It is a line on your board from the moment it goes.</p>
+<figure class="shot"><img src="img/b07_waiting_on_photos_chase.png" alt="A link sent four days ago turns into a chase; a fresh one is a quiet line" loading="lazy"><figcaption>A link sent four days ago turns into a chase; a fresh one is a quiet line</figcaption></figure>
+
+<ul>
+<li><strong>Fresh:</strong> a grey line saying who sent the link and when. Nothing to do yet.</li>
+<li><strong>After 72 hours with nothing back:</strong> it turns into <strong>Chase … for their photos</strong> with <strong>📲 Resend the link</strong>. Or call them and offer an assessment visit. 72 hours is the promise on the customer's own page.</li>
+<li>When their photos arrive, the ticket moves to <strong>Needs a price</strong> and becomes a <strong>Price it</strong> line by itself.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="convert-a-salesforce-ticket-and-fix-a-booking">
+  <div class="section-header"><h2>Convert a Salesforce ticket, and fix a booking</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b08_convert_salesforce.png" alt="A ticket keyed into Salesforce after the switch: Convert to AGM" loading="lazy"><figcaption>A ticket keyed into Salesforce after the switch: Convert to AGM</figcaption></figure>
+
+<p><strong>⇄ Convert to AGM</strong> copies a ticket someone keyed into Salesforce onto the new system in one press: a new SVC ticket on AGM's <strong>4. Service</strong> pipeline, assigned to the service manager, with the Salesforce notes. <strong>Nothing is sent to the customer.</strong> The line then asks for the last step: <strong>close it in Salesforce</strong>.</p>
+<figure class="shot"><img src="img/b09_fix_calendar_booking.png" alt="A call-center booking with no crew in its title" loading="lazy"><figcaption>A call-center booking with no crew in its title</figcaption></figure>
+
+<p><strong>Fix calendar bookings</strong> lists visits booked straight on AGM's Service calendar that the system couldn't tie to a ticket on its own: <strong>no open ticket</strong>, <strong>more than one open ticket</strong>, <strong>no crew in the title</strong>, or <strong>one crew booked twice at the same time</strong>. The button opens the customer in AGM to fix it.</p>
+  </div>
+</div>
+<div class="section" id="emails-with-no-ticket-loose-mail">
+  <div class="section-header"><h2>Emails with no ticket: Loose mail</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b15_loose_mail.png" alt="Each service@ email with photos or a voicemail, and a suggested ticket" loading="lazy"><figcaption>Each service@ email with photos or a voicemail, and a suggested ticket</figcaption></figure>
+
+<p>Every email to <strong>service@</strong> that carries photos or a voicemail and names no ticket lands here. For each one:
+- <strong>Add to SVC-…</strong> files it, photos and all, onto the ticket the board suggests (it says why: same email, same phone, same name).
+- <strong>Open a new ticket</strong> makes one from it, prefilled, with its photos.
+- <strong>Not service</strong> files it away. <strong>Call back</strong> dials a voicemail's caller. <strong>Open in Outlook</strong> reads it.</p>
+<p>Filed emails drop off this list but stay in the service@ inbox.</p>
+  </div>
+</div>
+<div class="section" id="today-s-visits-with-the-calendar-under-them">
+  <div class="section-header"><h2>Today&#x27;s visits, with the calendar under them</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b11_todays_visits_and_calendar.png" alt="Today&#x27;s visits in time order, then the whole week by crew" loading="lazy"><figcaption>Today&#x27;s visits in time order, then the whole week by crew</figcaption></figure>
+
+<p>Every visit today: time, crew, customer, type of job, city and ticket. <strong>Open</strong> goes to that visit's ticket. The <strong>Service calendar</strong> sits right below, open, for the week.</p>
+  </div>
+</div>
+<div class="section" id="part-3-one-service-calendar-for-everyone">
+  <div class="section-header"><h2>Part 3 · One service calendar for everyone</h2></div>
+  <div class="card-body">
+<p>Every service visit is an appointment on <strong>AGM's Service calendar</strong>, with the crew in its title (<strong>| Crew: Service 4</strong>), the same way installs work. HG Command reads that calendar and draws <strong>one row per crew</strong>: <strong>Service 3, 4 and 5 first</strong>, then the install crews that do go-backs. Old Salesforce visits still show until they are moved over.</p>
+<figure class="shot"><img src="img/c01_service_calendar_week.png" alt="The Service calendar, week view: one row per crew, one tile per visit" loading="lazy"><figcaption>The Service calendar, week view: one row per crew, one tile per visit</figcaption></figure>
+
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Crew</th>
+<th>Who books it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Service 3</strong> (Martin): larger jobs, further out</td>
+<td>Call center or service manager</td>
+</tr>
+<tr>
+<td><strong>Service 4</strong> (Carlos): troubleshooting and go-backs</td>
+<td>Call center or service manager</td>
+</tr>
+<tr>
+<td><strong>Service 5</strong> (Ali): one-man crew, assessments</td>
+<td>Service manager only</td>
+</tr>
+<tr>
+<td><strong>Install crews</strong> (go-backs)</td>
+<td>Service manager only</td>
+</tr>
+</tbody>
+</table></div>
+  </div>
+</div>
+<div class="section" id="a-visit-s-panel-and-book-here">
+  <div class="section-header"><h2>A visit&#x27;s panel, and + Book here</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/c02_visit_drawer.png" alt="Click a visit: ticket, issue, address, crew, date, time, and its links" loading="lazy"><figcaption>Click a visit: ticket, issue, address, crew, date, time, and its links</figcaption></figure>
+
+<p>Click any visit for its details, <strong>Open service ticket</strong> and the <strong>AGM contact record</strong>.</p>
+<figure class="shot"><img src="img/c03_book_here.png" alt="+ Book here on a crew&#x27;s day: ticket, day, time, crew" loading="lazy"><figcaption>+ Book here on a crew&#x27;s day: ticket, day, time, crew</figcaption></figure>
+
+<p>Every crew's day has <strong>+ Book here</strong>. Pick the <strong>ticket</strong>, <strong>time</strong> and <strong>crew</strong>, press <strong>📅 Book it</strong>. It goes on AGM's Service calendar under that crew, the ticket turns <strong>Scheduled</strong>, and the customer gets <strong>one</strong> confirmation, the way they asked at intake. It is the same booking as <strong>Book the visit</strong> on the ticket.</p>
+  </div>
+</div>
+<div class="section" id="the-call-center-books-service-in-agm">
+  <div class="section-header"><h2>The call center books service in AGM</h2></div>
+  <div class="card-body">
+<p>The call center sees the <strong>same crew rows</strong> on its own page (Call Center → <strong>🛠 Service Calendar</strong>), then books in AGM the way it books sales.</p>
+<figure class="shot"><img src="img/c04_call_center_service_calendar.png" alt="The Service calendar as the call center sees it" loading="lazy"><figcaption>The Service calendar as the call center sees it</figcaption></figure>
+
+<ol>
+<li>Open the customer's contact in AGM. No service ticket yet? Press <strong>Service Request</strong> first.</li>
+<li>Book an appointment. <strong>Calendar: Service</strong>, never HG Estimate.</li>
+<li>Title, crew at the end: <strong>Service | Jane Doe | San Jose | Crew: Service 4</strong> (start with the SVC number if known).</li>
+<li>Save, and tell the customer the day and time on the phone.</li>
+</ol>
+<figure class="shot"><img src="img/a4_agm_book_service.png" alt="AGM&#x27;s Book appointment, Calendar set to Service" loading="lazy"><figcaption>AGM&#x27;s Book appointment, Calendar set to Service</figcaption></figure>
+
+<p>AGM remembers the last calendar used, so check it says <strong>Service</strong> every time.</p>
+  </div>
+</div>
+<div class="section" id="what-happens-after-a-call-center-booking">
+  <div class="section-header"><h2>What happens after a call-center booking</h2></div>
+  <div class="card-body">
+<p>Within a few minutes HG Command finds the new appointment and ties it to the customer's open ticket:
+- the ticket gets the <strong>date, time and crew</strong>, and turns <strong>Scheduled</strong>;
+- the visit shows on that <strong>crew's row</strong> for everyone;
+- <strong>nothing is sent to the customer automatically</strong>: the call center told them on the phone.</p>
+<p>If it can't be tied up on its own, it becomes a <strong>Fix calendar bookings</strong> line on the service manager's board (no ticket, two tickets, no crew, or a crew booked twice).</p>
+<p><strong>One limit, for now:</strong> AGM's Service calendar offers each time <strong>once</strong>. If Service 3 has 10:00 Thursday, AGM won't offer 10:00 Thursday for Service 4. The call center books the nearest open time and tells the service manager; <strong>+ Book here</strong> on HG Command is not limited this way.</p>
+  </div>
+</div>
+<div class="section" id="part-4-the-three-tracks-in-detail">
+  <div class="section-header"><h2>Part 4 · The three tracks, in detail</h2></div>
+  <div class="card-body">
+<p>The folds under the calendar. You don't need them to run the day (everything that needs you is already in Your next moves) but they hold the full picture. Tower words: <strong>in flight</strong> = moving through the stages · <strong>holding</strong> = waiting on the customer · <strong>grounded</strong> = nobody has touched it for 3+ days.</p>
+  </div>
+</div>
+<div class="section" id="track-1-inbound-everyone-waiting-on-us">
+  <div class="section-header"><h2>Track 1 · Inbound: everyone waiting on us</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b12_track1_rail.png" alt="The rail: missed calls, Polly&#x27;s messages, unanswered texts, new requests" loading="lazy"><figcaption>The rail: missed calls, Polly&#x27;s messages, unanswered texts, new requests</figcaption></figure>
+
+<p>Most urgent first, each with <strong>where it came from</strong> (the Service line, the main HG number, a text, an email, <strong>Polly</strong> the after-hours AI, a new ticket) and <strong>how long they've waited</strong>. The edge turns red past 24 hours.</p>
+<figure class="shot"><img src="img/b14_answered.png" alt="Answered: who picked up each customer, and when" loading="lazy"><figcaption>Answered: who picked up each customer, and when</figcaption></figure>
+
+<p>When the call center or the service manager answers, the customer moves to <strong>Answered</strong> with the person's name and the time. A call somebody picked up counts as answered.</p>
+  </div>
+</div>
+<div class="section" id="track-2-in-flight-every-open-ticket-by-stage">
+  <div class="section-header"><h2>Track 2 · In flight: every open ticket by stage</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b16_track2_lanes.png" alt="The five stages in flight, each split AGM / Salesforce, grounded counted" loading="lazy"><figcaption>The five stages in flight, each split AGM / Salesforce, grounded counted</figcaption></figure>
+
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Needs assessment / photos</strong></td>
+<td>We need to see it: photos to come back, or a visit to look</td>
+</tr>
+<tr>
+<td><strong>Needs a price</strong></td>
+<td>We have what we need: set the price (or no charge)</td>
+</tr>
+<tr>
+<td><strong>Holding — waiting on the customer</strong></td>
+<td>The ball is in the customer's court</td>
+</tr>
+<tr>
+<td><strong>Scheduled</strong></td>
+<td>On the calendar, with its crew</td>
+</tr>
+<tr>
+<td><strong>Done, not paid</strong></td>
+<td>Work done, money not in yet</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>🛑 Grounded</strong> shows only tickets untouched for 3+ days; <strong>Only AGM / Only Salesforce</strong> split the two systems.</p>
+  </div>
+</div>
+<div class="section" id="reading-a-ticket-card">
+  <div class="section-header"><h2>Reading a ticket card</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b17_lane_cards.png" alt="Ticket cards: number, where it lives, customer, next step, how long untouched" loading="lazy"><figcaption>Ticket cards: number, where it lives, customer, next step, how long untouched</figcaption></figure>
+
+<p>Each card: the <strong>SVC number</strong> and <strong>where it lives</strong> (AGM = the new system; Salesforce = an old ticket still finishing there), the <strong>customer</strong>, the <strong>next step</strong> in plain words, who opened it, and how long since anyone touched it. Click an AGM card to open its ticket.</p>
+<figure class="shot"><img src="img/b18_scheduled_cards.png" alt="Scheduled cards show the day and the crew" loading="lazy"><figcaption>Scheduled cards show the day and the crew</figcaption></figure>
+
+<p>An old <strong>Salesforce</strong> card opens a panel with its whole history instead:</p>
+<figure class="shot"><img src="img/b20_salesforce_ticket_drawer.png" alt="An old Salesforce ticket&#x27;s panel: status, scope of work, service log" loading="lazy"><figcaption>An old Salesforce ticket&#x27;s panel: status, scope of work, service log</figcaption></figure>
+
+<p>Use it to read what happened before the switch.</p>
+  </div>
+</div>
+<div class="section" id="clear-take-a-dead-ticket-off-the-board">
+  <div class="section-header"><h2>Clear: take a dead ticket off the board</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b19_clear_reasons.png" alt="Clear on a card, and the five reasons" loading="lazy"><figcaption>Clear on a card, and the five reasons</figcaption></figure>
+
+<p>Press <strong>Clear</strong> on a card and pick why: customer gone · already handled · duplicate · not service · too old to act on. Or <strong>Select untouched over a year</strong>, untick any to keep, and <strong>Clear selected</strong>.</p>
+<p>It marks the ticket <strong>Cancelled</strong>, closes its AGM card with a note in your name and switches off every reminder. <strong>Nothing is sent to the customer.</strong> Set the status back on the ticket to reopen it.</p>
+  </div>
+</div>
+<div class="section" id="track-3-landed-and-the-numbers">
+  <div class="section-header"><h2>Track 3 · Landed, and the numbers</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/b21_track3_landed.png" alt="Landed: every job finished in the last 14 days, both systems" loading="lazy"><figcaption>Landed: every job finished in the last 14 days, both systems</figcaption></figure>
+
+<p>A job <strong>lands</strong> when the work is done <strong>and</strong> the money is in (or it was no charge). <strong>Done, not paid</strong> stays in flight, because collecting is part of the flight.</p>
+<figure class="shot"><img src="img/b22_numbers_salesforce_switch.png" alt="The Salesforce switch numbers" loading="lazy"><figcaption>The Salesforce switch numbers</figcaption></figure>
+
+<p><strong>New service requests born in Salesforce</strong> must always read <strong>zero</strong>; each one is a <strong>Convert to AGM</strong> line. <strong>Left in Salesforce</strong> is the burn-down to zero.</p>
+<figure class="shot"><img src="img/b23_today_in_service.png" alt="Today in Service: requests, calls, who picks up" loading="lazy"><figcaption>Today in Service: requests, calls, who picks up</figcaption></figure>
+
+<p><strong>Where requests come from</strong> and <strong>who picks up</strong> (the office, Polly, or missed) tell you whether customers are getting through.</p>
+  </div>
+</div>
+<div class="section" id="part-5-opening-a-ticket">
+  <div class="section-header"><h2>Part 5 · Opening a ticket</h2></div>
+  <div class="card-body">
+<p>One form, three versions: <strong>Call center</strong>, <strong>Sales rep</strong> and <strong>Service department</strong>. The buttons at the top say who is opening it, and that is recorded on the ticket.</p>
+<figure class="shot"><img src="img/p04_new_ticket_call_center_door.png" alt="The call center&#x27;s version: your name, then look the caller up by phone" loading="lazy"><figcaption>The call center&#x27;s version: your name, then look the caller up by phone</figcaption></figure>
+
+<p><strong>Start with the phone number and press Look up.</strong> It pulls the customer from AGM and from every past install: "Avery has called before" and "100 Sample Way: 1 job, last 2022" give you the two questions to confirm on the call. The address tells the system whether HG installed there and whether it's in warranty; nobody has to ask.</p>
+  </div>
+</div>
+<div class="section" id="the-rest-of-the-form">
+  <div class="section-header"><h2>The rest of the form</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p02_new_ticket_customer_and_job.png" alt="Customer details, what&#x27;s wrong, the area, go-back, warranty" loading="lazy"><figcaption>Customer details, what&#x27;s wrong, the area, go-back, warranty</figcaption></figure>
+
+<p><strong>What's wrong</strong> goes in the customer's own words. The email and phone are where their link goes, so read them back.</p>
+<figure class="shot"><img src="img/p03_new_ticket_service_dept_box_and_create.png" alt="The service department&#x27;s box, how the link should go, and Create" loading="lazy"><figcaption>The service department&#x27;s box, how the link should go, and Create</figcaption></figure>
+
+<p>The gold box is the service department's: a price now if it is known, and whether photos are needed. Choose how the customer wants their link (email, text, both or none) and press <strong>Create the service ticket</strong>. The ticket page opens, assigned to the service manager, and service@ gets an email.</p>
+  </div>
+</div>
+<div class="section" id="part-6-working-a-ticket">
+  <div class="section-header"><h2>Part 6 · Working a ticket</h2></div>
+  <div class="card-body">
+<p>Every ticket has its own page. The <strong>Next step</strong> line always says what to do now.</p>
+<figure class="shot"><img src="img/p05_ticket_top_facts_next_step.png" alt="The top of a ticket: customer, whether HG installed it, what they told us, Next step" loading="lazy"><figcaption>The top of a ticket: customer, whether HG installed it, what they told us, Next step</figcaption></figure>
+
+<p>Who the customer is, whether a Heavenly Greens install is on file at that address (and when), what they asked for, <strong>what they told us</strong>, the area, go-back and warranty answers, and their photos once they arrive.</p>
+  </div>
+</div>
+<div class="section" id="send-the-link-or-book-a-visit-to-look">
+  <div class="section-header"><h2>Send the link, or book a visit to look</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p06_ticket_send_link_or_book_assessment.png" alt="The self-assessment link, the send buttons, and the assessment visit" loading="lazy"><figcaption>The self-assessment link, the send buttons, and the assessment visit</figcaption></figure>
+
+<p>The customer's <strong>self-assessment link</strong> is their own page for this ticket, where they send photos. <strong>It is never sent automatically</strong>: type your name and press <strong>Email and text the customer their self-assessment link</strong> (it goes the way they asked), or <strong>I already sent it myself</strong> if you sent it from your own phone.</p>
+<p>When photos won't do, pick a crew and a time and press <strong>Book the assessment visit</strong>: a crew goes to look, takes photos and says what it needs. No price needed yet. The customer gets a confirmation.</p>
+  </div>
+</div>
+<div class="section" id="what-the-customer-sees">
+  <div class="section-header"><h2>What the customer sees</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p13_customer_ticket_send_photos.png" alt="The customer&#x27;s own ticket page: what we need, the four photos, Send my photos" loading="lazy"><figcaption>The customer&#x27;s own ticket page: what we need, the four photos, Send my photos</figcaption></figure>
+
+<p>Their page explains the four photos that let us price without a visit (the whole yard, the problem from two opposite sides, a close-up, something for scale), takes up to five photos and short videos, and promises an answer <strong>within 24 to 72 hours</strong>. When they press <strong>Send my photos</strong>, the ticket moves to <strong>Needs a price</strong>, its AGM card moves with it, and service@ gets an email.</p>
+  </div>
+</div>
+<div class="section" id="set-the-price-or-no-charge-then-the-crew">
+  <div class="section-header"><h2>Set the price, or no charge, then the crew</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p07_ticket_price_no_charge_assign_crew.png" alt="Final price, or no charge with a reason, then assign the crew" loading="lazy"><figcaption>Final price, or no charge with a reason, then assign the crew</figcaption></figure>
+
+<ol>
+<li><strong>Final price</strong>: what the customer pays when the work is done. <strong>Or no charge</strong>: warranty, go-back, free tune-up or goodwill. No-charge work gets a crew but <strong>never an invoice</strong>, and never looks like unpaid money.</li>
+<li><strong>Assign a crew</strong>: Service 3, 4, 5 or a partner crew. You must set a price or no charge first.</li>
+<li><strong>Save changes to this ticket.</strong></li>
+</ol>
+<p>The sales rep who opened the ticket gets one short email when it is priced, scheduled, done and paid.</p>
+  </div>
+</div>
+<div class="section" id="book-the-visit">
+  <div class="section-header"><h2>Book the visit</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p08_ticket_book_a_visit.png" alt="Book the visit with the crew on the ticket, or in AGM&#x27;s own calendar" loading="lazy"><figcaption>Book the visit with the crew on the ticket, or in AGM&#x27;s own calendar</figcaption></figure>
+
+<p>Pick the date and time and press <strong>Book the visit</strong>. It goes on AGM's Service calendar under that crew, the ticket turns <strong>Scheduled</strong>, and the customer gets <strong>one</strong> confirmation, the way they asked:</p>
+<figure class="shot"><img src="img/p17_customer_email_visit_confirmed.png" alt="The confirmation email the customer receives" loading="lazy"><figcaption>The confirmation email the customer receives</figcaption></figure>
+
+<p>From then on the customer also gets a <strong>reminder the day before</strong> and a <strong>note the morning of</strong>, automatically. <strong>Mark as a go-back</strong> (under the booking) records an install defect against the crew that installed it.</p>
+  </div>
+</div>
+<div class="section" id="the-service-agreement-not-switched-on-yet">
+  <div class="section-header"><h2>The service agreement (not switched on yet)</h2></div>
+  <div class="card-body">
+<p>For paid work, California requires a signed Service and Repair agreement; over $750 it becomes a full home-improvement contract. The ticket already has it: describe <strong>what the work is</strong> and press <strong>Send agreement</strong>. The customer signs on their own ticket page by typing their name.</p>
+<figure class="shot"><img src="img/p09_ticket_agreement_and_invoice_buttons.png" alt="The agreement and invoice buttons on the ticket" loading="lazy"><figcaption>The agreement and invoice buttons on the ticket</figcaption></figure>
+
+<p><strong>Today it says DRAFT WORDING:</strong> counsel has not supplied six pieces of the legal text, so a real customer cannot sign yet (a TEST ticket can, for practice). Until it is switched on, the agreement is not required before booking paid work.</p>
+  </div>
+</div>
+<div class="section" id="part-7-the-crews-day-sheets">
+  <div class="section-header"><h2>Part 7 · The crews&#x27; day sheets</h2></div>
+  <div class="card-body">
+<p><strong>Crews never get email.</strong> Each afternoon, the service manager copies <strong>tomorrow's</strong> link for each crew and pastes it into that crew's group chat.</p>
+<figure class="shot"><img src="img/p26_crew_day_sheet_links_copy_tomorrow.png" alt="Crew day sheets: Copy tomorrow for Service 3" loading="lazy"><figcaption>Crew day sheets: Copy tomorrow for Service 3</figcaption></figure>
+
+<p>One link per crew per day. It stops working at midnight after its day, or straight away when you press <strong>New link</strong> (a lost phone, or a link shared by mistake). Open the page from <strong>Crew day-sheet links</strong> on any ticket.</p>
+  </div>
+</div>
+<div class="section" id="what-the-crew-sees">
+  <div class="section-header"><h2>What the crew sees</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p18_crew_day_sheet_top.png" alt="The day sheet on a phone: today and tomorrow, each stop in time order" loading="lazy"><figcaption>The day sheet on a phone: today and tomorrow, each stop in time order</figcaption></figure>
+
+<p>Today and tomorrow, sorted by time. Each stop: the customer and address with <strong>Open in Maps</strong>, whether the call center <strong>confirmed</strong> it, <strong>what the customer said</strong>, their photos, the original install (turf, size, install date, warranty end), and either <strong>No charge — warranty</strong> or the <strong>agreed price</strong>.</p>
+<figure class="shot"><img src="img/p21_crew_stop_priced_take_payment.png" alt="A priced stop: gate notes, photos, the agreed price, and the five outcomes" loading="lazy"><figcaption>A priced stop: gate notes, photos, the agreed price, and the five outcomes</figcaption></figure>
+
+<figure class="shot"><img src="img/p19_crew_stop_no_charge_warranty.png" alt="A warranty stop: No charge, and Done, no charge in place of the payment buttons" loading="lazy"><figcaption>A warranty stop: No charge, and Done, no charge in place of the payment buttons</figcaption></figure>
+
+<p>The crew presses <strong>one</strong> button when they finish, then adds photos.</p>
+  </div>
+</div>
+<div class="section" id="one-outcome-per-stop">
+  <div class="section-header"><h2>One outcome per stop</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>The crew presses</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Done: take payment</strong></td>
+<td>The invoice for the agreed price is created and sent; the screen shows <strong>Take payment now</strong></td>
+</tr>
+<tr>
+<td><strong>Done: paid by check</strong></td>
+<td>The check number is recorded against the ticket</td>
+</tr>
+<tr>
+<td><strong>Done, no charge</strong></td>
+<td>The ticket closes; no invoice, ever</td>
+</tr>
+<tr>
+<td><strong>Needs another visit</strong></td>
+<td>Back to the service manager to rebook</td>
+</tr>
+<tr>
+<td><strong>Customer not home</strong></td>
+<td>Back to the service manager; the customer gets one "we missed you" note</td>
+</tr>
+<tr>
+<td><strong>Paid repair found</strong></td>
+<td>The crew's scope and photos go to the office to price</td>
+</tr>
+</tbody>
+</table></div>
+<p>Every outcome needs <strong>at least one photo</strong> and emails service@. A sales rep who opened the ticket hears about the outcomes that change their customer's plan. The crew <strong>cannot type an amount</strong>: the price is the one agreed. One ticket never gets a second invoice.</p>
+  </div>
+</div>
+<div class="section" id="taking-payment-at-the-door">
+  <div class="section-header"><h2>Taking payment at the door</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p23_crew_outcome_form_take_payment.png" alt="Done: take payment, photos, notes, Send to the office" loading="lazy"><figcaption>Done: take payment, photos, notes, Send to the office</figcaption></figure>
+
+<figure class="shot"><img src="img/p24_crew_result_take_payment.png" alt="Done, payment due: Take payment now, the invoice already sent" loading="lazy"><figcaption>Done, payment due: Take payment now, the invoice already sent</figcaption></figure>
+
+<p>The customer pays on the crew's phone (<strong>Take payment now</strong>) or on the invoice link they were just sent, by card or bank, into <strong>HG's Stripe account</strong>. If they pay later, the same link works.</p>
+  </div>
+</div>
+<div class="section" id="part-8-the-day-before-confirmation-calls">
+  <div class="section-header"><h2>Part 8 · The day-before confirmation calls</h2></div>
+  <div class="card-body">
+<p>At <strong>6:30am and 1pm</strong> on weekdays, every booked visit for the next business day becomes an <strong>AGM task</strong> on the Call Center user (a Monday visit is called on Friday). The <strong>7:30am call center email</strong> lists them under "Service visits tomorrow — confirm these".</p>
+<figure class="shot"><img src="img/p27_confirm_call_page.png" alt="The task&#x27;s link: who called, and how it went" loading="lazy"><figcaption>The task&#x27;s link: who called, and how it went</figcaption></figure>
+
+<p>The call center calls and presses one: <strong>Confirmed · Left a voicemail · They need a new time · Wrong number</strong>. The AGM task closes itself; the last two email service@ so the visit gets rebooked. The crew's day sheet then shows <strong>✓ Confirmed by phone</strong>, <strong>Voicemail left</strong> or <strong>Not confirmed</strong> on that stop.</p>
+  </div>
+</div>
+<div class="section" id="part-9-getting-paid">
+  <div class="section-header"><h2>Part 9 · Getting paid</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p10_ticket_signed_invoice_sent_record_payment.png" alt="An invoice out, its pay link, and Record a payment" loading="lazy"><figcaption>An invoice out, its pay link, and Record a payment</figcaption></figure>
+
+<p>The invoice goes out when the crew presses <strong>Done: take payment</strong> (or from the ticket with <strong>Create and send the invoice</strong>). It reaches the customer by email, and by text when we have their mobile number.</p>
+<p>Money that did not come through the pay link (a <strong>check</strong>, <strong>Paymentech</strong> by phone, a bank transfer or cash) goes in with <strong>Record a payment</strong> on the ticket.</p>
+<p><strong>When money arrives, the system closes everything by itself:</strong> the ticket and its AGM card close, the sales rep is told, and <strong>accounting@</strong> gets a "Service paid" email.</p>
+  </div>
+</div>
+<div class="section" id="accounting-service">
+  <div class="section-header"><h2>Accounting → Service</h2></div>
+  <div class="card-body">
+<p>Zima and Blas work service money at <strong>HG Command → Business → Accounting → Service</strong>. Cash basis.</p>
+<figure class="shot"><img src="img/p29_accounting_service_top_and_owed.png" alt="Owed for service, paid this week, and the Salesforce tickets QuickBooks still shows open" loading="lazy"><figcaption>Owed for service, paid this week, and the Salesforce tickets QuickBooks still shows open</figcaption></figure>
+
+<p><strong>Owed for service:</strong> finished work with money not in. New tickets show their invoice; older Salesforce tickets show only when QuickBooks says the customer has an open invoice.</p>
+<figure class="shot"><img src="img/p30_accounting_paid_and_record_payment.png" alt="Paid this week, Record a payment, and the QuickBooks check" loading="lazy"><figcaption>Paid this week, Record a payment, and the QuickBooks check</figcaption></figure>
+
+<p><strong>Record a payment</strong> marks the AGM invoice paid, closes the ticket, tells the sales rep and emails accounting@.</p>
+  </div>
+</div>
+<div class="section" id="quickbooks-and-no-charge-work">
+  <div class="section-header"><h2>QuickBooks, and no-charge work</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p31_accounting_quickbooks_shadow_no_charge.png" alt="Waiting to be written to QuickBooks, and No charge (closed)" loading="lazy"><figcaption>Waiting to be written to QuickBooks, and No charge (closed)</figcaption></figure>
+
+<p><strong>Waiting to be written to QuickBooks:</strong> for each paid ticket, the system builds the QuickBooks invoice (numbered with its SVC number) and payment, <strong>but does not write it yet</strong>. Accounting checks each row against what they keyed by hand; when they match, the switch gets turned on. Until then, key service payments into QuickBooks by hand.</p>
+<p><strong>No charge (closed):</strong> warranty, go-back and free tune-up work, with the reason. Nothing to collect.</p>
+  </div>
+</div>
+<div class="section" id="a-day-in-service">
+  <div class="section-header"><h2>A day in service</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>When</th>
+<th>Who</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>6:30am</strong></td>
+<td>System</td>
+<td>Tomorrow's visits become confirmation-call tasks for the call center</td>
+</tr>
+<tr>
+<td><strong>7:30am</strong></td>
+<td>Call center</td>
+<td>The morning email lists the visits to confirm; they call and press the result</td>
+</tr>
+<tr>
+<td><strong>Morning</strong></td>
+<td>Service manager</td>
+<td>Open the board and work <strong>Your next moves</strong> top to bottom: people waiting first, then conversions and bookings to fix</td>
+</tr>
+<tr>
+<td><strong>During the day</strong></td>
+<td>Crews</td>
+<td>Work their day sheet: one outcome per stop, with photos</td>
+</tr>
+<tr>
+<td><strong>During the day</strong></td>
+<td>Service manager</td>
+<td>Price what came in, book visits, chase links past 72 hours, file Loose mail</td>
+</tr>
+<tr>
+<td><strong>Afternoon</strong></td>
+<td>Service manager</td>
+<td>Copy <strong>tomorrow's</strong> day-sheet link into each crew's group chat</td>
+</tr>
+<tr>
+<td><strong>Before leaving</strong></td>
+<td>Service manager</td>
+<td><strong>Your next moves</strong> reads "Nothing is waiting on you"</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>The goal of the whole board:</strong> everything that comes in gets into flight the same day, and every flight lands.</p>
+  </div>
+</div>
+<div class="section" id="what-runs-by-itself-and-what-is-off-on-purpose">
+  <div class="section-header"><h2>What runs by itself, and what is off on purpose</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Today</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New ticket → AGM card on 4. Service, assigned to the service manager, emailed to service@</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Sales rep emailed when their ticket is priced, scheduled, done and paid</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Customer's photos arrive → ticket to Needs a price, service@ emailed</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Website service form → ticket, every 15 minutes</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Visit booked on HG Command → one confirmation, then the day-before reminder and the morning-of note (by the way the customer asked)</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Visit booked straight in AGM → tied to its ticket (within 30 minutes; sooner when the board is open)</td>
+<td>✅ On · customer reminders are held</td>
+</tr>
+<tr>
+<td>Day-before <strong>confirmation call</strong> tasks for the call center (6:30am and 1pm, plus the 7:30am email)</td>
+<td>✅ On since Oct 22</td>
+</tr>
+<tr>
+<td>Crew "done, take payment" → invoice for the agreed price sent, Take payment now shown</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Payment in → ticket Closed, AGM card Closed, sales rep told, accounting@ emailed</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Salesforce counters at 7am and 7:30am (new tickets keyed there; visits still booked there)</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Photo link sent automatically when a ticket opens</td>
+<td>⛔ Off: a person presses Send</td>
+</tr>
+<tr>
+<td>Card on file, charged when the work is done</td>
+<td>⛔ Off</td>
+</tr>
+<tr>
+<td>Customer must sign the service agreement before paid work</td>
+<td>⛔ Off: waiting on counsel's wording</td>
+</tr>
+<tr>
+<td>Unpaid reminders to customers</td>
+<td>⛔ Not built for service</td>
+</tr>
+<tr>
+<td>Payments written into QuickBooks</td>
+<td>🔌 Shadow: logged for accounting to check, not written</td>
+</tr>
+</tbody>
+</table></div>
+  </div>
+</div>
+<div class="section" id="where-salesforce-stands">
+  <div class="section-header"><h2>Where Salesforce stands</h2></div>
+  <div class="card-body">
+<ul>
+<li><strong>394 open Salesforce service tickets</strong> were copied onto the new system (385 on October 16, 9 more on October 24), each assigned to the service manager, with nothing sent to customers. They show "was Salesforce #…".</li>
+<li><strong>The system went live for new requests on October 19.</strong> Since then, <strong>10</strong> service tickets were still keyed into Salesforce; each shows on the board as <strong>Convert to AGM</strong>.</li>
+<li><strong>74 service visits</strong> are still booked only in Salesforce; each shows as <strong>Put …'s visit on the new system</strong> when its ticket is opened, and on the calendar as a Salesforce tile.</li>
+<li><strong>A list of 339 stale Salesforce tickets</strong> (some from 2016) is waiting for the service manager's sign-off before they are closed in Salesforce.</li>
+<li>Old Salesforce tickets still open the full history panel on the board, and the <strong>Salesforce Archive</strong> (Archive, top bar) shows any old record in full.</li>
+</ul>
+<p><strong>The finish line:</strong> "New service requests born in Salesforce" reads 0 every day, and "Left in Salesforce" counts down to 0.</p>
+  </div>
+</div>
+<div class="section" id="which-button-when">
+  <div class="section-header"><h2>Which button, when</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>When</th>
+<th>Who</th>
+<th>Press</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A customer calls</td>
+<td>Call center</td>
+<td><strong>Service Request</strong> on their AGM contact</td>
+</tr>
+<tr>
+<td>A customer needs to show us</td>
+<td>Call center or service manager</td>
+<td><strong>Text the customer their self-assessment link</strong> on the ticket</td>
+</tr>
+<tr>
+<td>Photos won't do</td>
+<td>Service manager</td>
+<td><strong>Book the assessment visit</strong> on the ticket</td>
+</tr>
+<tr>
+<td>Photos are in</td>
+<td>Service manager</td>
+<td><strong>💲 Look and price it</strong>: a price, or <strong>no charge</strong> with a reason</td>
+</tr>
+<tr>
+<td>Ready to book</td>
+<td>Service manager</td>
+<td><strong>Book the visit</strong> on the ticket, or <strong>+ Book here</strong> on the calendar</td>
+</tr>
+<tr>
+<td>Booking from the phone</td>
+<td>Call center</td>
+<td>AGM appointment, <strong>Calendar: Service</strong>, title ends <strong>| Crew: Service N</strong></td>
+</tr>
+<tr>
+<td>No photos after 72 hours</td>
+<td>Service manager</td>
+<td><strong>📲 Resend the link</strong>, or call and offer a visit</td>
+</tr>
+<tr>
+<td>Afternoon before</td>
+<td>Service manager</td>
+<td>Copy <strong>tomorrow's day-sheet link</strong> into each crew's group chat</td>
+</tr>
+<tr>
+<td>Day before</td>
+<td>Call center</td>
+<td>The confirmation-call task: Confirmed · Left voicemail · Needs a new time · Wrong number</td>
+</tr>
+<tr>
+<td>At each stop</td>
+<td>Crew</td>
+<td><strong>One outcome</strong> on the day sheet</td>
+</tr>
+<tr>
+<td>A check arrives</td>
+<td>Service manager or accounting</td>
+<td><strong>Record payment</strong></td>
+</tr>
+<tr>
+<td>After a call or message</td>
+<td>Service manager</td>
+<td><strong>Done? Press what happened</strong></td>
+</tr>
+<tr>
+<td>An email to service@ with no ticket</td>
+<td>Service manager</td>
+<td><strong>Add to SVC-…</strong> or <strong>Open a new ticket</strong></td>
+</tr>
+<tr>
+<td>A ticket keyed into Salesforce</td>
+<td>Service manager</td>
+<td><strong>⇄ Convert to AGM</strong>, then close it in Salesforce</td>
+</tr>
+<tr>
+<td>A ticket that is dead</td>
+<td>Service manager</td>
+<td><strong>Clear</strong>, with the reason</td>
+</tr>
+</tbody>
+</table></div>
+  </div>
+</div>
+<div class="section" id="known-gaps-and-what-to-do-if-something-looks-wrong">
+  <div class="section-header"><h2>Known gaps, and what to do if something looks wrong</h2></div>
+  <div class="card-body">
+<ul>
+<li><strong>AGM stage names:</strong> in AGM's 4. Service pipeline, the stage booked visits sit in reads <strong>"Done, not paid"</strong> and the done-and-unpaid stage reads "Completed — Unpaid". They are being renamed to <strong>Scheduled</strong> and <strong>Done, not paid</strong>. Go by HG Command's stage until then.</li>
+<li><strong>"(no contact name)"</strong> on the call list means a ticket copied from Salesforce whose AGM contact has no name. Open the ticket to see who it is.</li>
+<li><strong>The day-before confirmations</strong> are call tasks today. Tim has asked whether email or text would be better; that is still being decided.</li>
+<li><strong>When HG's AGM daily allowance runs low</strong>, the board's calls-and-messages list pauses and says so. Everything else keeps working.</li>
+</ul>
+<p><strong>If something doesn't work:</strong> write down the SVC number and what you pressed, take a screenshot, and reply to the email this guide came in. Don't work around it in Salesforce.</p>
+  </div>
+</div>
+
+<div class="footer">
+  Every customer in these screenshots is made up. Source: The Service Department in HG Command deck &mdash; <a href="https://gamma.app/docs/fuc5602o28bazox" target="_blank" rel="noopener">https://gamma.app/docs/fuc5602o28bazox</a>.
+</div>
+</body>
+</html>
