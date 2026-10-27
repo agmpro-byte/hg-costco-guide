@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production Guide — Heavenly Greens</title>
+<style>
+  :root {
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --dark: #1a1a2e;
+    --gray: #f8f9fa;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background: #fff;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--dark);
+    color: #fff;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 24px;
+  }
+  .header .flow-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .flow-step {
+    background: var(--green);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    color: #475569;
+    font-size: 1.2rem;
+  }
+  .centah-nav {
+    display: inline-block;
+    margin-top: 24px;
+    background: var(--amber);
+    color: #1a1a2e;
+    padding: 10px 22px;
+    border-radius: 22px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.1s ease, transform 0.1s ease;
+  }
+  .centah-nav:hover { background: #fbbf24; transform: translateY(-2px); }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--gray);
+    border-radius: 12px;
+  }
+  .toc h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+  .toc ol {
+    padding-left: 24px;
+  }
+  .toc li {
+    margin-bottom: 8px;
+  }
+  .toc a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .toc a:hover { text-decoration: underline; }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+  }
+  .section-header {
+    background: var(--green);
+    color: #fff;
+    padding: 20px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+  }
+  .section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .section-header p {
+    margin-top: 4px;
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+
+  /* STEP BLOCKS */
+  .step {
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .step-text {
+    padding: 20px 24px;
+  }
+  .step-text h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .step-text p, .step-text li {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .step-text ul {
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .step-image {
+    background: var(--gray);
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .step-image img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* CALLOUT BOXES */
+  .tip {
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .warning {
+    background: var(--amber-light);
+    border-left: 4px solid var(--amber);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .critical {
+    background: #fee2e2;
+    border-left: 4px solid var(--red);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes {
+    background: #eef2ff;
+    border-left: 4px solid #6366f1;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes strong {
+    color: #4338ca;
+  }
+
+  /* PRE-FLIGHT CHECKLIST */
+  .preflight {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fffbeb;
+    border: 2px solid var(--amber);
+    border-radius: 12px;
+  }
+  .preflight h2 {
+    color: #92400e;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .preflight .subtitle {
+    color: #78350f;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  .preflight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .preflight-card {
+    background: #fff;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .preflight-card h3 {
+    color: var(--dark);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .preflight-card p {
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .preflight-card .where {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+  @media (max-width: 640px) {
+    .preflight-grid { grid-template-columns: 1fr; }
+  }
+
+  /* CHEAT SHEET */
+  .cheat-sheet {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--dark);
+    color: #fff;
+    border-radius: 12px;
+  }
+  .cheat-sheet h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .cheat-sheet ol {
+    padding-left: 24px;
+    font-size: 1.05rem;
+  }
+  .cheat-sheet li {
+    margin-bottom: 12px;
+    color: #e2e8f0;
+  }
+  .cheat-sheet li strong {
+    color: #4ade80;
+  }
+  .cheat-sheet .memory-line {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #334155;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #4ade80;
+    letter-spacing: 0.5px;
+  }
+
+  /* PRINT */
+  @media print {
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 1.8rem; }
+    .section { page-break-inside: avoid; }
+    .step { page-break-inside: avoid; }
+    .step-image img { max-height: 400px; object-fit: contain; }
+    body { font-size: 11pt; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.6rem; }
+    .flow-bar { gap: 4px; }
+    .flow-step { font-size: 0.7rem; padding: 6px 10px; }
+    .section-header h2 { font-size: 1.2rem; }
+  }
+
+  /* GUIDE TABS (site-wide, added 2026-09-07) */
+  .guide-tabs { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; background:#0f0f1f; padding:12px 16px; }
+  .guide-tab { color:#cbd5e1; text-decoration:none; font-weight:600; font-size:0.9rem; padding:8px 16px; border-radius:20px; border:1px solid #334155; }
+  .guide-tab:hover { background:#1e293b; color:#fff; }
+  .guide-tab.active { background:var(--green); color:#fff; border-color:var(--green); }
+
+  .deck-embed { max-width: 900px; margin: 32px auto 8px; padding: 0 24px; }
+  .deck-embed iframe { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--border); border-radius: 12px; background: #111; }
+  .deck-actions { max-width: 900px; margin: 0 auto 40px; padding: 0 24px; display:flex; gap:12px; flex-wrap:wrap; }
+  .btn-green { display:inline-block; background: var(--green); color:#fff; padding: 12px 22px; border-radius: 22px; font-weight:700; text-decoration:none; }
+  .btn-green:hover { background:#15803d; }
+  .btn-ghost { display:inline-block; border:1px solid var(--border); color: var(--dark); padding: 12px 22px; border-radius: 22px; font-weight:600; text-decoration:none; }
+  .actor { display:inline-block; font-size:0.75rem; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:10px; margin-right:6px; vertical-align:middle; }
+  .actor.rep { background:#dbeafe; color:#1d4ed8; }
+  .actor.cust { background:#fef3c7; color:#b45309; }
+  .actor.agm { background:#dcfce7; color:#15803d; }
+  .footer { max-width:900px; margin:40px auto; padding:24px; color:var(--text-light); font-size:0.85rem; border-top:1px solid var(--border); }
+
+  /* PRODUCTION GUIDE (added 2026-10-27) */
+  .card-body { padding: 20px 24px; border: 1px solid var(--border); border-radius: 12px; }
+  .card-body p, .card-body li { font-size: 0.95rem; margin-bottom: 8px; }
+  .card-body ul, .card-body ol { padding-left: 22px; margin: 8px 0 12px; }
+  .card-body h3 { font-size: 1.05rem; color: var(--dark); margin: 4px 0 10px; }
+  .card-body table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 0.9rem; }
+  .card-body th, .card-body td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  .card-body th { background: var(--gray); color: var(--dark); }
+  .card-body .table-wrap { overflow-x: auto; }
+  .shot { margin: 16px 0; background: var(--gray); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; }
+  .shot img { max-width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .shot figcaption { font-size: 0.85rem; color: var(--text-light); margin-top: 8px; }
+  .toc ol { columns: 2; column-gap: 32px; }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+</style>
+</head>
+<body>
+<nav class="guide-tabs" aria-label="Guides">
+  <a href="https://hgdocs.com/" class="guide-tab">Costco Contract Guide</a>
+  <a href="https://hgdocs.com/hg-direct-contract/" class="guide-tab">HG Direct Contract Guide</a>
+  <a href="https://hgdocs.com/appointment-guide/" class="guide-tab">Appointment Guide</a>
+  <a href="https://hgdocs.com/resulting-in-centah/" class="guide-tab">Resulting in CENTAH</a>
+  <a href="https://hgdocs.com/production-guide/" class="guide-tab active">Production Guide</a>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>Production Guide</h1>
+  <p class="subtitle">Heavenly Greens — the installation department in HG Command, from sold to paid · updated October 26, 2026</p>
+  <div class="flow-bar">
+    <span class="flow-step">1. Sold</span><span class="flow-arrow">&rarr;</span><span class="flow-step">2. Ready for approval</span><span class="flow-arrow">&rarr;</span><span class="flow-step">3. Approved</span><span class="flow-arrow">&rarr;</span><span class="flow-step">4. Scheduled</span><span class="flow-arrow">&rarr;</span><span class="flow-step">5. Crew starting</span><span class="flow-arrow">&rarr;</span><span class="flow-step">6. Completed</span><span class="flow-arrow">&rarr;</span><span class="flow-step">7. Paid</span>
+  </div>
+  <a class="centah-nav" href="https://gamma.app/docs/vj7bq0zzkkcdmz5" target="_blank" rel="noopener">Open the full deck (30 cards) &rarr;</a>
+</div>
+
+<!-- ===== THE DECK ===== -->
+<div class="deck-embed">
+  <iframe src="https://gamma.app/embed/vj7bq0zzkkcdmz5" allow="fullscreen" title="Production in HG Command — how-to deck"></iframe>
+</div>
+<div class="deck-actions">
+  <a class="btn-green" href="https://gamma.app/docs/vj7bq0zzkkcdmz5" target="_blank" rel="noopener">Open the deck in Gamma</a>
+  <a class="btn-ghost" href="#the-100-000-foot-view">Read it as a page below &darr;</a>
+</div>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<div class="toc">
+  <h2>Quick Navigation</h2>
+  <ol>
+    <li><a href="#the-100-000-foot-view">The 100,000-foot view</a></li>
+    <li><a href="#the-job-pipeline">The Job Pipeline</a></li>
+    <li><a href="#new-at-the-top-delayed-and-partially-complete">New at the top: Delayed and partially complete</a></li>
+    <li><a href="#step-1-sold-what-is-still-missing">Step 1 · Sold: what is still missing</a></li>
+    <li><a href="#new-site-inspection">New · Site inspection</a></li>
+    <li><a href="#step-2-ready-for-office-approval-automatic">Step 2 · Ready for office approval (automatic)</a></li>
+    <li><a href="#step-3-approve-or-send-it-back">Step 3 · Approve, or send it back</a></li>
+    <li><a href="#new-approved-not-ready">New · Approved — not ready</a></li>
+    <li><a href="#new-chase-the-sales-rep-or-send-it-back">New · Chase the sales rep, or send it back</a></li>
+    <li><a href="#new-jobs-moved-over-from-salesforce">New · Jobs moved over from Salesforce</a></li>
+    <li><a href="#new-cancel-project">New · ⊘ Cancel project</a></li>
+    <li><a href="#step-4-ready-to-schedule">Step 4 · Ready to schedule</a></li>
+    <li><a href="#step-5-schedule-the-install">Step 5 · Schedule the install</a></li>
+    <li><a href="#the-installation-calendar">The Installation Calendar</a></li>
+    <li><a href="#moving-a-job-and-dayback-only-installs">Moving a job, and DayBack-only installs</a></li>
+    <li><a href="#step-6-delay-or-hold-with-a-reason">Step 6 · Delay or hold, with a reason</a></li>
+    <li><a href="#step-7-the-crew-gets-the-job">Step 7 · The crew gets the job</a></li>
+    <li><a href="#new-update-packet-same-link-new-version">New · Update Packet: same link, new version</a></li>
+    <li><a href="#step-8-crew-starting-hg-direct">Step 8 · Crew starting (HG Direct)</a></li>
+    <li><a href="#step-9-has-the-crew-finished-four-answers">Step 9 · Has the crew finished? Four answers</a></li>
+    <li><a href="#partially-complete-and-not-yet">Partially complete, and Not yet</a></li>
+    <li><a href="#job-complete-and-what-accounting-sees">Job complete, and what accounting sees</a></li>
+    <li><a href="#new-marked-complete-by-mistake-hold-the-payment">New · Marked complete by mistake? Hold the payment</a></li>
+    <li><a href="#costco-how-the-money-is-different">Costco · How the money is different</a></li>
+    <li><a href="#costco-step-by-step">Costco · Step by step</a></li>
+    <li><a href="#new-costco-collected-in-the-drawer">New · Costco collected, in the drawer</a></li>
+    <li><a href="#costco-completing-the-job">Costco · Completing the job</a></li>
+    <li><a href="#which-button-when">Which button, when</a></li>
+    <li><a href="#what-runs-by-itself-and-what-is-off-on-purpose">What runs by itself, and what is off on purpose</a></li>
+  </ol>
+  <div class="tip">Looking for one button? Jump to <a href="#which-button-when"><strong>Which button, when</strong></a>.</div>
+</div>
+
+<div class="section" id="production-in-hg-command">
+  <div class="section-header"><h2>Production in HG Command</h2><p>How the installation department works now, from sold to paid</p></div>
+  <div class="card-body">
+<p>Heavenly Greens · updated October 26, 2026 · for Tim, John, Liz, Emma and Troy</p>
+<figure class="shot"><img src="img/01_job_pipeline_all.png" alt="The Job Pipeline in HG Command" loading="lazy"><figcaption>The Job Pipeline in HG Command</figcaption></figure>
+
+<p><strong>What this deck is:</strong> the whole production department on one set of screens: which page to open, which button to press and when, and what the system does by itself afterwards. It replaces the October 15 Installation deck and adds everything built since. <strong>Every customer and sales rep in these pictures is made up.</strong></p>
+  </div>
+</div>
+<div class="section" id="the-100-000-foot-view">
+  <div class="section-header"><h2>The 100,000-foot view</h2></div>
+  <div class="card-body">
+<p>Every job moves through <strong>one pipeline</strong>, whether it is HG Direct or Costco:</p>
+<p><strong>Sold → Ready for office approval → Approved → Scheduled → Crew starting → Completed → Paid</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Who</th>
+<th>What they do in HG Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sales rep</strong></td>
+<td>Sells the job, uploads photos, access photos and the drawing, and answers "Site inspection needed?"</td>
+</tr>
+<tr>
+<td><strong>The office (John)</strong></td>
+<td>Approves the job or sends it back with a reason</td>
+</tr>
+<tr>
+<td><strong>Liz and Emma</strong></td>
+<td>Schedule it, call the customer with the date, text the installer packet link to the crew, mark Crew starting and Job complete</td>
+</tr>
+<tr>
+<td><strong>Eric</strong></td>
+<td>Costco only: charges the member in CENTAH and submits the completion so Costco pays</td>
+</tr>
+<tr>
+<td><strong>Blas and accounting</strong></td>
+<td>Collect every payment from the Charging Queue; match Costco's payments on Costco Recon</td>
+</tr>
+<tr>
+<td><strong>Tim and Troy</strong></td>
+<td>See it all on the same boards and the morning emails</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Three pages do the work:</strong> the <strong>Job Pipeline</strong> (every job and every button), the <strong>Installation Calendar</strong> (crews and days), and the <strong>uploader</strong> (photos, drawing and the installer packet). All three are on the bar across the top of HG Command.</p>
+  </div>
+</div>
+<div class="section" id="the-job-pipeline">
+  <div class="section-header"><h2>The Job Pipeline</h2></div>
+  <div class="card-body">
+<p>Open <strong>HG Command → Job Pipeline</strong>. One column per stage, every job a card.</p>
+<figure class="shot"><img src="img/01_job_pipeline_all.png" alt="The Job Pipeline: six columns, newest stage on the right" loading="lazy"><figcaption>The Job Pipeline: six columns, newest stage on the right</figcaption></figure>
+
+<ul>
+<li><strong>Columns:</strong> Sold, needs approval · Ready for office approval · Approved · <strong>Approved — not ready</strong> (new) · Scheduled · Completed / Not Paid. Every column sorts by sales rep.</li>
+<li><strong>Tabs:</strong> All · Costco · HG Direct · Commercial · Paver · Completed Jobs. The ⚑ Delayed and ⏸ On Hold buttons show only those jobs; the Area buttons show one area.</li>
+<li><strong>Search</strong> (top right): job number, customer, phone, email or address. "hg69" finds HG-00069.</li>
+<li><strong>Click any card</strong> and its <strong>drawer</strong> opens on the right. Every button in this guide lives in that drawer.</li>
+<li>The board refreshes every 5 minutes. <strong>New:</strong> it no longer closes a drawer you are working in.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="new-at-the-top-delayed-and-partially-complete">
+  <div class="section-header"><h2>New at the top: Delayed and partially complete</h2></div>
+  <div class="card-body">
+<p>Two lists sit above the board, <strong>Residential</strong> and <strong>Commercial</strong>, so a job that stopped part-way never gets forgotten.</p>
+<figure class="shot"><img src="img/03_tracker_delayed_partial.png" alt="Delayed / partially complete, Residential and Commercial" loading="lazy"><figcaption>Delayed / partially complete, Residential and Commercial</figcaption></figure>
+
+<p>Each row shows the job, whether it is ⚑ Delayed or ◐ Partially complete, since when, who marked it, why, and the crew. Click a row to open the job. A list with more than three jobs folds; click its title to open it.</p>
+  </div>
+</div>
+<div class="section" id="step-1-sold-what-is-still-missing">
+  <div class="section-header"><h2>Step 1 · Sold: what is still missing</h2></div>
+  <div class="card-body">
+<p>A signed job lands in <strong>Sold, needs approval</strong>. Its drawer says exactly what is missing, so nobody chases it by phone.</p>
+<figure class="shot"><img src="img/04_sold_missing_documents.png" alt="A sold job with no photos or drawing yet" loading="lazy"><figcaption>A sold job with no photos or drawing yet</figcaption></figure>
+
+<ul>
+<li>The sales rep uploads <strong>site photos (3 or more), access photos and the drawing</strong> with <strong>⬆️ Upload site photos, access photos &amp; drawing</strong>. The installer packet builds itself once they are in.</li>
+<li>The <strong>commission sheet</strong> is office only. It is never in the installer packet.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="new-site-inspection">
+  <div class="section-header"><h2>New · Site inspection</h2></div>
+  <div class="card-body">
+<p>When the sales rep answers <strong>Yes</strong> to "Site inspection needed?", the card and drawer carry <strong>🔍 Needs site inspection · N days</strong>. It turns red at 15 days.</p>
+<figure class="shot"><img src="img/05_site_inspection_needed.png" alt="Needs a site inspection, over 15 days" loading="lazy"><figcaption>Needs a site inspection, over 15 days</figcaption></figure>
+
+<figure class="shot"><img src="img/06_site_inspection_done.png" alt="After the inspection: who marked it done and their note" loading="lazy"><figcaption>After the inspection: who marked it done and their note</figcaption></figure>
+
+<ul>
+<li><strong>When the inspection is done, press ✓ Site inspection done</strong>, and add a note if you like (who went, what they found).</li>
+<li><strong>That emails</strong> production@, John Throne and the job's sales rep, copying Tim and Troy: "Site inspection done". (On since October 25.)</li>
+<li><strong>15 days with no inspection:</strong> the sales rep gets one reminder text and email, once. Nothing goes to the customer.</li>
+<li>"❔ Site inspection never answered" marks an older job jacket filled before the question existed.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="step-2-ready-for-office-approval-automatic">
+  <div class="section-header"><h2>Step 2 · Ready for office approval (automatic)</h2></div>
+  <div class="card-body">
+<p>When the job jacket is complete (and, for HG Direct, the deposit is paid) the job <strong>moves to Ready for office approval by itself</strong>. A check runs every 30 minutes. The drawer says when and why.</p>
+<figure class="shot"><img src="img/07_ready_for_approval.png" alt="Moved here automatically, and why" loading="lazy"><figcaption>Moved here automatically, and why</figcaption></figure>
+
+<p>Nobody presses anything for this step. If something is missing the job stays in Sold and the drawer lists what. Costco jobs have no deposit check: Costco pays Heavenly Greens, not the customer.</p>
+  </div>
+</div>
+<div class="section" id="step-3-approve-or-send-it-back">
+  <div class="section-header"><h2>Step 3 · Approve, or send it back</h2></div>
+  <div class="card-body">
+<p>The office opens the job and presses <strong>✓ Approve job</strong>. The confirm says what happens before anything happens.</p>
+<figure class="shot"><img src="img/08_approve_confirm.png" alt="Approve: what happens, before it happens" loading="lazy"><figcaption>Approve: what happens, before it happens</figcaption></figure>
+
+<figure class="shot"><img src="img/09_reject_form.png" alt="Reject: tick the reason and say what to fix" loading="lazy"><figcaption>Reject: tick the reason and say what to fix</figcaption></figure>
+
+<ul>
+<li><strong>Approve:</strong> the job moves to <strong>Approved</strong> in AGM and on the board. For HG Direct, <strong>Materials</strong> goes to accounting's Charging Queue. Nothing is charged from this board. Then print the job jacket (two copies) and the commission page.</li>
+<li><strong>✗ Reject:</strong> the job goes back to Sold with a red REJECTED box. The sales rep gets an AGM task and an email with exactly what you wrote, fixes it, and presses Submit for approval.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="new-approved-not-ready">
+  <div class="section-header"><h2>New · Approved — not ready</h2></div>
+  <div class="card-body">
+<p>An approved job that can't really be booked yet (materials not in, permit or HOA, waiting on the customer, site not prepped, site inspection needed) gets <strong>⊘ Not ready…</strong>.</p>
+<figure class="shot"><img src="img/10_not_ready_form.png" alt="Not ready: pick why and when to look again" loading="lazy"><figcaption>Not ready: pick why and when to look again</figcaption></figure>
+
+<figure class="shot"><img src="img/11_not_ready_box.png" alt="The Approved — not ready box: who, why, re-check day, and its buttons" loading="lazy"><figcaption>The Approved — not ready box: who, why, re-check day, and its buttons</figcaption></figure>
+
+<ul>
+<li>It moves to the <strong>Approved — not ready</strong> column and <strong>leaves every ready-to-schedule list</strong>: the board, the calendar's waiting list and the 7am email. It stays Approved in AGM.</li>
+<li><strong>Re-check day</strong> is required (up to 90 days). Past that day the box turns red.</li>
+<li><strong>✓ Ready now</strong> puts it back in the ready lists. <strong>💬 Add a note</strong> and <strong>Change why / re-check day</strong> keep the record current.</li>
+<li>Nothing is written to AGM or Salesforce and nothing is sent. The column also holds approved jobs that are delayed, on hold or waiting on a site inspection.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="new-chase-the-sales-rep-or-send-it-back">
+  <div class="section-header"><h2>New · Chase the sales rep, or send it back</h2></div>
+  <div class="card-body">
+<p>Two more buttons in the Approved — not ready box.</p>
+<figure class="shot"><img src="img/12_status_update_confirm.png" alt="✉ Status update: one email to the sales rep" loading="lazy"><figcaption>✉ Status update: one email to the sales rep</figcaption></figure>
+
+<figure class="shot"><img src="img/13_back_to_needs_approval.png" alt="◂ Back to Needs Approval" loading="lazy"><figcaption>◂ Back to Needs Approval</figcaption></figure>
+
+<ul>
+<li><strong>✉ Status update</strong> emails the job's sales rep everything about the job, why it is waiting and the questions we need answered, copying <strong>Liz, Tim Fullerton and John Throne</strong>. It is noted on the job. Nothing goes to the customer.</li>
+<li><strong>◂ Back to Needs Approval</strong> is for a job that really needs approving again (often one moved over from Salesforce). AGM moves it back to Job Needs Approval, it goes back to <strong>Sold, needs approval</strong>, and it needs ✓ Approve before it can be booked. Money already released stays as it is. Nothing is sent.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="new-jobs-moved-over-from-salesforce">
+  <div class="section-header"><h2>New · Jobs moved over from Salesforce</h2></div>
+  <div class="card-body">
+<p>43 Salesforce jobs were moved into AGM on October 20 and 21. They have <strong>no job jacket or installer packet</strong> here.</p>
+<figure class="shot"><img src="img/14_override_to_schedule.png" alt="⏭ Override to schedule, on a job moved from Salesforce" loading="lazy"><figcaption>⏭ Override to schedule, on a job moved from Salesforce</figcaption></figure>
+
+<figure class="shot"><img src="img/15_override_confirm.png" alt="Override: approve now, then the scheduler opens" loading="lazy"><figcaption>Override: approve now, then the scheduler opens</figcaption></figure>
+
+<figure class="shot"><img src="img/16_job_files_from_salesforce.png" alt="📎 Job files from Salesforce: the drawing, photos and proposal that came with it" loading="lazy"><figcaption>📎 Job files from Salesforce: the drawing, photos and proposal that came with it</figcaption></figure>
+
+<ul>
+<li><strong>⏭ Override to schedule</strong> approves the job now (with a reason that goes on the AGM timeline) and opens the Schedule form straight away. Build the job jacket and installer packet separately before the crew goes.</li>
+<li><strong>📎 Job files from Salesforce</strong> is the first box under Documents: every file that moved with the job. Use it to find the drawing and photos for the crew.</li>
+<li><strong>The Salesforce Archive</strong> (Archive, top bar) still shows any old Salesforce job in full: stages, quotes, payments, change orders and files.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="new-cancel-project">
+  <div class="section-header"><h2>New · ⊘ Cancel project</h2></div>
+  <div class="card-body">
+<p>For a sold job that is not going ahead, for example a customer who never paid the deposit and stopped answering.</p>
+<figure class="shot"><img src="img/17_cancel_project.png" alt="Cancel project: a reason, then type the job number" loading="lazy"><figcaption>Cancel project: a reason, then type the job number</figcaption></figure>
+
+<ul>
+<li><strong>Who:</strong> Eric, Tim Fullerton, Liz and John Throne (and Troy), each signed in with <strong>their own cell number</strong>. Sales reps never see it.</li>
+<li><strong>When:</strong> Sold, Ready for approval or Approved. A scheduled job is taken off the schedule first (Delay or Hold), then cancelled.</li>
+<li><strong>What it does:</strong> takes the job off every board and the 7am email, cancels the signed contract and any unpaid payment on it, and marks it lost in AGM.</li>
+<li><strong>What it never does:</strong> delete anything (photos, drawings and records all stay), contact the customer, or change Salesforce.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="step-4-ready-to-schedule">
+  <div class="section-header"><h2>Step 4 · Ready to schedule</h2></div>
+  <div class="card-body">
+<p>Every morning at <strong>7am</strong> one email lists every job that can be booked, to Liz, Emma, Tim Fullerton, John Throne, Eric and Troy. It is residential only (Steve schedules commercial himself), has an <strong>Approved — not ready</strong> section with each job's reason and re-check day, and marks Salesforce jobs that are <strong>NOT IN AGM</strong>.</p>
+<figure class="shot"><img src="img/18_approved_ready_to_schedule.png" alt="An approved job: Next, schedule it" loading="lazy"><figcaption>An approved job: Next, schedule it</figcaption></figure>
+
+<figure class="shot"><img src="img/41_waiting_to_be_scheduled.png" alt="Waiting to be scheduled, under the Installation Calendar" loading="lazy"><figcaption>Waiting to be scheduled, under the Installation Calendar</figcaption></figure>
+
+<p>The same list lives under the <strong>Installation Calendar</strong>: <strong>Not approved yet</strong> on the left, <strong>Approved — ready to schedule</strong> on the right, and <strong>Approved — not ready</strong> below it. Click a job to open it. <strong>Mondays and Fridays at 6:50am</strong> the Job Approval Sweep emails what is still waiting for approval.</p>
+  </div>
+</div>
+<div class="section" id="step-5-schedule-the-install">
+  <div class="section-header"><h2>Step 5 · Schedule the install</h2></div>
+  <div class="card-body">
+<p>In the job's drawer press <strong>📅 Schedule install</strong>: first day, how many days, and the crew.</p>
+<figure class="shot"><img src="img/19_schedule_form.png" alt="Schedule: first day, how long, crew" loading="lazy"><figcaption>Schedule: first day, how long, crew</figcaption></figure>
+
+<figure class="shot"><img src="img/20_schedule_unassigned.png" alt="New: Unassigned holds the day before the crew is known" loading="lazy"><figcaption>New: Unassigned holds the day before the crew is known</figcaption></figure>
+
+<figure class="shot"><img src="img/21_schedule_double_booked.png" alt="If the crew already has a job those days, it asks first" loading="lazy"><figcaption>If the crew already has a job those days, it asks first</figcaption></figure>
+
+<figure class="shot"><img src="img/22_schedule_result.png" alt="Booked: Job Scheduled in AGM, on the calendar, call the customer" loading="lazy"><figcaption>Booked: Job Scheduled in AGM, on the calendar, call the customer</figcaption></figure>
+
+<ul>
+<li>The job moves to <strong>Job Scheduled</strong> in AGM and goes on the <strong>AGM Installation calendar</strong> for every day it runs.</li>
+<li><strong>New: Unassigned</strong> (last choice in Crew) holds the day with no crew yet. Move it onto a crew when you know who.</li>
+<li>A double booking <strong>asks</strong>; it never blocks. A crew can do two small jobs in a day.</li>
+<li><strong>Nothing is sent to the customer. Call them with the date.</strong></li>
+</ul>
+  </div>
+</div>
+<div class="section" id="the-installation-calendar">
+  <div class="section-header"><h2>The Installation Calendar</h2></div>
+  <div class="card-body">
+<p>Crews down the side, days across. A three-day job shows as Day 1 of 3, 2/3, 3/3 on its crew's row. <strong>Unassigned</strong> is always the last row.</p>
+<figure class="shot"><img src="img/40_installation_calendar_week.png" alt="The Installation Calendar, week view" loading="lazy"><figcaption>The Installation Calendar, week view</figcaption></figure>
+
+<figure class="shot"><img src="img/42_calendar_drawer_one_tile.png" alt="New: one tile per install, and Move to a date" loading="lazy"><figcaption>New: one tile per install, and Move to a date</figcaption></figure>
+
+<ul>
+<li><strong>New: one tile per install.</strong> When a job is booked in AGM and DayBack (Salesforce) still has a copy, only the AGM tile shows; its drawer says "Also in DayBack".</li>
+<li><strong>To move a job:</strong> drag it to another day or crew in the Week view, <strong>or</strong> open it and press <strong>📅 Move to a date</strong> to type a new first day, crew and length.</li>
+<li><strong>Schedule from the waiting list:</strong> drag an approved job from Waiting to be scheduled onto a crew's row (or Unassigned).</li>
+<li>AGM bookings are <strong>not</strong> copied back into Salesforce or DayBack.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="moving-a-job-and-dayback-only-installs">
+  <div class="section-header"><h2>Moving a job, and DayBack-only installs</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/43_move_to_a_date.png" alt="Move to a date: new first day, crew, how long" loading="lazy"><figcaption>Move to a date: new first day, crew, how long</figcaption></figure>
+
+<figure class="shot"><img src="img/44_dayback_only_not_in_agm.png" alt="An install only in DayBack says &quot;not in AGM&quot;" loading="lazy"><figcaption>An install only in DayBack says &quot;not in AGM&quot;</figcaption></figure>
+
+<ul>
+<li><strong>📅 Move to a date</strong> works for any week or month, so you never drag across screens. The AGM calendar moves with it. Nothing is sent to the customer.</li>
+<li><strong>"· not in AGM"</strong> means the install is booked only in DayBack (Salesforce). Book it in AGM: open the job on the Job Pipeline and press Schedule. On October 21 every upcoming DayBack-only install was booked in AGM, so you should see this rarely.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="step-6-delay-or-hold-with-a-reason">
+  <div class="section-header"><h2>Step 6 · Delay or hold, with a reason</h2></div>
+  <div class="card-body">
+<p>From the drawer: <strong>⚑ Delay</strong> or <strong>⏸ Hold</strong>, with a reason (customer asked to move it, weather, materials not in yet, permit / HOA, site inspection needed, crew unavailable, or other).</p>
+<figure class="shot"><img src="img/25_delay_form.png" alt="Delay: pick the reason, add a note" loading="lazy"><figcaption>Delay: pick the reason, add a note</figcaption></figure>
+
+<figure class="shot"><img src="img/23_scheduled_job.png" alt="A scheduled job&#x27;s buttons" loading="lazy"><figcaption>A scheduled job&#x27;s buttons</figcaption></figure>
+
+<ul>
+<li>The job moves to <strong>Jobs Delayed</strong> or <strong>Jobs on Hold</strong> in AGM and <strong>comes off the Installation calendar</strong>, so the crew's day is free.</li>
+<li>It appears in the <strong>Delayed / partially complete</strong> list at the top of the Job Pipeline.</li>
+<li><strong>📅 Back on schedule</strong> books it again on a new day. Nothing is sent to the customer.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="step-7-the-crew-gets-the-job">
+  <div class="section-header"><h2>Step 7 · The crew gets the job</h2></div>
+  <div class="card-body">
+<p>The day before, <strong>Liz or Emma</strong> opens the job's drawer, presses <strong>Copy</strong> next to the <strong>Short link</strong>, and pastes it into <strong>the crew's group text</strong>. Crews never get email.</p>
+<figure class="shot"><img src="img/24_crew_packet_link.png" alt="Documents: the installer packet short link and its Copy button" loading="lazy"><figcaption>Documents: the installer packet short link and its Copy button</figcaption></figure>
+
+<ul>
+<li>When the crew taps the link they get a phone page with the job, the <strong>Installer special notes</strong> (read fresh every time they open it), the site photos and drawing, and <strong>Open Installer Packet</strong>.</li>
+<li><strong>✎ Installer special notes</strong> in the drawer is where the office writes anything the crew must know on the day.</li>
+<li>The Installation Calendar's job drawer has the same <strong>Installer packet</strong> link with a copy button.</li>
+<li>A job moved from Salesforce has no packet: send the crew the files from <strong>📎 Job files from Salesforce</strong>.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="new-update-packet-same-link-new-version">
+  <div class="section-header"><h2>New · Update Packet: same link, new version</h2></div>
+  <div class="card-body">
+<p>Something changed after the link went out (a new photo, a revised drawing, a signed change order)? Add it on the uploader and press <strong>Update Packet</strong>.</p>
+<figure class="shot"><img src="img/45_build_and_update_packet.png" alt="The uploader: Build Installer Packet and the new Update Packet" loading="lazy"><figcaption>The uploader: Build Installer Packet and the new Update Packet</figcaption></figure>
+
+<figure class="shot"><img src="img/46_packet_updated.png" alt="Packet Updated: the link the crew already has opens this version" loading="lazy"><figcaption>Packet Updated: the link the crew already has opens this version</figcaption></figure>
+
+<ul>
+<li><strong>The link does not change.</strong> The crew's existing link opens the new version, so there is <strong>no new link to send</strong>.</li>
+<li>Each upload section has its own <strong>Notes for the crew</strong> box, printed next to its photos in the packet.</li>
+<li>A signed change order rebuilds the packet by itself.</li>
+<li>The uploader opens from the drawer: <strong>⬆️ Upload photos, a drawing &amp; documents</strong>.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="step-8-crew-starting-hg-direct">
+  <div class="section-header"><h2>Step 8 · Crew starting (HG Direct)</h2></div>
+  <div class="card-body">
+<p>The evening before, or the morning of, press <strong>Crew starting — send Start of Work</strong>.</p>
+<figure class="shot"><img src="img/26_crew_starting_confirm.png" alt="Crew starting: what it does" loading="lazy"><figcaption>Crew starting: what it does</figcaption></figure>
+
+<ul>
+<li><strong>Start of Work</strong> goes to accounting's Charging Queue and their 7am list. Nothing is charged from this board.</li>
+<li>AGM moves the job to <strong>Installation Started</strong>.</li>
+<li><strong>Costco jobs have no Crew starting button.</strong> Costco pays Heavenly Greens after the install, so there is no payment to release.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="step-9-has-the-crew-finished-four-answers">
+  <div class="section-header"><h2>Step 9 · Has the crew finished? Four answers</h2></div>
+  <div class="card-body">
+<p>Press <strong>✓ Mark job completed</strong>. Nothing happens until you pick one of four answers. <strong>New:</strong> the button now shows on <strong>every</strong> scheduled job.</p>
+<figure class="shot"><img src="img/27_crew_finished_choices.png" alt="Has the crew finished? Four answers" loading="lazy"><figcaption>Has the crew finished? Four answers</figcaption></figure>
+
+<ul>
+<li><strong>✓ Job complete:</strong> the crew is done. The job moves to <strong>Completed / Not Paid</strong>, AGM moves to <strong>Installation Completed</strong>, Blas and accounting are emailed, and the <strong>Final Payment</strong> goes to the Charging Queue.</li>
+<li><strong>◐ Partially complete:</strong> a job done in phases. Write what is left and when the crew comes back. No payment moves.</li>
+<li><strong>⚑ Delayed:</strong> not going ahead for now; off the calendar.</li>
+<li><strong>Not yet:</strong> the crew needs more days. Pick how many; same crew, the calendar moves with it.</li>
+</ul>
+<p>None of the four sends anything to the customer.</p>
+  </div>
+</div>
+<div class="section" id="partially-complete-and-not-yet">
+  <div class="section-header"><h2>Partially complete, and Not yet</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/28_partially_complete.png" alt="Partially complete: what is left and when the crew returns" loading="lazy"><figcaption>Partially complete: what is left and when the crew returns</figcaption></figure>
+
+<figure class="shot"><img src="img/29_not_yet_add_days.png" alt="Not yet: add days on the same crew" loading="lazy"><figcaption>Not yet: add days on the same crew</figcaption></figure>
+
+<ul>
+<li><strong>Partially complete:</strong> AGM moves to Jobs Delayed. The days already worked stay on the calendar and later days come off. Book the return visit with <strong>📅 Back on schedule</strong>. The job shows in the Delayed / partially complete list until it is finished.</li>
+<li><strong>Not yet:</strong> adds days to the same booking. Nothing is sent and no payment moves.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="job-complete-and-what-accounting-sees">
+  <div class="section-header"><h2>Job complete, and what accounting sees</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/30_complete_result.png" alt="Job complete: Final Payment to the Charging Queue" loading="lazy"><figcaption>Job complete: Final Payment to the Charging Queue</figcaption></figure>
+
+<figure class="shot"><img src="img/32_complete_salesforce_job.png" alt="A Salesforce-sold job lands in Salesforce jobs to bill" loading="lazy"><figcaption>A Salesforce-sold job lands in Salesforce jobs to bill</figcaption></figure>
+
+<ul>
+<li>An HG Direct job sold here sends its <strong>Final Payment</strong> (and Start of Work, if nobody pressed Crew starting) to the <strong>Charging Queue</strong>.</li>
+<li><strong>New:</strong> a job sold in Salesforce has no payment steps here, so it lands in <strong>Salesforce jobs to bill</strong> on the Charging Queue, with the balance Salesforce shows.</li>
+<li><strong>Nothing is ever charged from the Job Pipeline.</strong> Accounting collects in the Charging Queue, the way the contract says the customer pays.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="new-marked-complete-by-mistake-hold-the-payment">
+  <div class="section-header"><h2>New · Marked complete by mistake? Hold the payment</h2></div>
+  <div class="card-body">
+<p>If a job was marked complete but the crew did not actually finish, open it in <strong>Completed / Not Paid</strong> and press the purple <strong>⏸ Job not finished — do not charge customer</strong>.</p>
+<figure class="shot"><img src="img/31_hold_payment_form.png" alt="Hold payment: say what is not finished and tick the box" loading="lazy"><figcaption>Hold payment: say what is not finished and tick the box</figcaption></figure>
+
+<ul>
+<li>The Final Payment goes <strong>back on hold</strong>: it leaves the Charging Queue and the 7am list, so nobody can charge it.</li>
+<li>Blas and accounting get a <strong>do not charge</strong> email. AGM moves back to Installation Started.</li>
+<li>When the crew finishes, press <strong>✓ Job finished — release payment</strong>.</li>
+<li>It only shows on HG Direct and commercial jobs whose final payment has not been charged or invoiced yet.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="costco-how-the-money-is-different">
+  <div class="section-header"><h2>Costco · How the money is different</h2></div>
+  <div class="card-body">
+<p>Costco jobs run through the <strong>same board and the same buttons</strong>. The money runs the other way.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>HG Direct</th>
+<th>Costco</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Who the customer pays</strong></td>
+<td>Heavenly Greens, through the Charging Queue</td>
+<td><strong>Costco.</strong> Eric charges the member's card in CENTAH after the cancellation window (3 business days, 5 if the member is 65+)</td>
+</tr>
+<tr>
+<td><strong>How Heavenly Greens gets paid</strong></td>
+<td>Customer payments collected step by step</td>
+<td><strong>Costco pays Heavenly Greens</strong> after the install, once Eric submits the completion in CENTAH and Costco approves it</td>
+</tr>
+<tr>
+<td><strong>Where it is checked</strong></td>
+<td>Charging Queue</td>
+<td><strong>Costco Recon</strong> (Accounting)</td>
+</tr>
+<tr>
+<td><strong>The drawer's money box</strong></td>
+<td>Payments &amp; Balance</td>
+<td><strong>Costco funding</strong></td>
+</tr>
+<tr>
+<td><strong>"Not Paid" means</strong></td>
+<td>the customer owes a payment</td>
+<td><strong>Costco has not funded it yet</strong></td>
+</tr>
+</tbody>
+</table></div>
+<figure class="shot"><img src="img/02_job_pipeline_costco.png" alt="The Costco tab on the Job Pipeline" loading="lazy"><figcaption>The Costco tab on the Job Pipeline</figcaption></figure>
+
+<p>Commission on a Costco job is paid once <strong>Costco has paid Heavenly Greens</strong>.</p>
+  </div>
+</div>
+<div class="section" id="costco-step-by-step">
+  <div class="section-header"><h2>Costco · Step by step</h2></div>
+  <div class="card-body">
+<ol>
+<li><strong>Lead:</strong> the Costco lead email arrives and an AGM contact is made automatically. The call center books the appointment in AGM.</li>
+<li><strong>Contract:</strong> the sales rep presses <strong>Build Costco Contract</strong> on the AGM contact (it needs the Lead #, Membership #, HIS # and 65+), reviews it, and sends it. The member signs. The job gets its HGC number and lands in <strong>Sold, needs approval</strong> on the Costco tab.</li>
+<li><strong>CENTAH sale:</strong> the sales rep sells the lead in CENTAH and submits the sold details. Costco emails the member a payment link. The rep pastes the 12-digit PO into <strong>Costco - PO Number</strong> in AGM.</li>
+<li><strong>Member charged:</strong> after the cancellation window <strong>Eric</strong> charges the card in CENTAH and writes "CC Charged in Full" on the AGM contact. <strong>Costco collected</strong> ticks itself in the drawer.</li>
+<li><strong>Ready for approval:</strong> automatic once the job jacket is complete. No deposit check.</li>
+<li><strong>Approve:</strong> the office checks <strong>Costco collected</strong>, then presses ✓ Approve job. No payment is released.</li>
+<li><strong>QuickBooks:</strong> Zima sets up the customer and estimate. Nothing is charged.</li>
+<li><strong>Schedule:</strong> Liz or Emma books it exactly like HG Direct, and calls the member with the date.</li>
+<li><strong>Install day:</strong> the crew gets the packet link by group text. No Crew starting button for Costco.</li>
+<li><strong>Complete:</strong> press ✓ Mark job completed → ✓ Job complete. Blas and accounting are emailed, copying Tim and <strong>Eric</strong>: "submit in CENTAH by" the next day.</li>
+<li><strong>CENTAH completion:</strong> Eric submits the completion in CENTAH within a day.</li>
+<li><strong>Costco pays:</strong> Blas uploads Costco's Payment History on <strong>Costco Recon</strong> to match it.</li>
+</ol>
+  </div>
+</div>
+<div class="section" id="new-costco-collected-in-the-drawer">
+  <div class="section-header"><h2>New · Costco collected, in the drawer</h2></div>
+  <div class="card-body">
+<p>The first line of a Costco job's <strong>Costco funding</strong> box. It means <strong>Costco has charged the member's card</strong> (not that Costco has paid Heavenly Greens yet).</p>
+<figure class="shot"><img src="img/33_costco_funding_collected.png" alt="Costco collected, ticked from Eric&#x27;s note" loading="lazy"><figcaption>Costco collected, ticked from Eric&#x27;s note</figcaption></figure>
+
+<figure class="shot"><img src="img/34_costco_not_collected_yet.png" alt="Not collected yet: no note from Eric" loading="lazy"><figcaption>Not collected yet: no note from Eric</figcaption></figure>
+
+<ul>
+<li>It <strong>ticks itself</strong> from Eric's AGM note "CC Charged in Full" and the date. Hover to see where the answer came from.</li>
+<li>Anyone signed in with their own name can tick or untick it by hand; <strong>↺ Use Eric's note instead</strong> undoes a hand tick.</li>
+<li><strong>Check it before you approve a Costco job.</strong> The board does not stop you; it is how the team works.</li>
+<li>It is kept in HG Command only. Nothing is written to AGM, Salesforce or QuickBooks, and nothing is sent.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="costco-completing-the-job">
+  <div class="section-header"><h2>Costco · Completing the job</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/35_costco_complete_confirm.png" alt="Has the crew finished? on a Costco job" loading="lazy"><figcaption>Has the crew finished? on a Costco job</figcaption></figure>
+
+<figure class="shot"><img src="img/36_costco_complete_result.png" alt="Marked completed: Costco funds it, Eric submits it in CENTAH" loading="lazy"><figcaption>Marked completed: Costco funds it, Eric submits it in CENTAH</figcaption></figure>
+
+<figure class="shot"><img src="img/37_costco_not_funded.png" alt="Completed / Not Paid on Costco: Costco has not funded it yet" loading="lazy"><figcaption>Completed / Not Paid on Costco: Costco has not funded it yet</figcaption></figure>
+
+<ul>
+<li><strong>✓ Job complete</strong> moves AGM to <strong>Installation Completed</strong> and emails Blas and accounting, copying Tim and Eric, with the date the CENTAH completion is due.</li>
+<li>Nothing goes to the Charging Queue and nothing is charged.</li>
+<li>The card stays in <strong>Completed / Not Paid</strong>, tagged <strong>Not funded by Costco</strong>, until Costco pays.</li>
+<li><strong>Change orders:</strong> the sales rep sends them from AGM. Each signed change order is folded into the materials and the installer packet; Eric charges it separately in CENTAH.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="which-button-when">
+  <div class="section-header"><h2>Which button, when</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>When</th>
+<th>Who</th>
+<th>Press</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inspection done</td>
+<td>Office</td>
+<td><strong>✓ Site inspection done</strong></td>
+</tr>
+<tr>
+<td>Job jacket in</td>
+<td>Office</td>
+<td><strong>✓ Approve job</strong> or <strong>✗ Reject</strong></td>
+</tr>
+<tr>
+<td>Approved but can't be booked</td>
+<td>Liz / office</td>
+<td><strong>⊘ Not ready…</strong>, later <strong>✓ Ready now</strong></td>
+</tr>
+<tr>
+<td>Need an answer from the sales rep</td>
+<td>Liz / office</td>
+<td><strong>✉ Status update</strong></td>
+</tr>
+<tr>
+<td>Moved from Salesforce, no jacket</td>
+<td>Liz / office</td>
+<td><strong>⏭ Override to schedule</strong></td>
+</tr>
+<tr>
+<td>Not going ahead at all</td>
+<td>Eric, Tim, Liz, John</td>
+<td><strong>⊘ Cancel project</strong></td>
+</tr>
+<tr>
+<td>Ready to book</td>
+<td>Liz / Emma</td>
+<td><strong>📅 Schedule install</strong> (or drag on the calendar)</td>
+</tr>
+<tr>
+<td>Date or crew changes</td>
+<td>Liz / Emma</td>
+<td><strong>📅 Move to a date</strong>, drag, or <strong>Change date / crew</strong></td>
+</tr>
+<tr>
+<td>Can't go ahead this week</td>
+<td>Liz / Emma</td>
+<td><strong>⚑ Delay</strong> or <strong>⏸ Hold</strong>, later <strong>📅 Back on schedule</strong></td>
+</tr>
+<tr>
+<td>Day before install</td>
+<td>Liz / Emma</td>
+<td><strong>Copy</strong> the short link into the crew's group text</td>
+</tr>
+<tr>
+<td>Something changed after the link went out</td>
+<td>Rep / office</td>
+<td><strong>Update Packet</strong> on the uploader</td>
+</tr>
+<tr>
+<td>Crew is starting (HG Direct)</td>
+<td>Liz / Emma</td>
+<td><strong>Crew starting</strong></td>
+</tr>
+<tr>
+<td>Crew reports in</td>
+<td>Liz / Emma</td>
+<td><strong>✓ Mark job completed</strong> → one of four answers</td>
+</tr>
+<tr>
+<td>Marked complete by mistake</td>
+<td>Liz / office</td>
+<td><strong>⏸ Job not finished — do not charge customer</strong></td>
+</tr>
+<tr>
+<td>Costco member charged</td>
+<td>Eric</td>
+<td>the note in AGM; <strong>Costco collected</strong> ticks itself</td>
+</tr>
+</tbody>
+</table></div>
+<figure class="shot"><img src="img/38_completed_jobs.png" alt="Completed Jobs: everything finished" loading="lazy"><figcaption>Completed Jobs: everything finished</figcaption></figure>
+
+<p>Every button asks first and says what will happen. <strong>None of them sends anything to a customer.</strong></p>
+  </div>
+</div>
+<div class="section" id="what-runs-by-itself-and-what-is-off-on-purpose">
+  <div class="section-header"><h2>What runs by itself, and what is off on purpose</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Today</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sold → Ready for approval (every 30 minutes)</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>7am Ready to Schedule email</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Job Approval Sweep, Mondays and Fridays 6:50am</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Schedule, Delay / Hold, drag and Move to a date write AGM and its calendar</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Crew starting → AGM Installation Started</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Job complete → AGM Installation Completed, Blas and accounting emailed</td>
+<td>✅ On</td>
+</tr>
+<tr>
+<td>Site inspection done email and the 15-day sales rep reminder</td>
+<td>✅ On (since Oct 25)</td>
+</tr>
+<tr>
+<td>Customer told the install date, or reminded the day before</td>
+<td>⛔ Off on purpose: the office calls</td>
+</tr>
+<tr>
+<td>Final payment link sent automatically when a job completes</td>
+<td>⛔ Not built yet: accounting sends it</td>
+</tr>
+<tr>
+<td>Completed-but-unpaid reminders to customers</td>
+<td>🔌 Test mode: sends nothing</td>
+</tr>
+<tr>
+<td>AGM bookings copied back into Salesforce or DayBack</td>
+<td>⛔ No</td>
+</tr>
+</tbody>
+</table></div>
+<p>Anything that does not match what you see on a real job: reply to the email this guide came in and it gets fixed the same day.</p>
+  </div>
+</div>
+
+<div class="footer">
+  Every customer and sales rep in these screenshots is made up. Source: the Production in HG Command how-to deck &mdash; <a href="https://gamma.app/docs/vj7bq0zzkkcdmz5" target="_blank" rel="noopener">https://gamma.app/docs/vj7bq0zzkkcdmz5</a>.
+</div>
+</body>
+</html>
