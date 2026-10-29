@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Call Center Appointment Booking — Heavenly Greens</title>
+<style>
+  :root {
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --dark: #1a1a2e;
+    --gray: #f8f9fa;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background: #fff;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--dark);
+    color: #fff;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 24px;
+  }
+  .header .flow-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .flow-step {
+    background: var(--green);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    color: #475569;
+    font-size: 1.2rem;
+  }
+  .centah-nav {
+    display: inline-block;
+    margin-top: 24px;
+    background: var(--amber);
+    color: #1a1a2e;
+    padding: 10px 22px;
+    border-radius: 22px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.1s ease, transform 0.1s ease;
+  }
+  .centah-nav:hover { background: #fbbf24; transform: translateY(-2px); }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--gray);
+    border-radius: 12px;
+  }
+  .toc h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+  .toc ol {
+    padding-left: 24px;
+  }
+  .toc li {
+    margin-bottom: 8px;
+  }
+  .toc a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .toc a:hover { text-decoration: underline; }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+  }
+  .section-header {
+    background: var(--green);
+    color: #fff;
+    padding: 20px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+  }
+  .section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .section-header p {
+    margin-top: 4px;
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+
+  /* STEP BLOCKS */
+  .step {
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .step-text {
+    padding: 20px 24px;
+  }
+  .step-text h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .step-text p, .step-text li {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .step-text ul {
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .step-image {
+    background: var(--gray);
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .step-image img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* CALLOUT BOXES */
+  .tip {
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .warning {
+    background: var(--amber-light);
+    border-left: 4px solid var(--amber);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .critical {
+    background: #fee2e2;
+    border-left: 4px solid var(--red);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes {
+    background: #eef2ff;
+    border-left: 4px solid #6366f1;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes strong {
+    color: #4338ca;
+  }
+
+  /* PRE-FLIGHT CHECKLIST */
+  .preflight {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fffbeb;
+    border: 2px solid var(--amber);
+    border-radius: 12px;
+  }
+  .preflight h2 {
+    color: #92400e;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .preflight .subtitle {
+    color: #78350f;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  .preflight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .preflight-card {
+    background: #fff;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .preflight-card h3 {
+    color: var(--dark);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .preflight-card p {
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .preflight-card .where {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+  @media (max-width: 640px) {
+    .preflight-grid { grid-template-columns: 1fr; }
+  }
+
+  /* CHEAT SHEET */
+  .cheat-sheet {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--dark);
+    color: #fff;
+    border-radius: 12px;
+  }
+  .cheat-sheet h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .cheat-sheet ol {
+    padding-left: 24px;
+    font-size: 1.05rem;
+  }
+  .cheat-sheet li {
+    margin-bottom: 12px;
+    color: #e2e8f0;
+  }
+  .cheat-sheet li strong {
+    color: #4ade80;
+  }
+  .cheat-sheet .memory-line {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #334155;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #4ade80;
+    letter-spacing: 0.5px;
+  }
+
+  /* PRINT */
+  @media print {
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 1.8rem; }
+    .section { page-break-inside: avoid; }
+    .step { page-break-inside: avoid; }
+    .step-image img { max-height: 400px; object-fit: contain; }
+    body { font-size: 11pt; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.6rem; }
+    .flow-bar { gap: 4px; }
+    .flow-step { font-size: 0.7rem; padding: 6px 10px; }
+    .section-header h2 { font-size: 1.2rem; }
+  }
+
+  /* GUIDE TABS (site-wide, added 2026-09-07) */
+  .guide-tabs { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; background:#0f0f1f; padding:12px 16px; }
+  .guide-tab { color:#cbd5e1; text-decoration:none; font-weight:600; font-size:0.9rem; padding:8px 16px; border-radius:20px; border:1px solid #334155; }
+  .guide-tab:hover { background:#1e293b; color:#fff; }
+  .guide-tab.active { background:var(--green); color:#fff; border-color:var(--green); }
+
+  .deck-embed { max-width: 900px; margin: 32px auto 8px; padding: 0 24px; }
+  .deck-embed iframe { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--border); border-radius: 12px; background: #111; }
+  .deck-actions { max-width: 900px; margin: 0 auto 40px; padding: 0 24px; display:flex; gap:12px; flex-wrap:wrap; }
+  .btn-green { display:inline-block; background: var(--green); color:#fff; padding: 12px 22px; border-radius: 22px; font-weight:700; text-decoration:none; }
+  .btn-green:hover { background:#15803d; }
+  .btn-ghost { display:inline-block; border:1px solid var(--border); color: var(--dark); padding: 12px 22px; border-radius: 22px; font-weight:600; text-decoration:none; }
+  .actor { display:inline-block; font-size:0.75rem; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:10px; margin-right:6px; vertical-align:middle; }
+  .actor.rep { background:#dbeafe; color:#1d4ed8; }
+  .actor.cust { background:#fef3c7; color:#b45309; }
+  .actor.agm { background:#dcfce7; color:#15803d; }
+  .footer { max-width:900px; margin:40px auto; padding:24px; color:var(--text-light); font-size:0.85rem; border-top:1px solid var(--border); }
+
+  /* PRODUCTION GUIDE (added 2026-10-27) */
+  .card-body { padding: 20px 24px; border: 1px solid var(--border); border-radius: 12px; }
+  .card-body p, .card-body li { font-size: 0.95rem; margin-bottom: 8px; }
+  .card-body ul, .card-body ol { padding-left: 22px; margin: 8px 0 12px; }
+  .card-body h3 { font-size: 1.05rem; color: var(--dark); margin: 4px 0 10px; }
+  .card-body table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 0.9rem; }
+  .card-body th, .card-body td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  .card-body th { background: var(--gray); color: var(--dark); }
+  .card-body .table-wrap { overflow-x: auto; }
+  .shot { margin: 16px 0; background: var(--gray); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; }
+  .shot img { max-width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .shot figcaption { font-size: 0.85rem; color: var(--text-light); margin-top: 8px; }
+  .toc ol { columns: 2; column-gap: 32px; }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+</style>
+</head>
+<body>
+<nav class="guide-tabs" aria-label="Guides">
+  <a href="https://hgdocs.com/" class="guide-tab">Costco Contract Guide</a>
+  <a href="https://hgdocs.com/hg-direct-contract/" class="guide-tab">HG Direct Contract Guide</a>
+  <a href="https://hgdocs.com/appointment-guide/" class="guide-tab">Appointment Guide</a>
+  <a href="https://hgdocs.com/resulting-in-centah/" class="guide-tab">Resulting in CENTAH</a>
+  <a href="https://hgdocs.com/production-guide/" class="guide-tab">Production Guide</a>
+  <a href="https://hgdocs.com/service-guide/" class="guide-tab">Service Guide</a>
+  <a href="https://hgdocs.com/service-in-5-steps/" class="guide-tab">Service in 5 Steps</a>
+  <a href="https://hgdocs.com/call-center-appointment-booking/" class="guide-tab active">Call Center Appointment Booking</a>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>Call Center Appointment Booking</h1>
+  <p class="subtitle">Heavenly Greens — booking sales appointments and service visits, and what happens after each · October 29, 2026</p>
+  <div class="flow-bar">
+    <span class="flow-step">1. Address + deal</span><span class="flow-arrow">&rarr;</span><span class="flow-step">2. Book on HG Estimate</span><span class="flow-arrow">&rarr;</span><span class="flow-step">3. Check the deal</span><span class="flow-arrow">&rarr;</span><span class="flow-step">4. Service Request</span><span class="flow-arrow">&rarr;</span><span class="flow-step">5. Send the self-assessment link</span><span class="flow-arrow">&rarr;</span><span class="flow-step">6. Book the crew</span><span class="flow-arrow">&rarr;</span><span class="flow-step">7. Day-before call</span>
+  </div>
+  <a class="centah-nav" href="https://gamma.app/docs/rc4ihf0g00r6ttp" target="_blank" rel="noopener">Open the full deck (18 cards) &rarr;</a>
+</div>
+
+<!-- ===== THE DECK ===== -->
+<div class="deck-embed">
+  <iframe src="https://gamma.app/embed/rc4ihf0g00r6ttp" allow="fullscreen" title="Call center appointment booking — training deck"></iframe>
+</div>
+<div class="deck-actions">
+  <a class="btn-green" href="https://gamma.app/docs/rc4ihf0g00r6ttp" target="_blank" rel="noopener">Open the deck in Gamma</a>
+  <a class="btn-ghost" href="#two-kinds-of-appointment">Read it as a page below &darr;</a>
+</div>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<div class="toc">
+  <h2>Quick Navigation</h2>
+  <ol>
+    <li><a href="#two-kinds-of-appointment">Two kinds of appointment</a></li>
+    <li><a href="#sales-booking-the-appointment">Sales: booking the appointment</a></li>
+    <li><a href="#sales-what-happens-after-you-press-book">Sales: what happens after you press Book</a></li>
+    <li><a href="#sales-who-hears-what">Sales: who hears what</a></li>
+    <li><a href="#sales-the-two-things-that-stop-every-message">Sales: the two things that stop every message</a></li>
+    <li><a href="#service-from-the-first-call-to-the-visit">Service: from the first call to the visit</a></li>
+    <li><a href="#service-step-1-open-the-ticket-with-service-request">Service step 1: open the ticket with Service Request</a></li>
+    <li><a href="#new-today-who-are-you-pick-your-name-once">New today: &quot;Who are you?&quot; — pick your name once</a></li>
+    <li><a href="#service-step-2-the-rest-of-the-form-and-create">Service step 2: the rest of the form, and Create</a></li>
+    <li><a href="#service-step-3-send-the-self-assessment-link">Service step 3: send the self-assessment link</a></li>
+    <li><a href="#what-the-customer-sees">What the customer sees</a></li>
+    <li><a href="#the-self-assessment-link-who-hears-what-and-when">The self-assessment link: who hears what, and when</a></li>
+    <li><a href="#booking-a-service-visit-in-agm">Booking a service visit in AGM</a></li>
+    <li><a href="#the-agm-service-booking-form">The AGM Service booking form</a></li>
+    <li><a href="#after-a-service-booking-and-the-day-before-call">After a service booking, and the day-before call</a></li>
+    <li><a href="#what-s-automatic-and-what-s-you">What&#x27;s automatic, and what&#x27;s you</a></li>
+    <li><a href="#the-rules-on-one-page">The rules on one page</a></li>
+  </ol>
+  <div class="tip">Looking for one button? Jump to <a href="#the-rules-on-one-page"><strong>The rules on one page</strong></a>.</div>
+</div>
+
+<div class="section" id="booking-appointments-what-you-press-and-what-happens-next">
+  <div class="section-header"><h2>Booking Appointments: What You Press, and What Happens Next</h2><p>Sales appointments and service visits, for the Heavenly Greens call center</p></div>
+  <div class="card-body">
+<p>Thursday, October 29, 2026</p>
+<p>Two kinds of booking, two different chains of messages behind them. This guide shows each one: the steps you take, and everything AGM and the service system do by themselves afterwards.</p>
+  </div>
+</div>
+<div class="section" id="two-kinds-of-appointment">
+  <div class="section-header"><h2>Two kinds of appointment</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Sales appointment</strong> (an estimate)</th>
+<th><strong>Service visit</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Calendar</strong></td>
+<td><strong>HG Estimate</strong></td>
+<td><strong>Service</strong></td>
+</tr>
+<tr>
+<td><strong>Open first</strong></td>
+<td>The customer's deal in <strong>1. Lead Flow</strong></td>
+<td>A <strong>service ticket</strong>: press <strong>Service Request</strong> on the contact</td>
+</tr>
+<tr>
+<td><strong>Booked for</strong></td>
+<td>A <strong>sales rep</strong></td>
+<td>A <strong>crew</strong>: Service 3 or Service 4</td>
+</tr>
+<tr>
+<td><strong>Title</strong></td>
+<td>Fills itself in</td>
+<td>Ends with the crew: <strong>| Crew: Service 4</strong></td>
+</tr>
+<tr>
+<td><strong>Customer hears from AGM</strong></td>
+<td>Yes: confirmation, 24-hour reminder, 1-hour text</td>
+<td><strong>No</strong>. You tell them the day and time on the phone</td>
+</tr>
+<tr>
+<td><strong>Before the booking</strong></td>
+<td>Full address on the contact</td>
+<td>The <strong>self-assessment link</strong>, when we need photos to price it</td>
+</tr>
+</tbody>
+</table></div>
+<p>The rest of this guide walks through each column.</p>
+  </div>
+</div>
+<div class="section" id="sales-booking-the-appointment">
+  <div class="section-header"><h2>Sales: booking the appointment</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/n06_booking_form.png" alt="Book appointment: Calendar HG Estimate, the title fills itself, Team member, date and slot, Select Contact" loading="lazy"><figcaption>Book appointment: Calendar HG Estimate, the title fills itself, Team member, date and slot, Select Contact</figcaption></figure>
+
+<ol>
+<li><strong>First:</strong> the contact has a full street address with city, and one open deal in 1. Lead Flow.</li>
+<li><strong>Calendar: HG Estimate.</strong> Never Service or Installation.</li>
+<li><strong>Team member:</strong> the sales rep the appointment is for.</li>
+<li><strong>Date and slot</strong>, <strong>Select Contact</strong>, <strong>Status: Confirmed</strong>, then <strong>Book appointment</strong>.</li>
+</ol>
+  </div>
+</div>
+<div class="section" id="sales-what-happens-after-you-press-book">
+  <div class="section-header"><h2>Sales: what happens after you press Book</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/d01_sales_booking_timeline.png" alt="Every message and every automatic step after a sales booking, by who receives it" loading="lazy"><figcaption>Every message and every automatic step after a sales booking, by who receives it</figcaption></figure>
+
+<p>Read it left to right. <strong>Gold</strong> is you. Everything else happens by itself. The one-hour wait at the start is on purpose: it gives you time to fix a wrong time, sales rep or calendar <strong>before</strong> the customer is emailed.</p>
+  </div>
+</div>
+<div class="section" id="sales-who-hears-what">
+  <div class="section-header"><h2>Sales: who hears what</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>When</th>
+<th>Customer</th>
+<th>Sales rep</th>
+<th>Behind the scenes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>You book</strong></td>
+<td>Nothing yet</td>
+<td>Nothing yet</td>
+<td>The confirmation workflow starts</td>
+</tr>
+<tr>
+<td><strong>1 hour later</strong></td>
+<td><strong>Confirmation email</strong>: date, time, address</td>
+<td></td>
+<td>Deal moves to <strong>Appointment Booked</strong>. The customer comes off the sales follow-up emails. Their <strong>Call Center Followup card is removed</strong>. The sales rep's <strong>Quote / Build Contract</strong> button is set up</td>
+</tr>
+<tr>
+<td><strong>24 hours before</strong></td>
+<td><strong>Reminder email</strong>, with reschedule and cancel links</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Night before, 5:30pm</strong></td>
+<td></td>
+<td><strong>Text + email</strong>: appointment tomorrow</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>1 hour before</strong></td>
+<td><strong>Reminder text</strong></td>
+<td><strong>Text</strong>: appointment in 1 hour</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>90 min after the start</strong></td>
+<td></td>
+<td><strong>Text + email</strong>: did it run?</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Sales rep presses Appointment Ran</strong></td>
+<td></td>
+<td></td>
+<td>Deal moves to <strong>Appointment Ran</strong>. All reminders stop</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Costco customers</strong> get the same rhythm with Costco-branded emails, and their sales rep is prompted to build the contract or proposal.</p>
+  </div>
+</div>
+<div class="section" id="sales-the-two-things-that-stop-every-message">
+  <div class="section-header"><h2>Sales: the two things that stop every message</h2></div>
+  <div class="card-body">
+<p><strong>1. No street address.</strong> AGM emails the call center <strong>"Missing Address"</strong> and <strong>holds</strong> the appointment. No confirmation to the customer, no reminders to the sales rep, until someone fills the address in. Fill it in <strong>before</strong> you book.</p>
+<p><strong>2. No deal in 1. Lead Flow.</strong> The calendar itself sends nothing. Every message comes from the deal's workflow, so a customer booked with no deal can miss all of them.</p>
+<p><strong>So after every booking, check the deal:</strong> stage <strong>Appointment Booked</strong>, the right <strong>sales rep</strong> on it. If you move a booked card to Appointment Booked on the call center board, AGM moves the Lead Flow deal for you and takes the card off your call list.</p>
+<p><strong>Changing the time or sales rep later?</strong> Change it on the appointment. The reminders follow the new time.</p>
+  </div>
+</div>
+<div class="section" id="service-from-the-first-call-to-the-visit">
+  <div class="section-header"><h2>Service: from the first call to the visit</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/d02_service_journey.png" alt="The ten steps of a service request, coloured by who does each one" loading="lazy"><figcaption>The ten steps of a service request, coloured by who does each one</figcaption></figure>
+
+<p><strong>Gold steps are a person pressing a button.</strong> Nothing goes to a service customer until someone on our side acts on that one job. After that, the green steps happen by themselves.</p>
+  </div>
+</div>
+<div class="section" id="service-step-1-open-the-ticket-with-service-request">
+  <div class="section-header"><h2>Service step 1: open the ticket with Service Request</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p04_new_ticket_call_center_door.png" alt="The call center&#x27;s version of the form: your name, then look the caller up by phone" loading="lazy"><figcaption>The call center&#x27;s version of the form: your name, then look the caller up by phone</figcaption></figure>
+
+<ol>
+<li>Open the customer's contact in AGM and press <strong>Service Request</strong>.</li>
+<li><strong>First time on this computer?</strong> It asks <strong>"Who are you?"</strong>: pick your name (next section).</li>
+<li>Check the caller's <strong>phone number</strong> and press <strong>Look up</strong>. It finds them in AGM and in every past install, and tells you whether Heavenly Greens installed at that address and whether it's in warranty.</li>
+<li>Confirm the two things it shows you with the caller.</li>
+</ol>
+  </div>
+</div>
+<div class="section" id="new-today-who-are-you-pick-your-name-once">
+  <div class="section-header"><h2>New today: &quot;Who are you?&quot; — pick your name once</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/d04_who_are_you.png" alt="The first time you press Service Request on a computer: Who are you? Pick your name" loading="lazy"><figcaption>The first time you press Service Request on a computer: Who are you? Pick your name</figcaption></figure>
+
+<p>The first time you press <strong>Service Request</strong> on a computer, the form asks <strong>Who are you?</strong> Pick <strong>your own name</strong> from the list. The computer remembers you after that.</p>
+<figure class="shot"><img src="img/d05_opened_by_name.png" alt="After the pick: the right team&#x27;s form, and Opened by your name, with Not you? to change it" loading="lazy"><figcaption>After the pick: the right team&#x27;s form, and Opened by your name, with Not you? to change it</figcaption></figure>
+
+<p>From then on every press opens <strong>your team's form</strong> with <strong>"Opened by" your name</strong> already filled in. Your name goes on the ticket as the person who opened it, and a sales rep who opens a ticket gets their <strong>priced, scheduled, done and paid</strong> emails.</p>
+<ul>
+<li><strong>Always pick your own name</strong>, never a teammate's.</li>
+<li><strong>Sharing a computer?</strong> Press <strong>Not you?</strong> and pick yourself before you start.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="service-step-2-the-rest-of-the-form-and-create">
+  <div class="section-header"><h2>Service step 2: the rest of the form, and Create</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p03_new_ticket_service_dept_box_and_create.png" alt="How the customer wants their link, and Create the service ticket" loading="lazy"><figcaption>How the customer wants their link, and Create the service ticket</figcaption></figure>
+
+<ul>
+<li><strong>What's wrong</strong>, in the customer's own words.</li>
+<li><strong>Read their email and phone back out loud.</strong> That's where their link goes; one wrong digit and they never hear from us.</li>
+<li><strong>Ask how they want their link:</strong> email, text, both or none.</li>
+<li>Press <strong>Create the service ticket</strong>.</li>
+</ul>
+<p><strong>What happens by itself:</strong> a new <strong>SVC number</strong>, a card on AGM's <strong>4. Service</strong> pipeline assigned to the service manager (DeAnna), and an email to <strong>service@</strong>.</p>
+  </div>
+</div>
+<div class="section" id="service-step-3-send-the-self-assessment-link">
+  <div class="section-header"><h2>Service step 3: send the self-assessment link</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p06_ticket_send_link_or_book_assessment.png" alt="On the ticket: the self-assessment link, the send buttons, and the assessment visit" loading="lazy"><figcaption>On the ticket: the self-assessment link, the send buttons, and the assessment visit</figcaption></figure>
+
+<p>The ticket page opens with <strong>Next step: the self-assessment link has not been sent yet.</strong></p>
+<ul>
+<li>Type <strong>your name</strong> and press <strong>Email and text the customer their self-assessment link</strong>. It goes the way the customer asked.</li>
+<li>Sent it from your own phone? Press <strong>I already sent it myself</strong> so the ticket knows.</li>
+<li><strong>It is never sent automatically.</strong> If nobody presses the button, the customer never gets it.</li>
+<li>Photos won't do? The service manager books an <strong>assessment visit</strong> instead.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="what-the-customer-sees">
+  <div class="section-header"><h2>What the customer sees</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/p13_customer_ticket_send_photos.png" alt="The customer&#x27;s own ticket page: what to photograph, and Send my photos" loading="lazy"><figcaption>The customer&#x27;s own ticket page: what to photograph, and Send my photos</figcaption></figure>
+
+<p>Their own page for their ticket. It shows the <strong>four photos</strong> that let us price the job without a visit (the whole yard, the problem from two opposite sides, a close-up, something for scale), takes up to five photos or short videos, and promises an answer <strong>within 24 to 72 hours</strong>.</p>
+<p>When they press <strong>Send my photos</strong>, the ticket and its AGM card move to <strong>Needs a price</strong> by themselves, and service@ gets an email.</p>
+  </div>
+</div>
+<div class="section" id="the-self-assessment-link-who-hears-what-and-when">
+  <div class="section-header"><h2>The self-assessment link: who hears what, and when</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/d03_self_assessment_link_comms.png" alt="Every message around the self-assessment link, by who receives it" loading="lazy"><figcaption>Every message around the self-assessment link, by who receives it</figcaption></figure>
+
+<p><strong>If a customer calls asking about their photos:</strong> search their ticket. The ticket shows when the link was sent, how, and by whom, and whether photos have arrived. No photos after 72 hours means the service manager follows up; let them know the customer called.</p>
+  </div>
+</div>
+<div class="section" id="booking-a-service-visit-in-agm">
+  <div class="section-header"><h2>Booking a service visit in AGM</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/c04_call_center_service_calendar.png" alt="Call Center, Service Calendar: one row per crew, the same view the service team sees" loading="lazy"><figcaption>Call Center, Service Calendar: one row per crew, the same view the service team sees</figcaption></figure>
+
+<p>Check which crew has room on <strong>Call Center → 🛠 Service Calendar</strong>, then book in AGM:</p>
+<ol>
+<li>The customer must have a <strong>service ticket</strong>. No ticket? Press <strong>Service Request</strong> first.</li>
+<li>Open the contact, book an appointment, <strong>Calendar: Service</strong>. AGM remembers the last calendar, so check it every time.</li>
+<li>Title ends with the crew: <strong>Service | Jane Doe | San Jose | Crew: Service 4</strong>. Start with the SVC number if you have it.</li>
+<li><strong>Service 3</strong> (larger jobs, further out) or <strong>Service 4</strong> (troubleshooting and go-backs). Service 5 and install crews are booked by the service manager only.</li>
+<li>Save, and <strong>tell the customer the day and time on the phone.</strong></li>
+</ol>
+  </div>
+</div>
+<div class="section" id="the-agm-service-booking-form">
+  <div class="section-header"><h2>The AGM Service booking form</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/a4_agm_book_service.png" alt="AGM&#x27;s Book appointment with Calendar set to Service" loading="lazy"><figcaption>AGM&#x27;s Book appointment with Calendar set to Service</figcaption></figure>
+
+<ul>
+<li>One-hour slots, Monday to Friday. Up to three crews can be booked at the same time.</li>
+<li><strong>The crew in the title is how the system knows who is going.</strong> A booking with no crew in its title can't be matched to a crew.</li>
+<li><strong>AGM sends the service customer nothing</strong> from this booking. Your phone call is their confirmation.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="after-a-service-booking-and-the-day-before-call">
+  <div class="section-header"><h2>After a service booking, and the day-before call</h2></div>
+  <div class="card-body">
+<p>Within 30 minutes the system ties your booking to the customer's ticket: the ticket gets the <strong>date, time and crew</strong> and turns <strong>Scheduled</strong>, and the visit shows on that crew's row. If it can't (no ticket, two tickets, no crew in the title, or the crew booked twice at that time), the service manager gets a <strong>Fix calendar bookings</strong> line.</p>
+<figure class="shot"><img src="img/p27_confirm_call_page.png" alt="The confirmation call page: Confirmed, Left a voicemail, They need a new time, Wrong number" loading="lazy"><figcaption>The confirmation call page: Confirmed, Left a voicemail, They need a new time, Wrong number</figcaption></figure>
+
+<p><strong>The business day before every visit</strong>, a <strong>confirmation-call task</strong> lands on the Call Center user (made at 6:30am and 1pm) and in the <strong>7:30am call center email</strong>. Call the customer and press one: <strong>Confirmed · Left a voicemail · They need a new time · Wrong number</strong>. The task closes itself, and the last two go to the service manager to rebook. The crew's day sheet shows what you pressed.</p>
+  </div>
+</div>
+<div class="section" id="what-s-automatic-and-what-s-you">
+  <div class="section-header"><h2>What&#x27;s automatic, and what&#x27;s you</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Sales appointment</strong></th>
+<th><strong>Service visit</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>You</strong></td>
+<td>Address first, book on HG Estimate for the sales rep, check the deal</td>
+<td>Service Request, read back email and phone, <strong>press Send</strong> on the link, book with the crew in the title, tell the customer the time</td>
+</tr>
+<tr>
+<td><strong>Customer, automatically</strong></td>
+<td>Confirmation email, 24-hour reminder email, 1-hour text</td>
+<td>Their link (only after someone presses Send). Nothing from an AGM booking</td>
+</tr>
+<tr>
+<td><strong>Sales rep, automatically</strong></td>
+<td>Night-before text + email, 1-hour text, "did it run?"</td>
+<td>Only if they opened the ticket: priced, scheduled, done, paid</td>
+</tr>
+<tr>
+<td><strong>Office, automatically</strong></td>
+<td>Call center card removed; deal moved to Appointment Booked</td>
+<td>service@ emailed at every step; ticket moves stage by itself</td>
+</tr>
+<tr>
+<td><strong>Day before</strong></td>
+<td>Reminders go out by themselves</td>
+<td><strong>You</strong> make the confirmation call and press the result</td>
+</tr>
+</tbody>
+</table></div>
+  </div>
+</div>
+<div class="section" id="the-rules-on-one-page">
+  <div class="section-header"><h2>The rules on one page</h2></div>
+  <div class="card-body">
+<p><strong>Sales</strong>
+1. <strong>Address first.</strong> No street address holds every message.
+2. <strong>HG Estimate only</strong>, for the right sales rep, Status Confirmed.
+3. <strong>Check the deal</strong> after every booking: Appointment Booked, sales rep on it.
+4. <strong>Wrong booking? Fix it within the hour</strong>, before the customer is emailed.</p>
+<p><strong>Service</strong>
+5. <strong>Ticket first:</strong> Service Request, then book. First time on a computer, <strong>pick your own name</strong>.
+6. <strong>Read the email and phone back.</strong> That's where the link goes.
+7. <strong>Press Send on the self-assessment link.</strong> It never goes by itself.
+8. <strong>Calendar: Service</strong>, crew at the end of the title, Service 3 or 4 only.
+9. <strong>Tell the customer the day and time on the phone.</strong> AGM won't.
+10. <strong>Make the day-before confirmation calls</strong> and press the result.</p>
+  </div>
+</div>
+
+<div class="footer">
+  The service customers in these screenshots are made up. Source: the Booking Appointments deck &mdash; <a href="https://gamma.app/docs/rc4ihf0g00r6ttp" target="_blank" rel="noopener">https://gamma.app/docs/rc4ihf0g00r6ttp</a>.
+</div>
+</body>
+</html>
