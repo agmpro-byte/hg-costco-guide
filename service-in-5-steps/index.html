@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service in 5 Steps — Heavenly Greens</title>
+<style>
+  :root {
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --dark: #1a1a2e;
+    --gray: #f8f9fa;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background: #fff;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--dark);
+    color: #fff;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 24px;
+  }
+  .header .flow-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .flow-step {
+    background: var(--green);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    color: #475569;
+    font-size: 1.2rem;
+  }
+  .centah-nav {
+    display: inline-block;
+    margin-top: 24px;
+    background: var(--amber);
+    color: #1a1a2e;
+    padding: 10px 22px;
+    border-radius: 22px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.1s ease, transform 0.1s ease;
+  }
+  .centah-nav:hover { background: #fbbf24; transform: translateY(-2px); }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--gray);
+    border-radius: 12px;
+  }
+  .toc h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+  .toc ol {
+    padding-left: 24px;
+  }
+  .toc li {
+    margin-bottom: 8px;
+  }
+  .toc a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .toc a:hover { text-decoration: underline; }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+  }
+  .section-header {
+    background: var(--green);
+    color: #fff;
+    padding: 20px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+  }
+  .section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .section-header p {
+    margin-top: 4px;
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+
+  /* STEP BLOCKS */
+  .step {
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .step-text {
+    padding: 20px 24px;
+  }
+  .step-text h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .step-text p, .step-text li {
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .step-text ul {
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .step-image {
+    background: var(--gray);
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .step-image img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* CALLOUT BOXES */
+  .tip {
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .warning {
+    background: var(--amber-light);
+    border-left: 4px solid var(--amber);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .critical {
+    background: #fee2e2;
+    border-left: 4px solid var(--red);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes {
+    background: #eef2ff;
+    border-left: 4px solid #6366f1;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .behind-scenes strong {
+    color: #4338ca;
+  }
+
+  /* PRE-FLIGHT CHECKLIST */
+  .preflight {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fffbeb;
+    border: 2px solid var(--amber);
+    border-radius: 12px;
+  }
+  .preflight h2 {
+    color: #92400e;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .preflight .subtitle {
+    color: #78350f;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  .preflight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .preflight-card {
+    background: #fff;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .preflight-card h3 {
+    color: var(--dark);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .preflight-card p {
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .preflight-card .where {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+  @media (max-width: 640px) {
+    .preflight-grid { grid-template-columns: 1fr; }
+  }
+
+  /* CHEAT SHEET */
+  .cheat-sheet {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--dark);
+    color: #fff;
+    border-radius: 12px;
+  }
+  .cheat-sheet h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .cheat-sheet ol {
+    padding-left: 24px;
+    font-size: 1.05rem;
+  }
+  .cheat-sheet li {
+    margin-bottom: 12px;
+    color: #e2e8f0;
+  }
+  .cheat-sheet li strong {
+    color: #4ade80;
+  }
+  .cheat-sheet .memory-line {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #334155;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #4ade80;
+    letter-spacing: 0.5px;
+  }
+
+  /* PRINT */
+  @media print {
+    .header { padding: 24px 16px; }
+    .header h1 { font-size: 1.8rem; }
+    .section { page-break-inside: avoid; }
+    .step { page-break-inside: avoid; }
+    .step-image img { max-height: 400px; object-fit: contain; }
+    body { font-size: 11pt; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.6rem; }
+    .flow-bar { gap: 4px; }
+    .flow-step { font-size: 0.7rem; padding: 6px 10px; }
+    .section-header h2 { font-size: 1.2rem; }
+  }
+
+  /* GUIDE TABS (site-wide, added 2026-09-07) */
+  .guide-tabs { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; background:#0f0f1f; padding:12px 16px; }
+  .guide-tab { color:#cbd5e1; text-decoration:none; font-weight:600; font-size:0.9rem; padding:8px 16px; border-radius:20px; border:1px solid #334155; }
+  .guide-tab:hover { background:#1e293b; color:#fff; }
+  .guide-tab.active { background:var(--green); color:#fff; border-color:var(--green); }
+
+  .deck-embed { max-width: 900px; margin: 32px auto 8px; padding: 0 24px; }
+  .deck-embed iframe { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--border); border-radius: 12px; background: #111; }
+  .deck-actions { max-width: 900px; margin: 0 auto 40px; padding: 0 24px; display:flex; gap:12px; flex-wrap:wrap; }
+  .btn-green { display:inline-block; background: var(--green); color:#fff; padding: 12px 22px; border-radius: 22px; font-weight:700; text-decoration:none; }
+  .btn-green:hover { background:#15803d; }
+  .btn-ghost { display:inline-block; border:1px solid var(--border); color: var(--dark); padding: 12px 22px; border-radius: 22px; font-weight:600; text-decoration:none; }
+  .actor { display:inline-block; font-size:0.75rem; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:10px; margin-right:6px; vertical-align:middle; }
+  .actor.rep { background:#dbeafe; color:#1d4ed8; }
+  .actor.cust { background:#fef3c7; color:#b45309; }
+  .actor.agm { background:#dcfce7; color:#15803d; }
+  .footer { max-width:900px; margin:40px auto; padding:24px; color:var(--text-light); font-size:0.85rem; border-top:1px solid var(--border); }
+
+  /* PRODUCTION GUIDE (added 2026-10-27) */
+  .card-body { padding: 20px 24px; border: 1px solid var(--border); border-radius: 12px; }
+  .card-body p, .card-body li { font-size: 0.95rem; margin-bottom: 8px; }
+  .card-body ul, .card-body ol { padding-left: 22px; margin: 8px 0 12px; }
+  .card-body h3 { font-size: 1.05rem; color: var(--dark); margin: 4px 0 10px; }
+  .card-body table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 0.9rem; }
+  .card-body th, .card-body td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  .card-body th { background: var(--gray); color: var(--dark); }
+  .card-body .table-wrap { overflow-x: auto; }
+  .shot { margin: 16px 0; background: var(--gray); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; }
+  .shot img { max-width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .shot figcaption { font-size: 0.85rem; color: var(--text-light); margin-top: 8px; }
+  .toc ol { columns: 2; column-gap: 32px; }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+</style>
+</head>
+<body>
+<nav class="guide-tabs" aria-label="Guides">
+  <a href="https://hgdocs.com/" class="guide-tab">Costco Contract Guide</a>
+  <a href="https://hgdocs.com/hg-direct-contract/" class="guide-tab">HG Direct Contract Guide</a>
+  <a href="https://hgdocs.com/appointment-guide/" class="guide-tab">Appointment Guide</a>
+  <a href="https://hgdocs.com/resulting-in-centah/" class="guide-tab">Resulting in CENTAH</a>
+  <a href="https://hgdocs.com/production-guide/" class="guide-tab">Production Guide</a>
+  <a href="https://hgdocs.com/service-guide/" class="guide-tab">Service Guide</a>
+  <a href="https://hgdocs.com/service-in-5-steps/" class="guide-tab active">Service in 5 Steps</a>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>Service in 5 Steps</h1>
+  <p class="subtitle">Heavenly Greens — the five steps to complete a service ticket, the short version · October 29, 2026</p>
+  <div class="flow-bar">
+    <span class="flow-step">1. Book it</span><span class="flow-arrow">&rarr;</span><span class="flow-step">2. On the Service board</span><span class="flow-arrow">&rarr;</span><span class="flow-step">3. Price and schedule</span><span class="flow-arrow">&rarr;</span><span class="flow-step">4. Crew work order</span><span class="flow-arrow">&rarr;</span><span class="flow-step">5. Close and collect</span>
+  </div>
+  <a class="centah-nav" href="https://gamma.app/docs/pjkr9olpekv46x3" target="_blank" rel="noopener">Open the full deck (12 cards) &rarr;</a>
+</div>
+
+<!-- ===== THE DECK ===== -->
+<div class="deck-embed">
+  <iframe src="https://gamma.app/embed/pjkr9olpekv46x3" allow="fullscreen" title="Service in five steps — intro deck"></iframe>
+</div>
+<div class="deck-actions">
+  <a class="btn-green" href="https://gamma.app/docs/pjkr9olpekv46x3" target="_blank" rel="noopener">Open the deck in Gamma</a>
+  <a class="btn-green" href="https://hgdocs.com/service-guide/">The full Service Guide</a>
+  <a class="btn-ghost" href="#the-five-steps">Read it as a page below &darr;</a>
+</div>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<div class="toc">
+  <h2>Quick Navigation</h2>
+  <ol>
+    <li><a href="#the-five-steps">The five steps</a></li>
+    <li><a href="#step-1-the-call-center-books-it">Step 1 · The call center books it</a></li>
+    <li><a href="#step-1-photo-link-or-no-link">Step 1 · Photo link, or no link?</a></li>
+    <li><a href="#once-the-link-goes-out-what-the-customer-gets">Once the link goes out: what the customer gets</a></li>
+    <li><a href="#step-2-it-shows-up-on-the-service-board">Step 2 · It shows up on the Service board</a></li>
+    <li><a href="#step-2-waiting-on-photos-and-the-72-hour-chase">Step 2 · Waiting on photos, and the 72-hour chase</a></li>
+    <li><a href="#step-3-deanna-prices-it">Step 3 · DeAnna prices it</a></li>
+    <li><a href="#step-3-deanna-schedules-it">Step 3 · DeAnna schedules it</a></li>
+    <li><a href="#step-4-the-crew-s-work-order-link">Step 4 · The crew&#x27;s work order link</a></li>
+    <li><a href="#step-5-close-it-and-collect">Step 5 · Close it and collect</a></li>
+    <li><a href="#who-presses-what">Who presses what</a></li>
+  </ol>
+  <div class="tip">Looking for one button? Jump to <a href="#who-presses-what"><strong>Who presses what</strong></a>.</div>
+</div>
+
+<div class="section" id="service-in-five-steps">
+  <div class="section-header"><h2>Service in five steps</h2><p>From the first call to the money in</p></div>
+  <div class="card-body">
+<p>Heavenly Greens · Service department · October 29, 2026</p>
+<p>Every service job is <strong>one ticket</strong>, on <strong>one calendar</strong>, worked from <strong>one board</strong>: HG Command → Service.</p>
+  </div>
+</div>
+<div class="section" id="the-five-steps">
+  <div class="section-header"><h2>The five steps</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Step</th>
+<th>Who</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Book it</strong>, and choose: photo link or not</td>
+<td>Call center</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>It shows up on the Service board</strong></td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Price it and schedule it</strong></td>
+<td>DeAnna</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>The crew gets its work order link</strong></td>
+<td>DeAnna → crew</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>Close it and collect</strong></td>
+<td>Crew, then automatic</td>
+</tr>
+</tbody>
+</table></div>
+<p>Everyone in the screenshots that follow is a made-up customer.</p>
+  </div>
+</div>
+<div class="section" id="step-1-the-call-center-books-it">
+  <div class="section-header"><h2>Step 1 · The call center books it</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/s_p04_new_ticket_call_center_door.png" alt="The call center&#x27;s ticket form: your name, then look the caller up by phone" loading="lazy"><figcaption>The call center&#x27;s ticket form: your name, then look the caller up by phone</figcaption></figure>
+
+<p>On the customer's AGM contact, press <strong>Service Request</strong>. Type the caller's phone and press <strong>Look up</strong>: it says whether they've called before and whether HG installed at that address. Type <strong>what's wrong in their words</strong>, then press <strong>Create the service ticket</strong>.</p>
+  </div>
+</div>
+<div class="section" id="step-1-photo-link-or-no-link">
+  <div class="section-header"><h2>Step 1 · Photo link, or no link?</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/s_p06_ticket_send_link_or_book_assessment.png" alt="The ticket: send the self-assessment link, or book an assessment visit" loading="lazy"><figcaption>The ticket: send the self-assessment link, or book an assessment visit</figcaption></figure>
+
+<ul>
+<li><strong>Send the link:</strong> type your name and press <strong>Email and text the customer their self-assessment link</strong>. It is <strong>never sent automatically</strong>.</li>
+<li><strong>No link, it needs a look:</strong> leave it for DeAnna to book an <strong>assessment visit</strong>.</li>
+<li><strong>No link, it's a clear job:</strong> book it on AGM's <strong>Service</strong> calendar, Service 3 or 4, with the crew at the end of the title.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="once-the-link-goes-out-what-the-customer-gets">
+  <div class="section-header"><h2>Once the link goes out: what the customer gets</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/s_p13_customer_ticket_top.png" alt="The customer&#x27;s own ticket page: send us a few photos" loading="lazy"><figcaption>The customer&#x27;s own ticket page: send us a few photos</figcaption></figure>
+
+<p>The link goes the way the customer asked (email, text or both). It opens <strong>their own ticket page</strong>. It shows <strong>which four photos to take</strong>, takes photos and short videos, and promises an answer <strong>within 24 to 72 hours</strong>. When they press <strong>Send my photos</strong>, the ticket moves to <strong>Needs a price</strong> by itself and service@ gets an email.</p>
+  </div>
+</div>
+<div class="section" id="step-2-it-shows-up-on-the-service-board">
+  <div class="section-header"><h2>Step 2 · It shows up on the Service board</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/s_b04_next_moves.png" alt="Your next moves: one line per thing to do, one green button each" loading="lazy"><figcaption>Your next moves: one line per thing to do, one green button each</figcaption></figure>
+
+<p>Within minutes the ticket is on <strong>hgcommand.com → Service</strong>, assigned to DeAnna, and service@ gets an email. It becomes a line in <strong>Your next moves</strong>: what to do, how long they've waited, and <strong>one green button</strong>. After a call, press <strong>Done? Press what happened</strong>.</p>
+  </div>
+</div>
+<div class="section" id="step-2-waiting-on-photos-and-the-72-hour-chase">
+  <div class="section-header"><h2>Step 2 · Waiting on photos, and the 72-hour chase</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/s_b07_waiting_on_photos_chase.png" alt="A fresh link is a quiet line; after 72 hours it becomes a chase" loading="lazy"><figcaption>A fresh link is a quiet line; after 72 hours it becomes a chase</figcaption></figure>
+
+<ul>
+<li><strong>Link just sent:</strong> a grey line saying who sent it and when. Nothing to do yet.</li>
+<li><strong>Nothing back after 72 hours:</strong> it turns into <strong>Chase … for their photos</strong>. Press <strong>Resend the link</strong>, or call and offer an assessment visit.</li>
+<li><strong>Photos arrive:</strong> the line becomes <strong>Price it</strong>, the next step.</li>
+</ul>
+  </div>
+</div>
+<div class="section" id="step-3-deanna-prices-it">
+  <div class="section-header"><h2>Step 3 · DeAnna prices it</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/s_p07_ticket_price_no_charge_assign_crew.png" alt="Set the final price, or no charge with a reason, then assign the crew" loading="lazy"><figcaption>Set the final price, or no charge with a reason, then assign the crew</figcaption></figure>
+
+<p>Enter the <strong>final price</strong>, or choose <strong>no charge</strong> with the reason (warranty, go-back, free tune-up, goodwill). No-charge work gets a crew but <strong>never an invoice</strong>. Then <strong>assign a crew</strong> and press <strong>Save changes to this ticket</strong>.</p>
+  </div>
+</div>
+<div class="section" id="step-3-deanna-schedules-it">
+  <div class="section-header"><h2>Step 3 · DeAnna schedules it</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/s_c03_book_here.png" alt="+ Book here on the Service calendar: ticket, day, time, crew" loading="lazy"><figcaption>+ Book here on the Service calendar: ticket, day, time, crew</figcaption></figure>
+
+<p>Press <strong>Book the visit</strong> on the ticket, or <strong>+ Book here</strong> on the crew's row of the Service calendar. The ticket turns <strong>Scheduled</strong> and the customer gets <strong>one</strong> confirmation. Visits the call center books in AGM tie themselves to the ticket. If one can't, it shows up as <strong>Fix calendar bookings</strong>.</p>
+  </div>
+</div>
+<div class="section" id="step-4-the-crew-s-work-order-link">
+  <div class="section-header"><h2>Step 4 · The crew&#x27;s work order link</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/s_p21_crew_stop_top.png" alt="One stop on the crew&#x27;s phone: address, gate notes, what the customer said, photos" loading="lazy"><figcaption>One stop on the crew&#x27;s phone: address, gate notes, what the customer said, photos</figcaption></figure>
+
+<p><strong>Crews never get email.</strong> Every afternoon DeAnna presses <strong>Copy tomorrow</strong> for each crew and pastes the link into that crew's group chat. On their phone the crew sees every stop: the address with <strong>Open in Maps</strong>, gate notes, what the customer said, their photos, and the <strong>agreed price</strong> or <strong>No charge</strong>.</p>
+  </div>
+</div>
+<div class="section" id="step-5-close-it-and-collect">
+  <div class="section-header"><h2>Step 5 · Close it and collect</h2></div>
+  <div class="card-body">
+<figure class="shot"><img src="img/s_p24_crew_result_take_payment.png" alt="Done, payment due: Take payment now" loading="lazy"><figcaption>Done, payment due: Take payment now</figcaption></figure>
+
+<p>At each stop the crew presses <strong>one result</strong>. <strong>Done: take payment</strong> sends the invoice and shows <strong>Take payment now</strong>, and the customer pays by card on the spot. For a <strong>check</strong> or <strong>Paymentech</strong>, press <strong>Record a payment</strong> on the ticket. Then, by itself: the ticket closes, the sales rep is told, and <strong>accounting@</strong> gets "Service paid".</p>
+  </div>
+</div>
+<div class="section" id="who-presses-what">
+  <div class="section-header"><h2>Who presses what</h2></div>
+  <div class="card-body">
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>When</th>
+<th>Who</th>
+<th>Press</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A customer calls</td>
+<td>Call center</td>
+<td><strong>Service Request</strong> on their AGM contact</td>
+</tr>
+<tr>
+<td>They can show us</td>
+<td>Call center or DeAnna</td>
+<td><strong>Email and text … self-assessment link</strong></td>
+</tr>
+<tr>
+<td>No photos after 72 hours</td>
+<td>DeAnna</td>
+<td><strong>Resend the link</strong>, or call and offer a visit</td>
+</tr>
+<tr>
+<td>Photos are in</td>
+<td>DeAnna</td>
+<td>Set a <strong>price</strong> (or no charge), <strong>assign a crew</strong></td>
+</tr>
+<tr>
+<td>Ready to book</td>
+<td>DeAnna</td>
+<td><strong>Book the visit</strong>, or <strong>+ Book here</strong></td>
+</tr>
+<tr>
+<td>Afternoon before</td>
+<td>DeAnna</td>
+<td><strong>Copy tomorrow</strong> into each crew's group chat</td>
+</tr>
+<tr>
+<td>At the stop</td>
+<td>Crew</td>
+<td><strong>One result</strong>: Done: take payment, paid by check, no charge…</td>
+</tr>
+<tr>
+<td>A check arrives</td>
+<td>DeAnna or accounting</td>
+<td><strong>Record a payment</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Questions?</strong> If something looks wrong, note the SVC number and what you pressed, and send a screenshot.</p>
+  </div>
+</div>
+
+<div class="footer">
+  Every customer in these screenshots is made up. Source: the Service in five steps deck &mdash; <a href="https://gamma.app/docs/pjkr9olpekv46x3" target="_blank" rel="noopener">https://gamma.app/docs/pjkr9olpekv46x3</a>.
+</div>
+</body>
+</html>
